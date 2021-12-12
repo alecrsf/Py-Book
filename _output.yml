@@ -1,12 +1,16 @@
 bookdown::gitbook:
   config:
+    css: "chapter/html/style.css"
     download: ["pdf"]
     toc:
-      collapse: section #section or none
-      scroll_highlight: true
-      before: <li><h1>Py Notes</h1></li>
-      after: <li><a href="https://rstudio.com"> <img src="rstudio.png" width=20%></a></li> 
-    toolbar:
+     collapse: subsection # subsection, section or none
+     scroll_highlight: true
+     before: |
+        <li><h2 style:"text-align: center">Py-Book</h2><br> 
+        <a href="https://alecrsf.netlify.app/en/" style:"text-align: right"> by <b>alecrsf</b></a><li>
+     after: |
+        <li><a href="https://rstudio.com"> <img src="chapter/html/rstudio.png" width=20%></a></li> 
+     toolbar:
       position: fixed
     edit : null
     search:
@@ -15,33 +19,11 @@ bookdown::gitbook:
     fontsettings:
       theme: white
       family: times
-      size: 8
+      size: 10
     sharing:
       facebook: true
-      github: true
+      github: false
       twitter: false
       linkedin: true
-      whatsapp: true
+      whatsapp: false
     info: true
-    
-  # config:
-  #   toc:
-  #     before: |
-  #       <li><a href="./">A Minimal Book Example</a></li>
-  #     after: |
-  #       <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-  #   edit: https://github.com/USERNAME/REPO/edit/BRANCH/%s
-  #   download: ["pdf"]
-    
-# bookdown::bs4_book:
-#   css: bs4_style.css
-#   theme:
-#     primary: "#096B72"
-#   #repo: https://github.com/rstudio/bookdown-demo
-#   
-bookdown::pdf_book:
-  includes:
-    in_header: preamble.tex
-  latex_engine: xelatex
-  citation_package: natbib
-  keep_tex: yes

@@ -5,26 +5,20 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Numpy | Py-Book</title>
-  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::bs4_book,
-set in the _output.yml file.</p>" />
+  <meta name="description" content="Welcome to my book about Python" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Numpy | Py-Book" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::bs4_book,
-set in the _output.yml file.</p>" />
+  <meta property="og:description" content="Welcome to my book about Python" />
   
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 4 Numpy | Py-Book" />
   
-  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::bs4_book,
-set in the _output.yml file.</p>" />
+  <meta name="twitter:description" content="Welcome to my book about Python" />
   
 
 
@@ -156,7 +150,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><h1>Py Notes</h1></li>
+<li><h2 style:"text-align: center">Py-Book</h2><br> 
+<a href="https://alecrsf.netlify.app/en/" style:"text-align: right"> by <b>alecrsf</b></a><li>
+
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
 <ul>
@@ -267,7 +263,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.0.2" data-path="clustering.html"><a href="clustering.html#type-of-clustering-models"><i class="fa fa-check"></i><b>8.0.2</b> Type of Clustering Models</a></li>
 </ul></li>
 <li class="divider"></li>
-<li><a href="https://rstudio.com"> <img src="rstudio.png" width=20%></a></li>
+<li><a href="https://rstudio.com"> <img src="chapter/html/rstudio.png" width=20%></a></li> 
+
 </ul>
 
       </nav>
@@ -663,20 +660,20 @@ The <code>inv</code> function computes a square matrix’s inverse, whereas the 
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": true,
+"github": false,
 "facebook": true,
 "twitter": false,
 "linkedin": true,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"whatsapp": true,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
 "family": "times",
-"size": 8
+"size": 10
 },
 "edit": null,
 "history": {
@@ -687,18 +684,19 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["Py-bookdown.pdf"],
+"download": ["Py-Book.pdf"],
 "search": {
 "engine": "fuse",
 "options": null
 },
 "toc": {
-"collapse": "section",
-"scroll_highlight": true
-},
+"collapse": "subsection",
+"scroll_highlight": true,
 "toolbar": {
 "position": "fixed"
+}
 },
+"css": "chapter/html/style.css",
 "info": true
 });
 });
