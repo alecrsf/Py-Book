@@ -1,0 +1,62 @@
+# Data Visualization
+
+## Matplotlib
+```{python}
+import matplotlib.pyplot as plt 
+```
+
+<iframe src="https://matplotlib.org/stable/tutorials/index.html" height="600px" width="100%"></iframe>
+
+```{python}
+img = np.empty((20,30,3))
+img[:, :10] = [0, 0.6, 0]
+img[:, 10:20] = [1, 1, 1]
+img[:, 20:] = [0.6, 0, 0]
+plt.imshow(img)
+plt.show()
+```
+
+## Exploratory Visualization
+Suppose we want to have a look at the distribution of our dataset
+```{r include=FALSE, message=FALSE}
+df = r_to_py(readr::read_csv('https://raw.githubusercontent.com/ageron/handson-ml/master/datasets/housing/housing.csv'))
+```
+
+
+```{python, eval=T}
+df = pd.read_csv('data/housing.csv')
+df.hist(bins=50, figsize=(20,15))
+plt.show()
+```
+
+Detect how each attribute correlates with the `scatter_matrix()` function, applied to a subset of attributes. It draws a matrix of scatter plot.
+```{python}
+from pandas.plotting import scatter_matrix
+
+attributes = ["median_house_value", "median_income", "total_rooms", "housing_median_age"]
+scatter_matrix(df[attributes], figsize=(12, 8))
+plt.show()
+```
+
+
+
+
+
+
+
+
+
+
+## Other Packages
+
+### Seaborn
+
+<iframe src="https://seaborn.pydata.org/tutorial.html" height="600px" width="100%"></iframe>
+
+### Bokeh
+
+<iframe src="https://docs.bokeh.org/en/latest/docs/first_steps.html" height="600px" width="100%"></iframe>
+
+### Plotly
+
+<iframe src="https://dash.plotly.com/" height="600px" width="100%"></iframe>

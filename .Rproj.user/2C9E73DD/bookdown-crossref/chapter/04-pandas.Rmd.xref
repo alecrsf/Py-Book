@@ -1,0 +1,21 @@
+h1:pandas Pandas
+h2:series Series
+h2:dataframe DataFrame
+h3:indexing Indexing
+h4:loc-attribute  attribute
+h4:iloc-attribute  attribute
+h3:reading-data Reading Data
+h4:read_csv 
+h4:read_excel 
+h3:data-wrangling Data Wrangling
+h4:multi-indexing Multi-indexing
+h4:stacking-and-unstacking-levels Stacking and unstacking levels
+h4:adding-or-removing-columns Adding or removing columns
+h4:sorting-a-dataframe Sorting a DataFrame
+h4:aggregating Aggregating
+h3:evaluating-an-expression Evaluating an expression
+h3:handling-missing-data Handling Missing Data
+h4:fillna 
+h4:dropna 
+h3:overview-functions Overview Functions
+

@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 Pandas | Py-Book</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::bs4_book,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 Pandas | Py-Book" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::bs4_book,
+set in the _output.yml file.</p>" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 Pandas | Py-Book" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::bs4_book,
+set in the _output.yml file.</p>" />
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="numpy.html"/>
+<link rel="next" href="data-visualization.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/vis-4.16.1/vis.min.css" rel="stylesheet" />
+<script src="libs/vis-4.16.1/vis.min.js"></script>
+<link href="libs/timeline-0.4/timevis.css" rel="stylesheet" />
+<script src="libs/timevis-binding-1.0.0/timevis.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#setup"><i class="fa fa-check"></i>Setup</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="algorithms.html"><a href="algorithms.html"><i class="fa fa-check"></i><b>1</b> Algorithms</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="algorithms.html"><a href="algorithms.html#definitions"><i class="fa fa-check"></i><b>1.1</b> Definitions</a></li>
+<li class="chapter" data-level="1.2" data-path="algorithms.html"><a href="algorithms.html#computers-architecture"><i class="fa fa-check"></i><b>1.2</b> Computers Architecture</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Basics</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="basics.html"><a href="basics.html#control-flow"><i class="fa fa-check"></i><b>2.1</b> Control Flow</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="basics.html"><a href="basics.html#data-types"><i class="fa fa-check"></i><b>2.1.1</b> Data Types</a></li>
+<li class="chapter" data-level="2.1.2" data-path="basics.html"><a href="basics.html#variables"><i class="fa fa-check"></i><b>2.1.2</b> Variables</a></li>
+<li class="chapter" data-level="2.1.3" data-path="basics.html"><a href="basics.html#logics"><i class="fa fa-check"></i><b>2.1.3</b> Logics</a></li>
+<li class="chapter" data-level="2.1.4" data-path="basics.html"><a href="basics.html#iteration"><i class="fa fa-check"></i><b>2.1.4</b> Iteration</a></li>
+<li class="chapter" data-level="2.1.5" data-path="basics.html"><a href="basics.html#functions"><i class="fa fa-check"></i><b>2.1.5</b> Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="basics.html"><a href="basics.html#collection-types"><i class="fa fa-check"></i><b>2.2</b> Collection Types</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="basics.html"><a href="basics.html#lists"><i class="fa fa-check"></i><b>2.2.1</b> Lists</a></li>
+<li class="chapter" data-level="2.2.2" data-path="basics.html"><a href="basics.html#matrixes"><i class="fa fa-check"></i><b>2.2.2</b> Matrixes</a></li>
+<li class="chapter" data-level="2.2.3" data-path="basics.html"><a href="basics.html#dictionaries"><i class="fa fa-check"></i><b>2.2.3</b> Dictionaries</a></li>
+<li class="chapter" data-level="2.2.4" data-path="basics.html"><a href="basics.html#tuples"><i class="fa fa-check"></i><b>2.2.4</b> Tuples</a></li>
+<li class="chapter" data-level="2.2.5" data-path="basics.html"><a href="basics.html#sets"><i class="fa fa-check"></i><b>2.2.5</b> Sets</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="text-mining.html"><a href="text-mining.html"><i class="fa fa-check"></i><b>3</b> Text Mining</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="text-mining.html"><a href="text-mining.html#working-with-strings"><i class="fa fa-check"></i><b>3.1</b> Working with strings</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="text-mining.html"><a href="text-mining.html#string-types"><i class="fa fa-check"></i><b>3.1.1</b> String Types</a></li>
+<li class="chapter" data-level="3.1.2" data-path="text-mining.html"><a href="text-mining.html#strings-operations"><i class="fa fa-check"></i><b>3.1.2</b> Strings Operations</a></li>
+<li class="chapter" data-level="3.1.3" data-path="text-mining.html"><a href="text-mining.html#strings-conversion"><i class="fa fa-check"></i><b>3.1.3</b> Strings Conversion</a></li>
+<li class="chapter" data-level="3.1.4" data-path="text-mining.html"><a href="text-mining.html#string-indexing-and-slicing"><i class="fa fa-check"></i><b>3.1.4</b> String Indexing and Slicing</a></li>
+<li class="chapter" data-level="3.1.5" data-path="text-mining.html"><a href="text-mining.html#string-splitting-and-joining"><i class="fa fa-check"></i><b>3.1.5</b> String splitting and joining</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="text-mining.html"><a href="text-mining.html#regular-expressions"><i class="fa fa-check"></i><b>3.2</b> Regular Expressions</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="text-mining.html"><a href="text-mining.html#match-find"><i class="fa fa-check"></i><b>3.2.1</b> Match &amp; Find</a></li>
+<li class="chapter" data-level="3.2.2" data-path="text-mining.html"><a href="text-mining.html#search-replace"><i class="fa fa-check"></i><b>3.2.2</b> Search &amp; Replace</a></li>
+<li class="chapter" data-level="3.2.3" data-path="text-mining.html"><a href="text-mining.html#metacharacters"><i class="fa fa-check"></i><b>3.2.3</b> Metacharacters</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="numpy.html"><a href="numpy.html"><i class="fa fa-check"></i><b>4</b> Numpy</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="numpy.html"><a href="numpy.html#arrays"><i class="fa fa-check"></i><b>4.1</b> Arrays</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="numpy.html"><a href="numpy.html#creating-arrays"><i class="fa fa-check"></i><b>4.1.1</b> Creating Arrays</a></li>
+<li class="chapter" data-level="4.1.2" data-path="numpy.html"><a href="numpy.html#indexing-and-slicing-arrays"><i class="fa fa-check"></i><b>4.1.2</b> Indexing and slicing arrays</a></li>
+<li class="chapter" data-level="4.1.3" data-path="numpy.html"><a href="numpy.html#reshape"><i class="fa fa-check"></i><b>4.1.3</b> Reshape</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="numpy.html"><a href="numpy.html#operators"><i class="fa fa-check"></i><b>4.2</b> Operators</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="numpy.html"><a href="numpy.html#broadcasting-rules"><i class="fa fa-check"></i><b>4.2.1</b> Broadcasting Rules</a></li>
+<li class="chapter" data-level="4.2.2" data-path="numpy.html"><a href="numpy.html#upcasting"><i class="fa fa-check"></i><b>4.2.2</b> Upcasting</a></li>
+<li class="chapter" data-level="4.2.3" data-path="numpy.html"><a href="numpy.html#conditional-operators"><i class="fa fa-check"></i><b>4.2.3</b> Conditional operators</a></li>
+<li class="chapter" data-level="4.2.4" data-path="numpy.html"><a href="numpy.html#statistics"><i class="fa fa-check"></i><b>4.2.4</b> Statistics</a></li>
+<li class="chapter" data-level="4.2.5" data-path="numpy.html"><a href="numpy.html#linear-algebra"><i class="fa fa-check"></i><b>4.2.5</b> Linear Algebra</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="pandas.html"><a href="pandas.html"><i class="fa fa-check"></i><b>5</b> Pandas</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="pandas.html"><a href="pandas.html#series"><i class="fa fa-check"></i><b>5.1</b> Series</a></li>
+<li class="chapter" data-level="5.2" data-path="pandas.html"><a href="pandas.html#dataframe"><i class="fa fa-check"></i><b>5.2</b> DataFrame</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="pandas.html"><a href="pandas.html#indexing"><i class="fa fa-check"></i><b>5.2.1</b> Indexing</a></li>
+<li class="chapter" data-level="5.2.2" data-path="pandas.html"><a href="pandas.html#reading-data"><i class="fa fa-check"></i><b>5.2.2</b> Reading Data</a></li>
+<li class="chapter" data-level="5.2.3" data-path="pandas.html"><a href="pandas.html#data-wrangling"><i class="fa fa-check"></i><b>5.2.3</b> Data Wrangling</a></li>
+<li class="chapter" data-level="5.2.4" data-path="pandas.html"><a href="pandas.html#evaluating-an-expression"><i class="fa fa-check"></i><b>5.2.4</b> Evaluating an expression</a></li>
+<li class="chapter" data-level="5.2.5" data-path="pandas.html"><a href="pandas.html#handling-missing-data"><i class="fa fa-check"></i><b>5.2.5</b> Handling Missing Data</a></li>
+<li class="chapter" data-level="5.2.6" data-path="pandas.html"><a href="pandas.html#data-manipulation"><i class="fa fa-check"></i><b>5.2.6</b> Data Manipulation</a></li>
+<li class="chapter" data-level="5.2.7" data-path="pandas.html"><a href="pandas.html#overview-functions"><i class="fa fa-check"></i><b>5.2.7</b> Overview Functions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="data-visualization.html"><a href="data-visualization.html"><i class="fa fa-check"></i><b>6</b> Data Visualization</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="data-visualization.html"><a href="data-visualization.html#matplotlib"><i class="fa fa-check"></i><b>6.1</b> Matplotlib</a></li>
+<li class="chapter" data-level="6.2" data-path="data-visualization.html"><a href="data-visualization.html#exploratory-visualization"><i class="fa fa-check"></i><b>6.2</b> Exploratory Visualization</a></li>
+<li class="chapter" data-level="6.3" data-path="data-visualization.html"><a href="data-visualization.html#other-packages"><i class="fa fa-check"></i><b>6.3</b> Other Packages</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="data-visualization.html"><a href="data-visualization.html#seaborn"><i class="fa fa-check"></i><b>6.3.1</b> Seaborn</a></li>
+<li class="chapter" data-level="6.3.2" data-path="data-visualization.html"><a href="data-visualization.html#bokeh"><i class="fa fa-check"></i><b>6.3.2</b> Bokeh</a></li>
+<li class="chapter" data-level="6.3.3" data-path="data-visualization.html"><a href="data-visualization.html#plotly"><i class="fa fa-check"></i><b>6.3.3</b> Plotly</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html"><i class="fa fa-check"></i><b>7</b> Machine Learning with <strong>Scikit-Learn</strong></a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#data-preprocessing"><i class="fa fa-check"></i><b>7.1</b> Data PreProcessing</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#create-a-training-and-test-sets"><i class="fa fa-check"></i><b>7.1.1</b> Create a Training and Test Sets</a></li>
+<li class="chapter" data-level="7.1.2" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#impute-missing-values"><i class="fa fa-check"></i><b>7.1.2</b> Impute Missing Values</a></li>
+<li class="chapter" data-level="7.1.3" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#handling-texts-and-categorical-attributes"><i class="fa fa-check"></i><b>7.1.3</b> Handling Texts and Categorical Attributes</a></li>
+<li class="chapter" data-level="7.1.4" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#feature-scaling"><i class="fa fa-check"></i><b>7.1.4</b> Feature Scaling</a></li>
+<li class="chapter" data-level="7.1.5" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#pipelines"><i class="fa fa-check"></i><b>7.1.5</b> Pipelines</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#select-and-train-a-model"><i class="fa fa-check"></i><b>7.2</b> Select and Train a Model</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#training-and-evaluating-on-the-training-set"><i class="fa fa-check"></i><b>7.2.1</b> Training and Evaluating on the Training Set</a></li>
+<li class="chapter" data-level="7.2.2" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#model-evaluation"><i class="fa fa-check"></i><b>7.2.2</b> Model Evaluation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>8</b> Clustering</a>
+<ul>
+<li class="chapter" data-level="8.0.1" data-path="clustering.html"><a href="clustering.html#clustering-1"><i class="fa fa-check"></i><b>8.0.1</b> Clustering</a></li>
+<li class="chapter" data-level="8.0.2" data-path="clustering.html"><a href="clustering.html#type-of-clustering-models"><i class="fa fa-check"></i><b>8.0.2</b> Type of Clustering Models</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Py-Book</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="pandas" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Pandas</h1>
+<p>A powerful library for data manipulation and analysis, borrowing the idea of data frames from the <strong>R language</strong>. An essential import setup for Pandas is</p>
+<div class="sourceCode" id="cb225"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb225-1"><a href="pandas.html#cb225-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb225-2"><a href="pandas.html#cb225-2"></a><span class="im">from</span> datetime <span class="im">import</span> datetime, date</span></code></pre></div>
+<div id="series" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Series</h2>
+<p>Similar to one-dimensional NumPy array, with the addition of an index which can comprisearbitrary values</p>
+<div class="sourceCode" id="cb226"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb226-1"><a href="pandas.html#cb226-1"></a>pd.Series([<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>])</span></code></pre></div>
+<pre><code>## 0    2
+## 1    5
+## 2    6
+## 3    7
+## dtype: int64</code></pre>
+<p>In the example above, the index has not been specified, and it defaults to the standard 0-based integer index.</p>
+<div class="sourceCode" id="cb228"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb228-1"><a href="pandas.html#cb228-1"></a>s <span class="op">=</span> pd.Series([<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>],index<span class="op">=</span>(<span class="st">&quot;prime1&quot;</span>,<span class="st">&quot;prime2&quot;</span>,<span class="st">&quot;prime3&quot;</span>,<span class="st">&quot;prime4&quot;</span>))</span>
+<span id="cb228-2"><a href="pandas.html#cb228-2"></a><span class="bu">print</span>(s)</span></code></pre></div>
+<pre><code>## prime1    2
+## prime2    5
+## prime3    6
+## prime4    7
+## dtype: int64</code></pre>
+<p>And then indexes can be used for slicing</p>
+<div class="sourceCode" id="cb230"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb230-1"><a href="pandas.html#cb230-1"></a>s[[<span class="st">&quot;prime2&quot;</span>,<span class="st">&quot;prime4&quot;</span>]]</span></code></pre></div>
+<pre><code>## prime2    5
+## prime4    7
+## dtype: int64</code></pre>
+<p>When instantiated from a dictionary input, the keys are used to create the index</p>
+<div class="sourceCode" id="cb232"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb232-1"><a href="pandas.html#cb232-1"></a>s <span class="op">=</span> pd.Series({<span class="st">&#39;Friday&#39;</span>:<span class="fl">0.2</span>,<span class="st">&#39;Saturday&#39;</span>:<span class="fl">1.0</span>,<span class="st">&#39;Sunday&#39;</span>:<span class="fl">4.2</span>,<span class="st">&#39;Monday&#39;</span>:<span class="fl">0.0</span>,<span class="st">&#39;Tuesday&#39;</span>:<span class="fl">1.2</span>})</span>
+<span id="cb232-2"><a href="pandas.html#cb232-2"></a><span class="bu">print</span>(s[<span class="dv">1</span>:<span class="dv">3</span>])</span></code></pre></div>
+<pre><code>## Saturday    1.0
+## Sunday      4.2
+## dtype: float64</code></pre>
+<p>The overall behaviour of Series is similar to that of ndarray, as far as slicing and indexing are concerned:</p>
+<div class="sourceCode" id="cb234"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb234-1"><a href="pandas.html#cb234-1"></a><span class="kw">def</span> fahrenheit(t):</span>
+<span id="cb234-2"><a href="pandas.html#cb234-2"></a>    <span class="cf">return</span> <span class="dv">9</span><span class="op">*</span>t<span class="op">/</span><span class="dv">5</span><span class="op">+</span><span class="dv">32</span></span>
+<span id="cb234-3"><a href="pandas.html#cb234-3"></a>    </span>
+<span id="cb234-4"><a href="pandas.html#cb234-4"></a>s[s<span class="op">&lt;</span><span class="fl">1.2</span>],</span></code></pre></div>
+<pre><code>## (Friday      0.2
+## Saturday    1.0
+## Monday      0.0
+## dtype: float64,)</code></pre>
+<div class="sourceCode" id="cb236"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb236-1"><a href="pandas.html#cb236-1"></a>fahrenheit(s)</span></code></pre></div>
+<pre><code>## Friday      32.36
+## Saturday    33.80
+## Sunday      39.56
+## Monday      32.00
+## Tuesday     34.16
+## dtype: float64</code></pre>
+<p>Series has some features of <code>dict</code>, like assignment by index and testing of index value membership</p>
+<div class="sourceCode" id="cb238"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb238-1"><a href="pandas.html#cb238-1"></a>s[<span class="st">&#39;Monday&#39;</span>] <span class="op">=</span> np.nan</span>
+<span id="cb238-2"><a href="pandas.html#cb238-2"></a>pd.isna(s[<span class="st">&#39;Monday&#39;</span>])</span></code></pre></div>
+<pre><code>## True</code></pre>
+<div class="sourceCode" id="cb240"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb240-1"><a href="pandas.html#cb240-1"></a>dt<span class="op">=</span>pd.date_range(<span class="st">&#39;2019-10-29&#39;</span>,<span class="st">&#39;2019-11-02&#39;</span>)</span>
+<span id="cb240-2"><a href="pandas.html#cb240-2"></a><span class="bu">print</span>(dt)</span></code></pre></div>
+<pre><code>## DatetimeIndex([&#39;2019-10-29&#39;, &#39;2019-10-30&#39;, &#39;2019-10-31&#39;, &#39;2019-11-01&#39;,
+##                &#39;2019-11-02&#39;],
+##               dtype=&#39;datetime64[ns]&#39;, freq=&#39;D&#39;)</code></pre>
+<div class="sourceCode" id="cb242"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb242-1"><a href="pandas.html#cb242-1"></a>precip_sp <span class="op">=</span> pd.Series([<span class="fl">0.2</span>,<span class="fl">1.0</span>,<span class="fl">4.2</span>,<span class="fl">0.0</span>,<span class="fl">1.2</span>],index<span class="op">=</span>dt)</span>
+<span id="cb242-2"><a href="pandas.html#cb242-2"></a><span class="bu">print</span>(precip_sp)</span></code></pre></div>
+<pre><code>## 2019-10-29    0.2
+## 2019-10-30    1.0
+## 2019-10-31    4.2
+## 2019-11-01    0.0
+## 2019-11-02    1.2
+## Freq: D, dtype: float64</code></pre>
+<div class="sourceCode" id="cb244"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb244-1"><a href="pandas.html#cb244-1"></a>precip_bu <span class="op">=</span> pd.Series([<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">0.0</span>,<span class="fl">1.2</span>,<span class="fl">4.2</span>,<span class="fl">0.0</span>], index<span class="op">=</span>pd.date_range(<span class="st">&#39;2019-10-27&#39;</span>,<span class="st">&#39;2019-11-01&#39;</span>))</span>
+<span id="cb244-2"><a href="pandas.html#cb244-2"></a><span class="co">#NaN as precip_bu and precip_sp have different indexes range</span></span>
+<span id="cb244-3"><a href="pandas.html#cb244-3"></a><span class="bu">print</span>(precip_sp<span class="op">-</span>precip_bu)</span></code></pre></div>
+<pre><code>## 2019-10-27    NaN
+## 2019-10-28    NaN
+## 2019-10-29    0.2
+## 2019-10-30   -0.2
+## 2019-10-31    0.0
+## 2019-11-01    0.0
+## 2019-11-02    NaN
+## Freq: D, dtype: float64</code></pre>
+</div>
+<div id="dataframe" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> DataFrame</h2>
+<p>A2-dimensional, table-like, data structure with columns of possibly different types and an index for its rows.</p>
+<p>You can create a DataFrame by passing a dictionary of Series objects:</p>
+<div class="sourceCode" id="cb246"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb246-1"><a href="pandas.html#cb246-1"></a>people_dict <span class="op">=</span> {</span>
+<span id="cb246-2"><a href="pandas.html#cb246-2"></a>    <span class="st">&quot;weight&quot;</span>: pd.Series([<span class="dv">68</span>, <span class="dv">83</span>, <span class="dv">112</span>], index<span class="op">=</span>[<span class="st">&quot;alice&quot;</span>, <span class="st">&quot;martino&quot;</span>, <span class="st">&quot;franco&quot;</span>]),</span>
+<span id="cb246-3"><a href="pandas.html#cb246-3"></a>    <span class="st">&quot;birthyear&quot;</span>: pd.Series([<span class="dv">1984</span>, <span class="dv">1985</span>, <span class="dv">1992</span>], index<span class="op">=</span>[<span class="st">&quot;alice&quot;</span>, <span class="st">&quot;martino&quot;</span>,<span class="st">&quot;franco&quot;</span>], name<span class="op">=</span><span class="st">&quot;year&quot;</span>),</span>
+<span id="cb246-4"><a href="pandas.html#cb246-4"></a><span class="st">&quot;children&quot;</span>: pd.Series([<span class="dv">0</span>, <span class="dv">3</span>], index<span class="op">=</span>[<span class="st">&quot;martino&quot;</span>, <span class="st">&quot;franco&quot;</span>]),</span>
+<span id="cb246-5"><a href="pandas.html#cb246-5"></a><span class="st">&quot;hobby&quot;</span>: pd.Series([<span class="st">&quot;Biking&quot;</span>, <span class="st">&quot;Dancing&quot;</span>], index<span class="op">=</span>[<span class="st">&quot;alice&quot;</span>, <span class="st">&quot;martino&quot;</span>]),</span>
+<span id="cb246-6"><a href="pandas.html#cb246-6"></a>}</span>
+<span id="cb246-7"><a href="pandas.html#cb246-7"></a></span>
+<span id="cb246-8"><a href="pandas.html#cb246-8"></a>people <span class="op">=</span> pd.DataFrame(people_dict)</span>
+<span id="cb246-9"><a href="pandas.html#cb246-9"></a>people</span></code></pre></div>
+<pre><code>##          weight  birthyear  children    hobby
+## alice        68       1984       NaN   Biking
+## franco      112       1992       3.0      NaN
+## martino      83       1985       0.0  Dancing</code></pre>
+<p>Another convenient way to create a DataFrame is to pass all the values to the constructor as an ndarray, or a list of lists, and specify the column names and row index labels separately:</p>
+<div class="sourceCode" id="cb248"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb248-1"><a href="pandas.html#cb248-1"></a>values <span class="op">=</span> [</span>
+<span id="cb248-2"><a href="pandas.html#cb248-2"></a>[<span class="dv">1985</span>, np.nan, <span class="st">&quot;Biking&quot;</span>,   <span class="dv">68</span>],</span>
+<span id="cb248-3"><a href="pandas.html#cb248-3"></a>[<span class="dv">1984</span>, <span class="dv">3</span>,      <span class="st">&quot;Dancing&quot;</span>,  <span class="dv">83</span>],</span>
+<span id="cb248-4"><a href="pandas.html#cb248-4"></a>[<span class="dv">1992</span>, <span class="dv">0</span>,      np.nan,    <span class="dv">112</span>]</span>
+<span id="cb248-5"><a href="pandas.html#cb248-5"></a>         ]</span>
+<span id="cb248-6"><a href="pandas.html#cb248-6"></a></span>
+<span id="cb248-7"><a href="pandas.html#cb248-7"></a>d <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb248-8"><a href="pandas.html#cb248-8"></a>        values,</span>
+<span id="cb248-9"><a href="pandas.html#cb248-9"></a>        columns<span class="op">=</span>[<span class="st">&quot;birthyear&quot;</span>, <span class="st">&quot;children&quot;</span>, <span class="st">&quot;hobby&quot;</span>, <span class="st">&quot;weight&quot;</span>],</span>
+<span id="cb248-10"><a href="pandas.html#cb248-10"></a>        index<span class="op">=</span>[<span class="st">&quot;alice&quot;</span>, <span class="st">&quot;martino&quot;</span>, <span class="st">&quot;franco&quot;</span>])</span>
+<span id="cb248-11"><a href="pandas.html#cb248-11"></a>d</span></code></pre></div>
+<pre><code>##          birthyear  children    hobby  weight
+## alice         1985       NaN   Biking      68
+## martino       1984       3.0  Dancing      83
+## franco        1992       0.0      NaN     112</code></pre>
+<div class="sourceCode" id="cb250"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb250-1"><a href="pandas.html#cb250-1"></a>precips <span class="op">=</span> pd.DataFrame({<span class="st">&#39;San Pietro Capofiume&#39;</span>: precip_sp,<span class="st">&#39;Bologna Urbana&#39;</span>: precip_bu})</span>
+<span id="cb250-2"><a href="pandas.html#cb250-2"></a><span class="bu">print</span>(precips)</span></code></pre></div>
+<pre><code>##             San Pietro Capofiume  Bologna Urbana
+## 2019-10-27                   NaN             0.0
+## 2019-10-28                   NaN             0.0
+## 2019-10-29                   0.2             0.0
+## 2019-10-30                   1.0             1.2
+## 2019-10-31                   4.2             4.2
+## 2019-11-01                   0.0             0.0
+## 2019-11-02                   1.2             NaN</code></pre>
+<p>Panda’s <code>DataFrame()</code> function is flexible as to the types of its inputs. As a list of dictionaries, each dictionary element of the input list is one row ofthe data frame</p>
+<div class="sourceCode" id="cb252"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb252-1"><a href="pandas.html#cb252-1"></a>city_loc <span class="op">=</span> pd.DataFrame([{<span class="st">&#39;Lat&#39;</span>:<span class="fl">44.49381</span>,<span class="st">&#39;Long&#39;</span>:<span class="fl">11.33875</span>},</span>
+<span id="cb252-2"><a href="pandas.html#cb252-2"></a>{<span class="st">&#39;Lat&#39;</span>:<span class="fl">41.89193</span>,<span class="st">&#39;Long&#39;</span>:<span class="fl">12.51133</span>}],</span>
+<span id="cb252-3"><a href="pandas.html#cb252-3"></a>index<span class="op">=</span>[<span class="st">&#39;Bologna&#39;</span>,<span class="st">&#39;Rome&#39;</span>])</span>
+<span id="cb252-4"><a href="pandas.html#cb252-4"></a><span class="bu">print</span>(city_loc)</span></code></pre></div>
+<pre><code>##               Lat      Long
+## Bologna  44.49381  11.33875
+## Rome     41.89193  12.51133</code></pre>
+<p><code>DataFrame</code> behaves like a dictionary, in which keys are column names and the values are index-aligned <code>Series</code></p>
+<div class="sourceCode" id="cb254"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb254-1"><a href="pandas.html#cb254-1"></a>city_loc.columns</span></code></pre></div>
+<pre><code>## Index([&#39;Lat&#39;, &#39;Long&#39;], dtype=&#39;object&#39;)</code></pre>
+<div class="sourceCode" id="cb256"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb256-1"><a href="pandas.html#cb256-1"></a>city_loc[<span class="st">&#39;Lat&#39;</span>]</span></code></pre></div>
+<pre><code>## Bologna    44.49381
+## Rome       41.89193
+## Name: Lat, dtype: float64</code></pre>
+<div class="sourceCode" id="cb258"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb258-1"><a href="pandas.html#cb258-1"></a><span class="co"># add an elevation column for example as a list</span></span>
+<span id="cb258-2"><a href="pandas.html#cb258-2"></a>city_loc[<span class="st">&#39;Elev&#39;</span>] <span class="op">=</span> [<span class="dv">54</span>,<span class="dv">21</span>]</span>
+<span id="cb258-3"><a href="pandas.html#cb258-3"></a>city_loc</span></code></pre></div>
+<pre><code>##               Lat      Long  Elev
+## Bologna  44.49381  11.33875    54
+## Rome     41.89193  12.51133    21</code></pre>
+<div id="indexing" class="section level3" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> Indexing</h3>
+<div id="loc-attribute" class="section level4" number="5.2.1.1">
+<h4><span class="header-section-number">5.2.1.1</span> <code>.loc[]</code> attribute</h4>
+<p>Label-based indexing is supported via the attribute <code>.loc[]</code>, the result is a <code>Series</code> object.</p>
+<div class="sourceCode" id="cb260"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb260-1"><a href="pandas.html#cb260-1"></a>precips.loc[<span class="st">&#39;2019-10-30&#39;</span>], </span></code></pre></div>
+<pre><code>## (San Pietro Capofiume    1.0
+## Bologna Urbana          1.2
+## Name: 2019-10-30 00:00:00, dtype: float64,)</code></pre>
+<div class="sourceCode" id="cb262"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb262-1"><a href="pandas.html#cb262-1"></a><span class="bu">type</span>(precips.loc[<span class="st">&#39;2019-10-30&#39;</span>])</span></code></pre></div>
+<pre><code>## &lt;class &#39;pandas.core.series.Series&#39;&gt;</code></pre>
+<p><code>.loc[]</code> supports slicing. However, unlike ndarray integer-based slicing,it includes the upper label:</p>
+<div class="sourceCode" id="cb264"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb264-1"><a href="pandas.html#cb264-1"></a>precips.loc[<span class="st">&#39;2019-10-29&#39;</span>:<span class="st">&#39;2019-11-01&#39;</span>]</span></code></pre></div>
+<pre><code>##             San Pietro Capofiume  Bologna Urbana
+## 2019-10-29                   0.2             0.0
+## 2019-10-30                   1.0             1.2
+## 2019-10-31                   4.2             4.2
+## 2019-11-01                   0.0             0.0</code></pre>
+<p>and it also allows for list of labels:</p>
+<div class="sourceCode" id="cb266"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb266-1"><a href="pandas.html#cb266-1"></a><span class="co"># Note: in this example the list has to be transformed into a DatetimeIndex because the Series objects which were the input of the data frame had been constructed with a DatetimeIndex</span></span>
+<span id="cb266-2"><a href="pandas.html#cb266-2"></a>precips.loc[pd.DatetimeIndex([<span class="st">&#39;2019-10-31&#39;</span>,<span class="st">&#39;2019-11-01&#39;</span>,<span class="st">&#39;2019-11-02&#39;</span>])]</span></code></pre></div>
+<pre><code>##             San Pietro Capofiume  Bologna Urbana
+## 2019-10-31                   4.2             4.2
+## 2019-11-01                   0.0             0.0
+## 2019-11-02                   1.2             NaN</code></pre>
+<p>Is it possible to index through <em>booleans</em></p>
+<div class="sourceCode" id="cb268"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb268-1"><a href="pandas.html#cb268-1"></a><span class="co">#create index with missing values</span></span>
+<span id="cb268-2"><a href="pandas.html#cb268-2"></a>na<span class="op">=</span>(pd.isna(precips[<span class="st">&#39;Bologna Urbana&#39;</span>])<span class="op">|</span>pd.isna(precips[<span class="st">&#39;San Pietro Capofiume&#39;</span>]))</span>
+<span id="cb268-3"><a href="pandas.html#cb268-3"></a><span class="co">#index full dataset without(-) values which are na</span></span>
+<span id="cb268-4"><a href="pandas.html#cb268-4"></a>precips.loc[<span class="op">~</span>na]</span></code></pre></div>
+<pre><code>##             San Pietro Capofiume  Bologna Urbana
+## 2019-10-29                   0.2             0.0
+## 2019-10-30                   1.0             1.2
+## 2019-10-31                   4.2             4.2
+## 2019-11-01                   0.0             0.0</code></pre>
+</div>
+<div id="iloc-attribute" class="section level4" number="5.2.1.2">
+<h4><span class="header-section-number">5.2.1.2</span> <code>.iloc[]</code> attribute</h4>
+<p>The.iloc attribute provides integer-based indexing, following the usual Pythonconventions. The allowed types of input are the same as.loc, but integers mustbe specified instead of labels. The following examples return the same resultsas the ones above:</p>
+<div class="sourceCode" id="cb270"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb270-1"><a href="pandas.html#cb270-1"></a>precips.iloc[<span class="dv">3</span>]</span></code></pre></div>
+<pre><code>## San Pietro Capofiume    1.0
+## Bologna Urbana          1.2
+## Name: 2019-10-30 00:00:00, dtype: float64</code></pre>
+<div class="sourceCode" id="cb272"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb272-1"><a href="pandas.html#cb272-1"></a>precips.iloc[<span class="dv">2</span>:<span class="dv">6</span>]</span></code></pre></div>
+<pre><code>##             San Pietro Capofiume  Bologna Urbana
+## 2019-10-29                   0.2             0.0
+## 2019-10-30                   1.0             1.2
+## 2019-10-31                   4.2             4.2
+## 2019-11-01                   0.0             0.0</code></pre>
+<div class="sourceCode" id="cb274"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb274-1"><a href="pandas.html#cb274-1"></a>precips.iloc[[<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>]]</span></code></pre></div>
+<pre><code>##             San Pietro Capofiume  Bologna Urbana
+## 2019-10-31                   4.2             4.2
+## 2019-11-01                   0.0             0.0
+## 2019-11-02                   1.2             NaN</code></pre>
+<p>Is it possible to index with booleans, however first we need to convert it to a numpy array wiht <code>.to_numpy()</code></p>
+<div class="sourceCode" id="cb276"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb276-1"><a href="pandas.html#cb276-1"></a>precips.iloc[<span class="op">~</span>na.to_numpy()]</span></code></pre></div>
+<pre><code>##             San Pietro Capofiume  Bologna Urbana
+## 2019-10-29                   0.2             0.0
+## 2019-10-30                   1.0             1.2
+## 2019-10-31                   4.2             4.2
+## 2019-11-01                   0.0             0.0</code></pre>
+</div>
+<div id="query" class="section level4" number="5.2.1.3">
+<h4><span class="header-section-number">5.2.1.3</span> <code>.query()</code></h4>
+<p>The <code>.query()</code> method lets you filter a DataFrame based on a query expression; the best choice if you have several conditions to be applied on the row selection.</p>
+<div class="sourceCode" id="cb278"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb278-1"><a href="pandas.html#cb278-1"></a>df.query(<span class="st">&quot;(column1 == &#39;value&#39;) and (column2 &gt; 1000)&quot;</span>)</span>
+<span id="cb278-2"><a href="pandas.html#cb278-2"></a></span>
+<span id="cb278-3"><a href="pandas.html#cb278-3"></a>n <span class="op">=</span> <span class="dv">200</span></span>
+<span id="cb278-4"><a href="pandas.html#cb278-4"></a>df.query(<span class="st">&quot;(column1 == &#39;value&#39;) and (column2 &gt; @n)&quot;</span>)</span>
+<span id="cb278-5"><a href="pandas.html#cb278-5"></a></span>
+<span id="cb278-6"><a href="pandas.html#cb278-6"></a>df.query(<span class="ss">f&quot;(column1 == &#39;value&#39;) or (column2 &gt; </span><span class="sc">{n}</span><span class="ss">)&quot;</span>)</span></code></pre></div>
+</div>
+</div>
+<div id="reading-data" class="section level3" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> Reading Data</h3>
+<div id="read_csv" class="section level4" number="5.2.2.1">
+<h4><span class="header-section-number">5.2.2.1</span> <code>read_csv</code></h4>
+<div class="sourceCode" id="cb279"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb279-1"><a href="pandas.html#cb279-1"></a><span class="co"># iris1 = pd.read_csv(&quot;https://raw.githubusercontent.com/SakshamAyush/Iris_Flower_Classification/master/data/bezdekIris.csv&quot;)</span></span></code></pre></div>
+<ul>
+<li><p>The compression argument enables to specify the decompression algorithm if dataset is a compressed CSV file, setting the value <code>'infer'</code> chooses it by file extension.</p></li>
+<li><p>By default, time series are not recognized, the <code>dtypeof</code> the series is object, it should be <code>datetime64[ns]</code>. the <code>parse_dates</code> argument enables us to specify a list of columns that must be parse as dates (i.e. <code>parse_dates = ['year']</code> or <code>parse_dates = [0]</code>)</p></li>
+<li><p>The <code>index_col</code> argument enables us to set a sequence of columns as row labels (ex. <code>index_col='Time'</code>)</p></li>
+</ul>
+</div>
+<div id="read_excel" class="section level4" number="5.2.2.2">
+<h4><span class="header-section-number">5.2.2.2</span> <code>read_excel</code></h4>
+<p>The read_excel function enables the reading of <em>.xls</em> and <em>.xlsx</em> files. Installation of either xlrd or openpyxl (for Excel 2007,.xlsx) is a prerequisite.</p>
+</div>
+</div>
+<div id="data-wrangling" class="section level3" number="5.2.3">
+<h3><span class="header-section-number">5.2.3</span> Data Wrangling</h3>
+<p>Function <code>pd.concat</code> on a list of objects can concatenate Series or DataFrame objects</p>
+<div class="sourceCode" id="cb280"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb280-1"><a href="pandas.html#cb280-1"></a><span class="co">#Row labels are not modified</span></span>
+<span id="cb280-2"><a href="pandas.html#cb280-2"></a>s1<span class="op">=</span>pd.Series([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>])</span>
+<span id="cb280-3"><a href="pandas.html#cb280-3"></a>s2<span class="op">=</span>pd.Series([<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>])</span>
+<span id="cb280-4"><a href="pandas.html#cb280-4"></a>s<span class="op">=</span>pd.concat([s1, s2])</span>
+<span id="cb280-5"><a href="pandas.html#cb280-5"></a>s</span></code></pre></div>
+<pre><code>## 0    1
+## 1    2
+## 2    3
+## 0    4
+## 1    5
+## 2    6
+## dtype: int64</code></pre>
+<p>Be careful when concatenating DataFrame objects. Let c1 and c2 be the column labels of the 1st and 2nd frame</p>
+<p>Columns𝐶2 and 𝐶1 are added to first data frame, columns𝐶1 and 𝐶2 to the second, all filled with NaN.</p>
+<p>The rows of the second frame are appended to the first</p>
+<div class="sourceCode" id="cb282"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb282-1"><a href="pandas.html#cb282-1"></a>df1<span class="op">=</span>pd.DataFrame({<span class="st">&#39;a&#39;</span>: [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>],<span class="st">&#39;b&#39;</span>: [<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>]})</span>
+<span id="cb282-2"><a href="pandas.html#cb282-2"></a>df2<span class="op">=</span>pd.DataFrame({<span class="st">&#39;b&#39;</span>: [<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>],<span class="st">&#39;c&#39;</span>: [<span class="dv">10</span>,<span class="dv">11</span>,<span class="dv">12</span>]})</span>
+<span id="cb282-3"><a href="pandas.html#cb282-3"></a>df<span class="op">=</span>pd.concat([df1, df2])</span></code></pre></div>
+<div id="multi-indexing" class="section level4" number="5.2.3.1">
+<h4><span class="header-section-number">5.2.3.1</span> Multi-indexing</h4>
+<p>If all columns are tuples of the same size, then they are understood as a multi-index. The same goes for row index labels. For example:</p>
+<div class="sourceCode" id="cb283"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb283-1"><a href="pandas.html#cb283-1"></a>d <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb283-2"><a href="pandas.html#cb283-2"></a>  {</span>
+<span id="cb283-3"><a href="pandas.html#cb283-3"></a>    (<span class="st">&quot;public&quot;</span>, <span class="st">&quot;birthyear&quot;</span>):</span>
+<span id="cb283-4"><a href="pandas.html#cb283-4"></a>        {(<span class="st">&quot;Paris&quot;</span>,<span class="st">&quot;alice&quot;</span>):<span class="dv">1985</span>, (<span class="st">&quot;Paris&quot;</span>,<span class="st">&quot;martino&quot;</span>): <span class="dv">1984</span>, (<span class="st">&quot;London&quot;</span>,<span class="st">&quot;franco&quot;</span>):<span class="dv">1992</span>},</span>
+<span id="cb283-5"><a href="pandas.html#cb283-5"></a>(<span class="st">&quot;public&quot;</span>, <span class="st">&quot;hobby&quot;</span>):</span>
+<span id="cb283-6"><a href="pandas.html#cb283-6"></a>        {(<span class="st">&quot;Paris&quot;</span>,<span class="st">&quot;alice&quot;</span>):<span class="st">&quot;Biking&quot;</span>, (<span class="st">&quot;Paris&quot;</span>,<span class="st">&quot;martino&quot;</span>): <span class="st">&quot;Dancing&quot;</span>},</span>
+<span id="cb283-7"><a href="pandas.html#cb283-7"></a>    (<span class="st">&quot;private&quot;</span>, <span class="st">&quot;weight&quot;</span>):</span>
+<span id="cb283-8"><a href="pandas.html#cb283-8"></a>        {(<span class="st">&quot;Paris&quot;</span>,<span class="st">&quot;alice&quot;</span>):<span class="dv">68</span>, (<span class="st">&quot;Paris&quot;</span>,<span class="st">&quot;martino&quot;</span>): <span class="dv">83</span>, (<span class="st">&quot;London&quot;</span>,<span class="st">&quot;franco&quot;</span>): <span class="dv">112</span>},</span>
+<span id="cb283-9"><a href="pandas.html#cb283-9"></a>    (<span class="st">&quot;private&quot;</span>, <span class="st">&quot;children&quot;</span>):</span>
+<span id="cb283-10"><a href="pandas.html#cb283-10"></a>        {(<span class="st">&quot;Paris&quot;</span>, <span class="st">&quot;alice&quot;</span>):np.nan, (<span class="st">&quot;Paris&quot;</span>,<span class="st">&quot;martino&quot;</span>): <span class="dv">3</span>, (<span class="st">&quot;London&quot;</span>,<span class="st">&quot;franco&quot;</span>): <span class="dv">0</span>}</span>
+<span id="cb283-11"><a href="pandas.html#cb283-11"></a>  }</span>
+<span id="cb283-12"><a href="pandas.html#cb283-12"></a>) </span>
+<span id="cb283-13"><a href="pandas.html#cb283-13"></a>d</span></code></pre></div>
+<pre><code>##                   public          private         
+##                birthyear    hobby  weight children
+## Paris  alice        1985   Biking      68      NaN
+##        martino      1984  Dancing      83      3.0
+## London franco       1992      NaN     112      0.0</code></pre>
+<p>You can transpose columns and indices using the <code>.T</code> attribute:</p>
+<div class="sourceCode" id="cb285"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb285-1"><a href="pandas.html#cb285-1"></a>dT <span class="op">=</span> d.T</span></code></pre></div>
+<p>There are two levels of columns, and two levels of indices. We can drop a column level by calling <code>droplevel()</code> (the same goes for indices):</p>
+<div class="sourceCode" id="cb286"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb286-1"><a href="pandas.html#cb286-1"></a>dT.columns <span class="op">=</span> dT.columns.droplevel(level <span class="op">=</span> <span class="dv">0</span>)</span>
+<span id="cb286-2"><a href="pandas.html#cb286-2"></a>dT</span></code></pre></div>
+<pre><code>##                     alice  martino franco
+## public  birthyear    1985     1984   1992
+##         hobby      Biking  Dancing    NaN
+## private weight         68       83    112
+##         children      NaN      3.0    0.0</code></pre>
+</div>
+<div id="stacking-and-unstacking-levels" class="section level4" number="5.2.3.2">
+<h4><span class="header-section-number">5.2.3.2</span> Stacking and unstacking levels</h4>
+<p>Calling the <code>stack()</code> method will push the lowest column level after the lowest index:</p>
+<div class="sourceCode" id="cb288"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb288-1"><a href="pandas.html#cb288-1"></a>d.stack()</span></code></pre></div>
+<pre><code>##                           private   public
+## Paris  alice   birthyear      NaN     1985
+##                hobby          NaN   Biking
+##                weight        68.0      NaN
+##        martino birthyear      NaN     1984
+##                children       3.0      NaN
+##                hobby          NaN  Dancing
+##                weight        83.0      NaN
+## London franco  birthyear      NaN     1992
+##                children       0.0      NaN
+##                weight       112.0      NaN</code></pre>
+<div class="sourceCode" id="cb290"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb290-1"><a href="pandas.html#cb290-1"></a>dT.stack()</span></code></pre></div>
+<pre><code>## public   birthyear  alice         1985
+##                     martino       1984
+##                     franco        1992
+##          hobby      alice       Biking
+##                     martino    Dancing
+## private  weight     alice           68
+##                     martino         83
+##                     franco         112
+##          children   martino        3.0
+##                     franco         0.0
+## dtype: object</code></pre>
+<p>Note that many NaN values appeared. This makes sense because many new combinations did not exist before (eg. there was no bob in London).</p>
+<p>Calling <code>unstack()</code> will do the reverse, once again creating many NaN values.</p>
+<div class="sourceCode" id="cb292"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb292-1"><a href="pandas.html#cb292-1"></a>dT.unstack()</span></code></pre></div>
+<pre><code>##             alice                          ...    franco                      
+##         birthyear children   hobby weight  ... birthyear children hobby weight
+## private       NaN      NaN     NaN     68  ...       NaN      0.0   NaN    112
+## public       1985      NaN  Biking    NaN  ...      1992      NaN   NaN    NaN
+## 
+## [2 rows x 12 columns]</code></pre>
+<p>The <code>stack()</code> and <code>unstack()</code> methods let you select the level to stack/unstack. You can even stack/unstack multiple levels at once, specifying the <code>level</code> parameter.</p>
+</div>
+<div id="adding-or-removing-columns" class="section level4" number="5.2.3.3">
+<h4><span class="header-section-number">5.2.3.3</span> Adding or removing columns</h4>
+<div class="sourceCode" id="cb294"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb294-1"><a href="pandas.html#cb294-1"></a>people</span></code></pre></div>
+<pre><code>##          weight  birthyear  children    hobby
+## alice        68       1984       NaN   Biking
+## franco      112       1992       3.0      NaN
+## martino      83       1985       0.0  Dancing</code></pre>
+<div class="sourceCode" id="cb296"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb296-1"><a href="pandas.html#cb296-1"></a>people[<span class="st">&quot;age&quot;</span>] <span class="op">=</span> <span class="dv">2018</span> <span class="op">-</span> people[<span class="st">&quot;birthyear&quot;</span>] <span class="co"># adds a new column &quot;age&quot; </span></span>
+<span id="cb296-2"><a href="pandas.html#cb296-2"></a>people[<span class="st">&quot;over 30&quot;</span>] <span class="op">=</span> people[<span class="st">&quot;age&quot;</span>] <span class="op">&gt;</span> <span class="dv">30</span> <span class="co"># adds another column &quot;over 30&quot; </span></span>
+<span id="cb296-3"><a href="pandas.html#cb296-3"></a>birthyears <span class="op">=</span> people.pop(<span class="st">&quot;birthyear&quot;</span>)</span>
+<span id="cb296-4"><a href="pandas.html#cb296-4"></a><span class="kw">del</span> people[<span class="st">&quot;children&quot;</span>]</span>
+<span id="cb296-5"><a href="pandas.html#cb296-5"></a></span>
+<span id="cb296-6"><a href="pandas.html#cb296-6"></a>people</span></code></pre></div>
+<pre><code>##          weight    hobby  age  over 30
+## alice        68   Biking   34     True
+## franco      112      NaN   26    False
+## martino      83  Dancing   33     True</code></pre>
+<p>When you add a new column, it must have the same number of rows. Missing rows are filled with NaN, and extra rows are ignored.</p>
+<p>When adding a new column, it is added at the end (on the right) by default. You can also insert a column anywhere else using the <code>.insert()</code> method.</p>
+<div class="sourceCode" id="cb298"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb298-1"><a href="pandas.html#cb298-1"></a>people.insert(<span class="dv">1</span>, <span class="st">&quot;height&quot;</span>, [<span class="dv">172</span>, <span class="dv">181</span>, <span class="dv">185</span>])</span>
+<span id="cb298-2"><a href="pandas.html#cb298-2"></a></span>
+<span id="cb298-3"><a href="pandas.html#cb298-3"></a>(people</span>
+<span id="cb298-4"><a href="pandas.html#cb298-4"></a>.assign(body_mass_index <span class="op">=</span> <span class="kw">lambda</span> df: df[<span class="st">&quot;weight&quot;</span>] <span class="op">/</span> (df[<span class="st">&quot;height&quot;</span>] <span class="op">/</span> <span class="dv">100</span>)<span class="op">**</span> <span class="dv">2</span>)</span>
+<span id="cb298-5"><a href="pandas.html#cb298-5"></a>.assign(overweight <span class="op">=</span> <span class="kw">lambda</span> df: df[<span class="st">&quot;body_mass_index&quot;</span>] <span class="op">&gt;</span> <span class="dv">25</span>)</span>
+<span id="cb298-6"><a href="pandas.html#cb298-6"></a>)</span></code></pre></div>
+<pre><code>##          weight  height    hobby  age  over 30  body_mass_index  overweight
+## alice        68     172   Biking   34     True        22.985398       False
+## franco      112     181      NaN   26    False        34.186991        True
+## martino      83     185  Dancing   33     True        24.251278       False</code></pre>
+</div>
+<div id="sorting-a-dataframe" class="section level4" number="5.2.3.4">
+<h4><span class="header-section-number">5.2.3.4</span> Sorting a DataFrame</h4>
+<p>You can sort a DataFrame by calling its sort_index method. By default it sorts the rows by their index label, in ascending order, but let’s reverse the order:</p>
+<div class="sourceCode" id="cb300"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb300-1"><a href="pandas.html#cb300-1"></a>people.sort_index(ascending<span class="op">=</span><span class="va">False</span>)</span></code></pre></div>
+<pre><code>##          weight  height    hobby  age  over 30
+## martino      83     185  Dancing   33     True
+## franco      112     181      NaN   26    False
+## alice        68     172   Biking   34     True</code></pre>
+<p>Note that sort_index returned a sorted copy of the DataFrame. To modify people directly, we can set the <code>inplace=</code> argument to <code>True</code>. Also, we can sort the columns instead of the rows by setting <code>axis=1</code> or by the values instead of the labels, we can use <code>sort_values()</code> and specify the column to sort by:</p>
+<div class="sourceCode" id="cb302"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb302-1"><a href="pandas.html#cb302-1"></a>people.sort_values(by<span class="op">=</span><span class="st">&quot;age&quot;</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb302-2"><a href="pandas.html#cb302-2"></a>people</span></code></pre></div>
+<pre><code>##          weight  height    hobby  age  over 30
+## franco      112     181      NaN   26    False
+## martino      83     185  Dancing   33     True
+## alice        68     172   Biking   34     True</code></pre>
+</div>
+<div id="aggregating" class="section level4" number="5.2.3.5">
+<h4><span class="header-section-number">5.2.3.5</span> Aggregating</h4>
+<p>Similar to the SQL language, pandas allows grouping your data into groups to run calculations over each group.
+* <code>.groupby(" ")</code></p>
+<p>Pandas supports spreadsheet-like <a title= "A pivot table is a table of grouped values that aggregates the individual items of a more extensive table (such as from a database, spreadsheet, or business intelligence program) within one or more discrete categories. This summary might include sums, averages, or other statistics, which the pivot table groups together using a chosen aggregation function applied to the grouped values."> pivot tables </a> that allow quick data summarization. To illustrate this, let’s create a simple DataFrame:</p>
+</div>
+</div>
+<div id="evaluating-an-expression" class="section level3" number="5.2.4">
+<h3><span class="header-section-number">5.2.4</span> Evaluating an expression</h3>
+<p>A great feature supported by pandas is expression evaluation. This relies on the <code>numexpr</code> library which must be installed.</p>
+<div class="sourceCode" id="cb304"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb304-1"><a href="pandas.html#cb304-1"></a>people.<span class="bu">eval</span>(<span class="st">&quot;weight / (height/100) ** 2 &gt; 25&quot;</span>)</span></code></pre></div>
+<pre><code>## franco      True
+## martino    False
+## alice      False
+## dtype: bool</code></pre>
+<p>Assignment expressions are also supported. Let’s set <code>inplace=True</code> to directly modify the DataFrame rather than getting a modified copy:</p>
+<div class="sourceCode" id="cb306"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb306-1"><a href="pandas.html#cb306-1"></a>people.<span class="bu">eval</span>(<span class="st">&quot;body_mass_index = weight / (height/100) ** 2&quot;</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb306-2"><a href="pandas.html#cb306-2"></a>people</span></code></pre></div>
+<pre><code>##          weight  height    hobby  age  over 30  body_mass_index
+## franco      112     181      NaN   26    False        34.186991
+## martino      83     185  Dancing   33     True        24.251278
+## alice        68     172   Biking   34     True        22.985398</code></pre>
+</div>
+<div id="handling-missing-data" class="section level3" number="5.2.5">
+<h3><span class="header-section-number">5.2.5</span> Handling Missing Data</h3>
+<p>Dealing with missing data is a frequent task when working with real life data. Pandas offers a few tools to handle missing data.</p>
+<ul>
+<li><p><code>.isnull()</code>, <code>.isna()</code>, indicate whether values are missing (True/False). Its sum (<code>.isnull().sum(0)</code>) reports and overview the number of <em>NAs</em> for each column.</p></li>
+<li><p><code>df[df.isnull().any(axis=1)]</code> keeps only the rows that contain at least one null</p></li>
+</ul>
+<div class="sourceCode" id="cb308"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb308-1"><a href="pandas.html#cb308-1"></a>grades_array <span class="op">=</span> np.array([[<span class="dv">8</span>,<span class="dv">8</span>,<span class="dv">9</span>],[<span class="dv">10</span>,<span class="dv">9</span>,<span class="dv">9</span>],[<span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">2</span>], [<span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">10</span>]])</span>
+<span id="cb308-2"><a href="pandas.html#cb308-2"></a>grades <span class="op">=</span> pd.DataFrame(grades_array, columns<span class="op">=</span>[<span class="st">&quot;sep&quot;</span>, <span class="st">&quot;oct&quot;</span>, <span class="st">&quot;nov&quot;</span>], index<span class="op">=</span>[<span class="st">&quot;alice&quot;</span>,<span class="st">&quot;bob&quot;</span>,<span class="st">&quot;charles&quot;</span>,<span class="st">&quot;darwin&quot;</span>])</span>
+<span id="cb308-3"><a href="pandas.html#cb308-3"></a>grades</span></code></pre></div>
+<pre><code>##          sep  oct  nov
+## alice      8    8    9
+## bob       10    9    9
+## charles    4    8    2
+## darwin     9   10   10</code></pre>
+<div class="sourceCode" id="cb310"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb310-1"><a href="pandas.html#cb310-1"></a>bonus_array <span class="op">=</span> np.array([[<span class="dv">0</span>,np.nan,<span class="dv">2</span>],[np.nan,<span class="dv">1</span>,<span class="dv">0</span>],[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>], [<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">0</span>]])</span>
+<span id="cb310-2"><a href="pandas.html#cb310-2"></a>bonus_points <span class="op">=</span> pd.DataFrame(bonus_array, columns<span class="op">=</span>[<span class="st">&quot;oct&quot;</span>, <span class="st">&quot;nov&quot;</span>, <span class="st">&quot;dec&quot;</span>], index<span class="op">=</span>[<span class="st">&quot;bob&quot;</span>,<span class="st">&quot;colin&quot;</span>, <span class="st">&quot;darwin&quot;</span>, <span class="st">&quot;charles&quot;</span>]) </span>
+<span id="cb310-3"><a href="pandas.html#cb310-3"></a>bonus_points</span></code></pre></div>
+<pre><code>##          oct  nov  dec
+## bob      0.0  NaN  2.0
+## colin    NaN  1.0  0.0
+## darwin   0.0  1.0  0.0
+## charles  3.0  3.0  0.0</code></pre>
+<div class="sourceCode" id="cb312"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb312-1"><a href="pandas.html#cb312-1"></a>grades <span class="op">+</span> bonus_points</span></code></pre></div>
+<pre><code>##          dec   nov   oct  sep
+## alice    NaN   NaN   NaN  NaN
+## bob      NaN   NaN   9.0  NaN
+## charles  NaN   5.0  11.0  NaN
+## colin    NaN   NaN   NaN  NaN
+## darwin   NaN  11.0  10.0  NaN</code></pre>
+<p>Looks like the addition worked in some cases but way too many elements are now empty. That’s because when aligning the DataFrames, some columns and rows were only present on one side, and thus they were considered missing on the other side (NaN). Then adding NaN to a number results in NaN, hence the result.</p>
+<div id="fillna" class="section level4" number="5.2.5.1">
+<h4><span class="header-section-number">5.2.5.1</span> <code>.fillna()</code></h4>
+<p>Let’s try to fix the problem above. For example, we can decide that missing data should result in a zero, instead of NaN. We can replace all <em>NaN</em> values by a any value using the <code>fillna()</code> method:</p>
+<div class="sourceCode" id="cb314"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb314-1"><a href="pandas.html#cb314-1"></a>(grades <span class="op">+</span> bonus_points).fillna(<span class="dv">0</span>) <span class="co">#fill with 0s</span></span></code></pre></div>
+<pre><code>##          dec   nov   oct  sep
+## alice    0.0   0.0   0.0  0.0
+## bob      0.0   0.0   9.0  0.0
+## charles  0.0   5.0  11.0  0.0
+## colin    0.0   0.0   0.0  0.0
+## darwin   0.0  11.0  10.0  0.0</code></pre>
+<p>It’s a bit unfair that we’re setting grades to zero in September, though. Perhaps we should decide that missing grades are missing grades, but missing bonus points should be replaced by zeros:</p>
+<div class="sourceCode" id="cb316"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb316-1"><a href="pandas.html#cb316-1"></a>better_bonus_points <span class="op">=</span> bonus_points.copy()</span>
+<span id="cb316-2"><a href="pandas.html#cb316-2"></a>better_bonus_points.insert(<span class="dv">0</span>, <span class="st">&quot;sep&quot;</span>, <span class="dv">0</span>)</span>
+<span id="cb316-3"><a href="pandas.html#cb316-3"></a>better_bonus_points.loc[<span class="st">&quot;alice&quot;</span>] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb316-4"><a href="pandas.html#cb316-4"></a>better_bonus_points <span class="op">=</span> better_bonus_points.interpolate(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb316-5"><a href="pandas.html#cb316-5"></a></span>
+<span id="cb316-6"><a href="pandas.html#cb316-6"></a>final_grades <span class="op">=</span> grades <span class="op">+</span> better_bonus_points</span>
+<span id="cb316-7"><a href="pandas.html#cb316-7"></a>final_grades</span></code></pre></div>
+<pre><code>##          dec   nov   oct   sep
+## alice    NaN   9.0   8.0   8.0
+## bob      NaN  10.0   9.0  10.0
+## charles  NaN   5.0  11.0   4.0
+## colin    NaN   NaN   NaN   NaN
+## darwin   NaN  11.0  10.0   9.0</code></pre>
+</div>
+<div id="dropna" class="section level4" number="5.2.5.2">
+<h4><span class="header-section-number">5.2.5.2</span> <code>.dropna()</code></h4>
+<p>So let’s call the <code>.dropna()</code> method to get rid of rows that are full of NaNs:</p>
+<div class="sourceCode" id="cb318"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb318-1"><a href="pandas.html#cb318-1"></a>final_grades_clean <span class="op">=</span> final_grades.dropna(how<span class="op">=</span><span class="st">&quot;all&quot;</span>)</span>
+<span id="cb318-2"><a href="pandas.html#cb318-2"></a>final_grades_clean</span></code></pre></div>
+<pre><code>##          dec   nov   oct   sep
+## alice    NaN   9.0   8.0   8.0
+## bob      NaN  10.0   9.0  10.0
+## charles  NaN   5.0  11.0   4.0
+## darwin   NaN  11.0  10.0   9.0</code></pre>
+<p>To remove columns that are full of NaNs, we set the axis argument to 1:</p>
+<div class="sourceCode" id="cb320"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb320-1"><a href="pandas.html#cb320-1"></a>final_grades_clean <span class="op">=</span> final_grades_clean.dropna(axis<span class="op">=</span><span class="dv">1</span>, how<span class="op">=</span><span class="st">&quot;all&quot;</span>)</span>
+<span id="cb320-2"><a href="pandas.html#cb320-2"></a>final_grades_clean</span></code></pre></div>
+<pre><code>##           nov   oct   sep
+## alice     9.0   8.0   8.0
+## bob      10.0   9.0  10.0
+## charles   5.0  11.0   4.0
+## darwin   11.0  10.0   9.0</code></pre>
+</div>
+</div>
+<div id="data-manipulation" class="section level3" number="5.2.6">
+<h3><span class="header-section-number">5.2.6</span> Data Manipulation</h3>
+<ul>
+<li><p><code>.tonumeric()</code> convert each column value to numeric</p></li>
+<li><p><code>.astype(str)</code> convert, for example, to <em>str</em> the values</p></li>
+<li><p><code>.groupby(by=None, axis=0, level=None, as_index=True, sort=True, group_keys=True, squeeze=NoDefault.no_default, observed=False, dropna=True)</code> a groupby operation involves some combination of splitting the object, applying a function, and combining the results. This can be used to group large amounts of data and compute operations on these groups.</p></li>
+</ul>
+<div class="sourceCode" id="cb322"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb322-1"><a href="pandas.html#cb322-1"></a>df.groupby(<span class="st">&#39;column1&#39;</span>).<span class="bu">sum</span>()</span></code></pre></div>
+<ul>
+<li>Use <code>.cut()</code> function to create a vector with categories labeled according to some values. For example, suppose we have a variable ‘median_income’ and we want to split it into 5 categories, in a variable ‘income_cat’ :</li>
+</ul>
+<div class="sourceCode" id="cb323"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb323-1"><a href="pandas.html#cb323-1"></a>df[<span class="st">&quot;income_cat&quot;</span>] <span class="op">=</span> pd.cut(housing[<span class="st">&quot;median_income&quot;</span>], bins<span class="op">=</span>[<span class="fl">0.</span>, <span class="fl">1.5</span>, <span class="fl">3.0</span>, <span class="fl">4.5</span>, <span class="fl">6.</span>, np.inf], labels<span class="op">=</span>[<span class="st">&#39;low income&#39;</span>, <span class="st">&#39;low-mid income&#39;</span>, <span class="st">&#39;mid income&#39;</span>, <span class="st">&#39;mid-high income&#39;</span>, <span class="st">&#39;high income&#39;</span>])]</span></code></pre></div>
+</div>
+<div id="overview-functions" class="section level3" number="5.2.7">
+<h3><span class="header-section-number">5.2.7</span> Overview Functions</h3>
+<ul>
+<li><p>The <code>.info()</code> method prints out a summary of each columns contents:</p></li>
+<li><p>the <code>.describe()</code> method gives a nice overview of the main aggregated values over each column: * count: number of non-null (not NaN) values * mean: mean of non-null values * std: standard deviation of non-null values * min: minimum of non-null values * 25%, 50%, 75%: 25th, 50th and 75th percentile of non-null values * max: maximum of non-null values</p></li>
+<li><p>In order to know the characteristics of the elements, the <code>.unique()</code> function reports the single elements. Instead, <code>.nunique()</code> it counts the unique values.</p></li>
+<li><p>For <em>object</em> type of data, there may exits multiple categories (<em>factors</em>). To explore them use <code>.value_counts()</code></p></li>
+<li><p><code>.shape()</code> it reports the shape of the table (rows x columns)</p></li>
+<li><p><code>.corr()</code>, compute pairwise correlation of columns, excluding NA/null values</p></li>
+</ul>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="numpy.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-visualization.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

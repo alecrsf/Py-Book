@@ -1,0 +1,46 @@
+# Data Visualization
+
+## Matplotlib
+```{python}
+import matplotlib.pyplot as plt 
+```
+
+<iframe src="https://matplotlib.org/stable/tutorials/index.html" height="600px" width="100%"></iframe>
+
+```{python}
+img = np.empty((20,30,3))
+img[:, :10] = [0, 0.6, 0]
+img[:, 10:20] = [1, 1, 1]
+img[:, 20:] = [0.6, 0, 0]
+plt.imshow(img)
+plt.show()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Other Packages
+
+### Seaborn
+
+<iframe src="https://seaborn.pydata.org/tutorial.html" height="600px" width="100%"></iframe>
+
+### Bokeh
+
+<iframe src="https://docs.bokeh.org/en/latest/docs/first_steps.html" height="600px" width="100%"></iframe>
+
+### Plotly
+
+<iframe src="https://dash.plotly.com/" height="600px" width="100%"></iframe>

@@ -1,0 +1,380 @@
+# Machine Learning with **Scikit-Learn**
+
+<iframe src="https://scikit-learn.org/dev/user_guide.html" height="500px" width="100%">
+
+</iframe>
+
+## Data PreProcessing
+
+### Create a Training and Test Sets
+
+-   [`train_test_split()`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html), this function randomly splits the dataset in training and test sets. `random_state` allows you to set the random generator seed and to make this notebook's output identical at every run.
+
+```{python, eval=F}
+from sklearn.model_selection import train_test_split
+
+train_set, test_set = train_test_split(df, test_size=0.2, random_state=42)
+```
+
+-   `StratifiedShuffleSplit()`, this algorithm provides train and test indexes to split (**stratify**) data in train and test sets. For example based on a *column* of my dataset *df*
+
+```{python, eval=FALSE}
+from sklearn.model_selection import StratifiedShuffleSplit
+
+split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=42)
+
+for train_index, test_index in split.split(df, df["column"]):
+    strat_train_set = df.loc[train_index]
+    strat_test_set = df.loc[test_index]
+```
+
+Is it possible to compare the different proportions based on the split, in the overall dataset, the test set generated with the stratified sampling, in a test set generated using random sampling
+
+```{python, eval=F}
+def income_cat_proportions(data):
+    return data["column"].value_counts() / len(data)
+
+train_set, test_set = train_test_split(df, test_size=0.2, random_state=42)
+
+compare_props = pd.DataFrame({
+    "Overall": income_cat_proportions(df),
+    "Stratified": income_cat_proportions(strat_test_set),
+    "Random": income_cat_proportions(test_set)}
+    ).sort_index()
+
+compare_props["Rand. %Error"] = 100 * compare_props["Random"] / compare_props["Overall"] - 100
+compare_props["Strat. %Error"] = 100 * compare_props["Stratified"] / compare_props["Overall"] - 100
+
+compare_props
+```
+
+The test set generated using stratified sampling has category proportions almost identical to those in the full dataset. Remove the income\_cat.
+
+```{python, eval=F}
+for set_ in (strat_train_set, strat_test_set):
+	set_.drop("income_cat", axis=1, inplace=True)
+```
+
+After choosing the best technique to split the dataset (for example, in this case the stratified sampling), redefine your *df*
+
+Remember to separate the **predictors** (i.e median\_house\_value) by the labels
+
+```{python, eval=F}
+# drop labels for training set
+df = strat_train_set.drop("median_house_value", axis=1) 
+
+df_labels = strat_train_set["median_house_value"].copy()
+```
+
+### Impute Missing Values
+
+Machine Learning algorithms do not work with missing values.
+
+Use [`SimpleImputer()`](https://scikit-learn.org/stable/modules/generated/sklearn.impute.SimpleImputer.html) function to replace `na` values with the median values. The strategy parameter allows you to specify the imputation strategy.
+
+Remember also that imputation techniques doesn't apply to categorical variables, so make sure you remove them from your df.
+
+```{python, eval=F}
+from sklearn.impute import SimpleImputer
+
+imputer = SimpleImputer(strategy="median")
+imputer.strategy # 'median'
+
+#You can fit the imputer instance to the training data with the fit() function
+imputer.fit(df)
+
+#Imputer computes the median to the numerical attributes and stores results in statistics_ variable, which is equal to df.median().values:
+imputer.statistics_ 
+
+#At this point you can define the training set by replacing the missing values with the median values of the learned medians. The result (X) is a numpy array containing the transformed features. You get the same results by applying fit_transform()
+X = imputer.transform(df)
+
+df_tr = pd.DataFrame(X, columns= df.columns,
+                          index= df.index)
+```
+
+### Handling Texts and Categorical Attributes
+
+Now let's preprocess the categorical input feature. We need to convert these categories from text to numbers. Let's define an arbitrary dataframe containing the values of our categorical column `df_cat = df[["categorical_column"]]`
+
+#### Ordinal Encoder
+
+Try [`OrdinalEncoder()`](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OrdinalEncoder.html) function that encodes categorical features as an integer array. By using the **`OrdinalEncoder`** approach *ML* techniques will assume that two nearby values are more similar than two distant values.
+
+Be careful as it may not be the case of your study; for example, if categories were encoded like this `0=Low-Income` and `4=Low/Mid-Income`, notice that these are more similar than `0=Low-Income` and `1=High-Income`
+
+```{python, eval=F}
+df_cat = df[["categorical_column"]]
+from sklearn.preprocessing import OrdinalEncoder
+
+ordinal_encoder = OrdinalEncoder()
+df_cat_encoded = ordinal_encoder.fit_transform(df_cat)
+df_cat_encoded[:10] #to see the df with encoded variables
+
+np.unique(df_cat_encoded) #to see the encodings
+
+#The ordinal_encoder stores the list of categories in its categories_ variable. It is a list of 1D array of categories for each categorical variable: (in this case we have just 1 categorical attribute):
+ordinal_encoder.categories_
+```
+
+#### One Hot Encoder
+
+The [`OneHotEncoder()`](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html) function encodes categorical features as a one-hot numeric array. It allows you to create a binary attribute per category. For example:
+
+-   one attribute is equal to 1 when category is `Low-Income`, 0 otherwise;
+-   one attribute is equal to 1 when category is `Mid-Income`, 0 otherwise;
+-   and so on
+
+This approach is called `one-hot encoding` because, for the corresponding row, only one attribute will be equal to 1, while the others will be 0.
+
+```{python,eval=F}
+from sklearn.preprocessing import OneHotEncoder
+
+1hot_encoder = OneHotEncoder()
+df_cat_1hot = 1hot_encoder.fit_transform(df_cat)
+df_cat_1hot
+```
+
+By default, the `OneHotEncoder()` returns a sparse matrix. Each row is full of 0s except for a single 1 per row. This can consume tons of memory, you can only store the location of the nonzero elements. You can convert the sparse matrix to a dense array, if needed, by calling the `toarray()`function.
+
+```{python,eval=F}
+df_cat_1hot.toarray()
+
+# Alternatively, you can set sparse=False when creating the OneHotEncoder:
+1hot_encoder = OneHotEncoder(sparse=False)
+df_cat_1hot = 1hot_encoder.fit_transform(df_cat)
+df_cat_1hot
+
+# You can list the encoder's categories_ variable.
+cat_encoder.categories_
+```
+
+### Feature Scaling
+
+Some Machine Learning techniques do not perform well when the input have different scales. Two simple ways to get all attributes with the same scale are:
+
+-   `min-max scaling or normalization`: all values are shifted and rescaled so that they end up ranging from 0 to 1. First subtract the min value and then divide by the max minus the min. This approach is supported by [`MinMaxScaler()`](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html) class.
+
+-   `standardization`: first it subtracts the mean value and then it divides by the standard deviation. This approach is supported by [`StandardScaler()`](https://www.google.com/search?q=standard+scaler&oq=standard+scaler&aqs=chrome..69i57j0i10i512j0i20i263i512j0i512l7.2497j0j4&sourceid=chrome&ie=UTF-8) class.
+
+You need to apply this procedure to the training data only.
+
+### Pipelines
+
+The [`Pipeline`](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html) class helps with the data cleaning steps. Basically we can define the workflow that we've applied previously , within few simple lines of code.
+
+Let's build a pipeline for preprocessing the **numerical attributes** of the dataframe first:
+
+```{python, eval=F}
+df_num = df.drop("categorical_variable_if_any", axis=1)
+
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+
+num_pipeline = Pipeline([
+        ('imputer', SimpleImputer(strategy="median")),
+        ('attribs_adder', CombinedAttributesAdder()),
+        ('std_scaler', StandardScaler())
+        ])
+
+df_num_tr = num_pipeline.fit_transform(df_num)
+```
+
+The `Pipeline` class takes a list of `name,estimator` pairs defining a sequence steps.
+
+-   The `names` must be unique and do not contain `__`.
+
+-   The `estimators` are `transformers`.
+
+The `num_pipleline` object calls `fit_transform()` sequentially on all transformers, passing the output of each call as the parameter to the next call until it reaches the final estimator.
+
+Now let's build a pipeline for **preprocessing both the numerical attributes and categorical attributes**. Use [`ColumnTransformer`](https://scikit-learn.org/stable/modules/generated/sklearn.compose.ColumnTransformer.html) class that applies transformers to columns of an array or pandas DataFrame.
+
+The `ColumnTransformer()` function requires a list of tuples, where each tuple contains a name, a transformer and a list of names (or indexes) of columns that the transformer should be applied to.
+
+The `full_pipeline` object applies a `fit_transform()` to the df data.
+
+```{python, eval=F}
+from sklearn.compose import ColumnTransformer
+
+num_attribs = list(df_num)
+cat_attribs = ["categorical_variable_if_any"]
+
+full_pipeline = ColumnTransformer([
+	#numerical attributes transformed with num_pipeline
+        ("num", num_pipeline, num_attribs), 
+  #categorical variables transformed with onehotencoder
+        ("cat", OneHotEncoder(), cat_attribs), 
+    ])
+
+df_prepared = full_pipeline.fit_transform(df)
+```
+
+## Select and Train a Model
+
+The flowchart below is designed to give users a bit of a rough guide on how to approach problems with regard to which estimators to try on your data
+
+[![](images/ml_map.png "Choosing the right estimator")](https://scikit-learn.org/dev/tutorial/machine_learning_map/index.html)
+
+### Training and Evaluating on the Training Set
+
+Let's first train a Linear Regression model
+
+```{python, eval=F}
+df = strat_train_set.drop("median_house_value", axis=1) # drop labels for training set
+df_labels = strat_train_set["median_house_value"].copy()
+```
+
+```{python, eval=F}
+from sklearn.linear_model import LinearRegression
+
+lin_reg = LinearRegression()
+lin_reg.fit(df_prepared, df_labels)
+```
+
+Let's try the full preprocessing pipeline on a few training instances: the first 5 rows:
+
+```{python, eval=F}
+some_data = df.iloc[:5]
+some_labels = df_labels.iloc[:5]
+some_data_prepared = full_pipeline.transform(some_data)
+
+print('Compare predictions against the actual values.')
+print("Predictions:", lin_reg.predict(some_data_prepared))
+print("Labels:", list(some_labels)) 
+
+print(100-100*lin_reg.predict(some_data_prepared)/list(some_labels))
+```
+
+### Model Evaluation
+
+To measure this regression model performance you can use the [`mean_squared_error`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_error.html) function that performs a mean squared error regression loss:
+
+```{python, eval=F}
+from sklearn.metrics import mean_squared_error
+
+df_predictions = lin_reg.predict(df_prepared)
+
+lin_mse = mean_squared_error(df_labels, df_predictions, squared = False)
+# lin_rmse = np.sqrt(lin_mse) # Alternative to (squared = False)
+
+lin_mse
+```
+
+Mean absolute error:
+
+```{python, eval=F}
+from sklearn.metrics import mean_absolute_error
+
+lin_mae = mean_absolute_error(df_labels, df_predictions)
+lin_mae
+```
+
+This result is not very good, mainly because it shows a prediction error of 68,628 dollar (lim\_mse). It seems that the model underfit the training data, due to the features that do not provide enough information or the model that is not powerful enough. To fix underfitting, you can select a powerful model or add more features.
+
+Let's try a Decision Tree Regressor model that is capable of finding complex nonlinear relationships in the data.
+
+```{python, eval=F}
+from sklearn.tree import DecisionTreeRegressor
+
+tree_reg = DecisionTreeRegressor(random_state=42)
+tree_reg.fit(df_prepared, df_labels) 
+
+df_predictions = tree_reg.predict(df_prepared)
+tree_mse = mean_squared_error(df_labels, df_predictions)
+tree_rmse = np.sqrt(tree_mse)
+
+tree_rmse #= 0.0
+```
+
+Here the error is 0. The model maybe has overfit the data. To check this you can follow one of the following solutions:
+
+-   Use part of the training set for training and part of it for model validation.
+-   Use **k-fold cross validation** feature.
+
+#### Cross-Validation
+
+The [`cross-validation`](https://scikit-learn.org/stable/modules/cross_validation.html) approach uses different portions of the data to test and train a model on different iterations. You can use the [`cross_val_score`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_val_score.html) function to randomly splits the training set into `k` distinct subsets called `folds`, then it trains and evaluates a model `k` times, picking a different `fold` for evaluation every time and training on the other `k-1` folds.
+
+```{python, eval=F}
+# k is set to 10
+# The result is an array containing the 10 evaluation scores
+
+from sklearn.model_selection import cross_val_score
+
+scores = cross_val_score(tree_reg, df_prepared,
+df_labels, scoring="neg_mean_squared_error", cv=10)
+
+tree_rmse_scores = np.sqrt(-scores)
+
+def display_scores(scores):
+    print("Scores:", scores)
+    print("Mean:", scores.mean())
+    print("Standard deviation:", scores.std())
+
+display_scores(tree_rmse_scores)
+```
+
+The **Decision Tree** has a score of approximately 71,407 with +/- 2,439.
+
+Let's compute the same scores for **Linear Regression**.
+
+```{python, eval=F}
+lin_scores = cross_val_score(lin_reg, df_prepared, df_labels,scoring="neg_mean_squared_error", cv=10)
+
+lin_rmse_scores = np.sqrt(-lin_scores)
+display_scores(lin_rmse_scores)
+```
+
+The `Decision Tree` model seems to perform **worse** than the `Linear Regression` model due to the ovefitting.
+
+Let's try another model: `RandomForestRegressor`. Random Forest works by training many Decision Trees on random subsets of the features, than averaging out their predictions. It is an `Ensemble Learning` model, because it builds a model on top of many other models.
+
+```{python,eval=F}
+from sklearn.ensemble import RandomForestRegressor
+
+forest_reg = RandomForestRegressor(n_estimators=100, random_state=42)
+forest_reg.fit(df_prepared, df_labels)
+
+df_predictions = forest_reg.predict(df_prepared)
+forest_mse = mean_squared_error(df_labels, df_predictions)
+
+forest_rmse = np.sqrt(forest_mse)
+forest_rmse
+```
+
+```{python,eval=F}
+forest_scores = cross_val_score(forest_reg, df_prepared, df_labels,scoring="neg_mean_squared_error", cv=10)
+forest_rmse_scores = np.sqrt(-forest_scores)
+
+display_scores(forest_rmse_scores)
+```
+
+```{python,eval=F}
+scores = cross_val_score(lin_reg, df_prepared, df_labels, scoring="neg_mean_squared_error", cv=10)
+
+pd.Series(np.sqrt(-scores)).describe()
+```
+
+Let's try another model: `Support Vector Machine`.
+
+Below the SVR (Epsilon-Support Vector Regression) model is used with the `kernel=linear` parameter.
+
+```{python,eval=F}
+from sklearn.svm import SVR
+
+svm_reg = SVR()
+svm_reg.fit(df_prepared, df_labels)
+df_predictions = svm_reg.predict(df_prepared)
+svm_mse = mean_squared_error(df_labels, df_predictions)
+
+svm_rmse = np.sqrt(svm_mse)
+svm_rmse
+```
+
+```{python,eval=F}
+svm_scores = cross_val_score(svm_reg, df_prepared, df_labels,scoring="neg_mean_squared_error", cv=10)
+svm_rmse_scores = np.sqrt(-svm_scores)
+
+display_scores(svm_rmse_scores)
+```

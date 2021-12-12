@@ -1,0 +1,4 @@
+"0","import re
+
+s1 = 'Python is an excellent language'
+s2 = 'I love the Python language. I also use Python to build applications at work!'"

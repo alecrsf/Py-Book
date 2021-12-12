@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Basics | Py-Book</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::bs4_book,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Basics | Py-Book" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::bs4_book,
+set in the _output.yml file.</p>" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Basics | Py-Book" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::bs4_book,
+set in the _output.yml file.</p>" />
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="algorithms.html"/>
+<link rel="next" href="text-mining.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/vis-4.16.1/vis.min.css" rel="stylesheet" />
+<script src="libs/vis-4.16.1/vis.min.js"></script>
+<link href="libs/timeline-0.4/timevis.css" rel="stylesheet" />
+<script src="libs/timevis-binding-1.0.0/timevis.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#setup"><i class="fa fa-check"></i>Setup</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="algorithms.html"><a href="algorithms.html"><i class="fa fa-check"></i><b>1</b> Algorithms</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="algorithms.html"><a href="algorithms.html#definitions"><i class="fa fa-check"></i><b>1.1</b> Definitions</a></li>
+<li class="chapter" data-level="1.2" data-path="algorithms.html"><a href="algorithms.html#computers-architecture"><i class="fa fa-check"></i><b>1.2</b> Computers Architecture</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Basics</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="basics.html"><a href="basics.html#control-flow"><i class="fa fa-check"></i><b>2.1</b> Control Flow</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="basics.html"><a href="basics.html#data-types"><i class="fa fa-check"></i><b>2.1.1</b> Data Types</a></li>
+<li class="chapter" data-level="2.1.2" data-path="basics.html"><a href="basics.html#variables"><i class="fa fa-check"></i><b>2.1.2</b> Variables</a></li>
+<li class="chapter" data-level="2.1.3" data-path="basics.html"><a href="basics.html#logics"><i class="fa fa-check"></i><b>2.1.3</b> Logics</a></li>
+<li class="chapter" data-level="2.1.4" data-path="basics.html"><a href="basics.html#iteration"><i class="fa fa-check"></i><b>2.1.4</b> Iteration</a></li>
+<li class="chapter" data-level="2.1.5" data-path="basics.html"><a href="basics.html#functions"><i class="fa fa-check"></i><b>2.1.5</b> Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="basics.html"><a href="basics.html#collection-types"><i class="fa fa-check"></i><b>2.2</b> Collection Types</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="basics.html"><a href="basics.html#lists"><i class="fa fa-check"></i><b>2.2.1</b> Lists</a></li>
+<li class="chapter" data-level="2.2.2" data-path="basics.html"><a href="basics.html#matrixes"><i class="fa fa-check"></i><b>2.2.2</b> Matrixes</a></li>
+<li class="chapter" data-level="2.2.3" data-path="basics.html"><a href="basics.html#dictionaries"><i class="fa fa-check"></i><b>2.2.3</b> Dictionaries</a></li>
+<li class="chapter" data-level="2.2.4" data-path="basics.html"><a href="basics.html#tuples"><i class="fa fa-check"></i><b>2.2.4</b> Tuples</a></li>
+<li class="chapter" data-level="2.2.5" data-path="basics.html"><a href="basics.html#sets"><i class="fa fa-check"></i><b>2.2.5</b> Sets</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="text-mining.html"><a href="text-mining.html"><i class="fa fa-check"></i><b>3</b> Text Mining</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="text-mining.html"><a href="text-mining.html#working-with-strings"><i class="fa fa-check"></i><b>3.1</b> Working with strings</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="text-mining.html"><a href="text-mining.html#string-types"><i class="fa fa-check"></i><b>3.1.1</b> String Types</a></li>
+<li class="chapter" data-level="3.1.2" data-path="text-mining.html"><a href="text-mining.html#strings-operations"><i class="fa fa-check"></i><b>3.1.2</b> Strings Operations</a></li>
+<li class="chapter" data-level="3.1.3" data-path="text-mining.html"><a href="text-mining.html#strings-conversion"><i class="fa fa-check"></i><b>3.1.3</b> Strings Conversion</a></li>
+<li class="chapter" data-level="3.1.4" data-path="text-mining.html"><a href="text-mining.html#string-indexing-and-slicing"><i class="fa fa-check"></i><b>3.1.4</b> String Indexing and Slicing</a></li>
+<li class="chapter" data-level="3.1.5" data-path="text-mining.html"><a href="text-mining.html#string-splitting-and-joining"><i class="fa fa-check"></i><b>3.1.5</b> String splitting and joining</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="text-mining.html"><a href="text-mining.html#regular-expressions"><i class="fa fa-check"></i><b>3.2</b> Regular Expressions</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="text-mining.html"><a href="text-mining.html#match-find"><i class="fa fa-check"></i><b>3.2.1</b> Match &amp; Find</a></li>
+<li class="chapter" data-level="3.2.2" data-path="text-mining.html"><a href="text-mining.html#search-replace"><i class="fa fa-check"></i><b>3.2.2</b> Search &amp; Replace</a></li>
+<li class="chapter" data-level="3.2.3" data-path="text-mining.html"><a href="text-mining.html#metacharacters"><i class="fa fa-check"></i><b>3.2.3</b> Metacharacters</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="numpy.html"><a href="numpy.html"><i class="fa fa-check"></i><b>4</b> Numpy</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="numpy.html"><a href="numpy.html#arrays"><i class="fa fa-check"></i><b>4.1</b> Arrays</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="numpy.html"><a href="numpy.html#creating-arrays"><i class="fa fa-check"></i><b>4.1.1</b> Creating Arrays</a></li>
+<li class="chapter" data-level="4.1.2" data-path="numpy.html"><a href="numpy.html#indexing-and-slicing-arrays"><i class="fa fa-check"></i><b>4.1.2</b> Indexing and slicing arrays</a></li>
+<li class="chapter" data-level="4.1.3" data-path="numpy.html"><a href="numpy.html#reshape"><i class="fa fa-check"></i><b>4.1.3</b> Reshape</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="numpy.html"><a href="numpy.html#operators"><i class="fa fa-check"></i><b>4.2</b> Operators</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="numpy.html"><a href="numpy.html#broadcasting-rules"><i class="fa fa-check"></i><b>4.2.1</b> Broadcasting Rules</a></li>
+<li class="chapter" data-level="4.2.2" data-path="numpy.html"><a href="numpy.html#upcasting"><i class="fa fa-check"></i><b>4.2.2</b> Upcasting</a></li>
+<li class="chapter" data-level="4.2.3" data-path="numpy.html"><a href="numpy.html#conditional-operators"><i class="fa fa-check"></i><b>4.2.3</b> Conditional operators</a></li>
+<li class="chapter" data-level="4.2.4" data-path="numpy.html"><a href="numpy.html#statistics"><i class="fa fa-check"></i><b>4.2.4</b> Statistics</a></li>
+<li class="chapter" data-level="4.2.5" data-path="numpy.html"><a href="numpy.html#linear-algebra"><i class="fa fa-check"></i><b>4.2.5</b> Linear Algebra</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="pandas.html"><a href="pandas.html"><i class="fa fa-check"></i><b>5</b> Pandas</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="pandas.html"><a href="pandas.html#series"><i class="fa fa-check"></i><b>5.1</b> Series</a></li>
+<li class="chapter" data-level="5.2" data-path="pandas.html"><a href="pandas.html#dataframe"><i class="fa fa-check"></i><b>5.2</b> DataFrame</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="pandas.html"><a href="pandas.html#indexing"><i class="fa fa-check"></i><b>5.2.1</b> Indexing</a></li>
+<li class="chapter" data-level="5.2.2" data-path="pandas.html"><a href="pandas.html#reading-data"><i class="fa fa-check"></i><b>5.2.2</b> Reading Data</a></li>
+<li class="chapter" data-level="5.2.3" data-path="pandas.html"><a href="pandas.html#data-wrangling"><i class="fa fa-check"></i><b>5.2.3</b> Data Wrangling</a></li>
+<li class="chapter" data-level="5.2.4" data-path="pandas.html"><a href="pandas.html#evaluating-an-expression"><i class="fa fa-check"></i><b>5.2.4</b> Evaluating an expression</a></li>
+<li class="chapter" data-level="5.2.5" data-path="pandas.html"><a href="pandas.html#handling-missing-data"><i class="fa fa-check"></i><b>5.2.5</b> Handling Missing Data</a></li>
+<li class="chapter" data-level="5.2.6" data-path="pandas.html"><a href="pandas.html#data-manipulation"><i class="fa fa-check"></i><b>5.2.6</b> Data Manipulation</a></li>
+<li class="chapter" data-level="5.2.7" data-path="pandas.html"><a href="pandas.html#overview-functions"><i class="fa fa-check"></i><b>5.2.7</b> Overview Functions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="data-visualization.html"><a href="data-visualization.html"><i class="fa fa-check"></i><b>6</b> Data Visualization</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="data-visualization.html"><a href="data-visualization.html#matplotlib"><i class="fa fa-check"></i><b>6.1</b> Matplotlib</a></li>
+<li class="chapter" data-level="6.2" data-path="data-visualization.html"><a href="data-visualization.html#exploratory-visualization"><i class="fa fa-check"></i><b>6.2</b> Exploratory Visualization</a></li>
+<li class="chapter" data-level="6.3" data-path="data-visualization.html"><a href="data-visualization.html#other-packages"><i class="fa fa-check"></i><b>6.3</b> Other Packages</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="data-visualization.html"><a href="data-visualization.html#seaborn"><i class="fa fa-check"></i><b>6.3.1</b> Seaborn</a></li>
+<li class="chapter" data-level="6.3.2" data-path="data-visualization.html"><a href="data-visualization.html#bokeh"><i class="fa fa-check"></i><b>6.3.2</b> Bokeh</a></li>
+<li class="chapter" data-level="6.3.3" data-path="data-visualization.html"><a href="data-visualization.html#plotly"><i class="fa fa-check"></i><b>6.3.3</b> Plotly</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html"><i class="fa fa-check"></i><b>7</b> Machine Learning with <strong>Scikit-Learn</strong></a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#data-preprocessing"><i class="fa fa-check"></i><b>7.1</b> Data PreProcessing</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#create-a-training-and-test-sets"><i class="fa fa-check"></i><b>7.1.1</b> Create a Training and Test Sets</a></li>
+<li class="chapter" data-level="7.1.2" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#impute-missing-values"><i class="fa fa-check"></i><b>7.1.2</b> Impute Missing Values</a></li>
+<li class="chapter" data-level="7.1.3" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#handling-texts-and-categorical-attributes"><i class="fa fa-check"></i><b>7.1.3</b> Handling Texts and Categorical Attributes</a></li>
+<li class="chapter" data-level="7.1.4" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#feature-scaling"><i class="fa fa-check"></i><b>7.1.4</b> Feature Scaling</a></li>
+<li class="chapter" data-level="7.1.5" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#pipelines"><i class="fa fa-check"></i><b>7.1.5</b> Pipelines</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#select-and-train-a-model"><i class="fa fa-check"></i><b>7.2</b> Select and Train a Model</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#training-and-evaluating-on-the-training-set"><i class="fa fa-check"></i><b>7.2.1</b> Training and Evaluating on the Training Set</a></li>
+<li class="chapter" data-level="7.2.2" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#model-evaluation"><i class="fa fa-check"></i><b>7.2.2</b> Model Evaluation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>8</b> Clustering</a>
+<ul>
+<li class="chapter" data-level="8.0.1" data-path="clustering.html"><a href="clustering.html#clustering-1"><i class="fa fa-check"></i><b>8.0.1</b> Clustering</a></li>
+<li class="chapter" data-level="8.0.2" data-path="clustering.html"><a href="clustering.html#type-of-clustering-models"><i class="fa fa-check"></i><b>8.0.2</b> Type of Clustering Models</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Py-Book</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="basics" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Basics</h1>
+<div id="control-flow" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Control Flow</h2>
+<div id="data-types" class="section level3" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Data Types</h3>
+<ul>
+<li><code>int()</code> converts to <strong>integers</strong></li>
+<li><code>str()</code> converts to <strong>strings</strong></li>
+<li><code>float()</code> converts to <strong>float</strong> (integers with decimals)</li>
+</ul>
+<p>There exist also booleans: <strong>True</strong>, <strong>False</strong></p>
+<p>So what are the other comparison operators? Well, we’ve got: equal to <strong>==</strong>, not equal to <strong>!=</strong>, greater than <strong>&gt;</strong>, smaller than <strong>&lt;</strong>, greater or equal to <strong>&gt;=</strong>, smaller or equal to <strong>&lt;=</strong></p>
+<p>Other booleans operators are <strong>and</strong>, <strong>or</strong>, <strong>not</strong>.</p>
+<p>Be careful not to confuse <em>assignment</em> (one equals sign) with <em>comparison</em> (two equals signs)</p>
+</div>
+<div id="variables" class="section level3" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Variables</h3>
+<p>A variable lets you store a value by assigning it to a name. The name can be used to refer to the value later in the program. You can use letters, numbers, and underscores in variable names. But you can’t use special symbols, or start the name with a number.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="basics.html#cb3-1"></a>x <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb3-2"><a href="basics.html#cb3-2"></a>name <span class="op">=</span> <span class="st">&quot;Alessio&quot;</span></span>
+<span id="cb3-3"><a href="basics.html#cb3-3"></a><span class="bu">print</span>(x,name)</span></code></pre></div>
+<pre><code>## 5 Alessio</code></pre>
+<p>The input function prompts the user for input, and returns what they enter as a string. Like this:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="basics.html#cb5-1"></a>x <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>(<span class="st">&quot;Insert a value for x:&quot;</span>))</span></code></pre></div>
+<p>Remember to specify the type of the value in this case <em>int</em> was used in order to work with an integer value for x #### In-Place Operators In-place operators let you write code like `x = x + 3´ more concisely, as ‘x += 3’, for all the operations &lt;+,-,*,/,%,**,//&gt;</p>
+</div>
+<div id="logics" class="section level3" number="2.1.3">
+<h3><span class="header-section-number">2.1.3</span> Logics</h3>
+<div id="if-else-elif" class="section level4" number="2.1.3.1">
+<h4><span class="header-section-number">2.1.3.1</span> <code>if</code>, <code>else</code>, <code>elif</code></h4>
+<ul>
+<li><p><code>if</code>statements to run code based on a certain condition</p></li>
+<li><p>The <code>else</code> statement can be used to run some statements when the condition of the <strong>if</strong> statement is not met.</p></li>
+<li><p><code>elif</code> is the short for <code>else if</code> statement, used when chaining several <code>if</code> statements</p></li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="basics.html#cb6-1"></a><span class="cf">if</span> condition:</span>
+<span id="cb6-2"><a href="basics.html#cb6-2"></a>    statement</span>
+<span id="cb6-3"><a href="basics.html#cb6-3"></a><span class="cf">elif</span> condition:</span>
+<span id="cb6-4"><a href="basics.html#cb6-4"></a>    statement:</span>
+<span id="cb6-5"><a href="basics.html#cb6-5"></a><span class="cf">else</span> condition:</span>
+<span id="cb6-6"><a href="basics.html#cb6-6"></a>  statement</span></code></pre></div>
+<p>Python uses <strong>indentation</strong> (that empty space at the beginning of a line) to delimit blocks of code. Depending on the program’s logic, indentation can be mandatory. As you can see, the statements in the <strong>if</strong> should be indented.</p>
+</div>
+<div id="while" class="section level4" number="2.1.3.2">
+<h4><span class="header-section-number">2.1.3.2</span> <code>while</code></h4>
+<p>We can use the <code>while</code> loop to repeat a block of code multiple times.</p>
+<p>For example, let’s say we need to process multiple user inputs, so that each time the user inputs something, the same block of code needs to execute.</p>
+<p>To end a <code>while</code> loop prematurely, we can use a <code>break</code> statement.</p>
+<p>Instead <code>continue</code> jumps back to the top of the loop, rather than stopping it. Basically, the continue statement stops the current iteration and continues with the next one.</p>
+</div>
+</div>
+<div id="iteration" class="section level3" number="2.1.4">
+<h3><span class="header-section-number">2.1.4</span> Iteration</h3>
+<p>The <code>for</code> loop is used to iterate over a given sequence, such as lists or strings.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="basics.html#cb7-1"></a>string <span class="op">=</span> <span class="st">&quot;testing for loops&quot;</span></span>
+<span id="cb7-2"><a href="basics.html#cb7-2"></a>count <span class="op">=</span> <span class="dv">0</span> <span class="co">#initialize counter</span></span>
+<span id="cb7-3"><a href="basics.html#cb7-3"></a></span>
+<span id="cb7-4"><a href="basics.html#cb7-4"></a><span class="cf">for</span> i <span class="kw">in</span> string:</span>
+<span id="cb7-5"><a href="basics.html#cb7-5"></a>  <span class="cf">if</span>(i <span class="op">==</span> <span class="st">&#39;t&#39;</span>):</span>
+<span id="cb7-6"><a href="basics.html#cb7-6"></a>    count <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb7-7"><a href="basics.html#cb7-7"></a></span>
+<span id="cb7-8"><a href="basics.html#cb7-8"></a><span class="bu">print</span>(count)</span>
+<span id="cb7-9"><a href="basics.html#cb7-9"></a><span class="co">#How many letters &quot;t&quot;?</span></span></code></pre></div>
+<pre><code>## 2</code></pre>
+<dl>
+<dt><code>while</code> or <code>for</code>?</dt>
+<dd><p>Usually we’d use the for loop when the number of iterations is fixed. For example, iterating over a fixed list of items in a shopping list.</p>
+<p>The while loop is useful in cases when the number of iterations isn’t known and depends on some calculations and conditions in the code block of the loop.</p>
+</dd>
+</dl>
+<p>Inserting <code>%%time</code> in the code chunk reports the computational time to complete the operation</p>
+</div>
+<div id="functions" class="section level3" number="2.1.5">
+<h3><span class="header-section-number">2.1.5</span> Functions</h3>
+<p>Functions are defined with the <em><code>def</code></em> statement. The statement ends with a colon, and the code that is part of the function is indented below the <em><code>def</code></em> statement.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="basics.html#cb9-1"></a><span class="kw">def</span> function(x):</span>
+<span id="cb9-2"><a href="basics.html#cb9-2"></a>    <span class="cf">return</span>(x)</span>
+<span id="cb9-3"><a href="basics.html#cb9-3"></a></span>
+<span id="cb9-4"><a href="basics.html#cb9-4"></a>function(<span class="dv">5</span>)</span></code></pre></div>
+<pre><code>## 5</code></pre>
+<div id="functional-programming" class="section level4" number="2.1.5.1">
+<h4><span class="header-section-number">2.1.5.1</span> Functional Programming</h4>
+<p>In this section I will define <strong>higher-order functions</strong>. These are functions that have no side effects, and return a value that depend only on the argument and therefore it doesn’t change the structure of functions or elements within.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="basics.html#cb11-1"></a><span class="kw">def</span> pure_function(x,y):</span>
+<span id="cb11-2"><a href="basics.html#cb11-2"></a>    temp <span class="op">=</span> x <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>y</span>
+<span id="cb11-3"><a href="basics.html#cb11-3"></a>    <span class="cf">return</span> temp <span class="op">/</span> (<span class="dv">2</span><span class="op">*</span>x <span class="op">+</span> y)</span>
+<span id="cb11-4"><a href="basics.html#cb11-4"></a></span>
+<span id="cb11-5"><a href="basics.html#cb11-5"></a>pure_function(<span class="dv">2</span>,<span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## 0.8</code></pre>
+<ul>
+<li>easier to test and reasoning</li>
+<li>more efficient. It reduces the number of times the function is called (<em>memoization</em>)</li>
+<li>easier to run in parallel</li>
+</ul>
+<p>Python allows to have function with varying number of arguments. Using <code>*args</code> (the name <em>args</em> is just a convention; you can choose to use another) as a function parameter enables you to pass an arbitrary number of arguments to that function. The arguments are then accessible as the tuple <code>args</code> in the body of the function.</p>
+<p>The parameter <code>*args</code> must come after the named parameters to a function. Also, named parameters to a function can be made optional by giving them a default value. These must come after named parameters without a default value.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="basics.html#cb13-1"></a><span class="kw">def</span> function(x, <span class="op">*</span>args, food<span class="op">=</span><span class="st">&#39;egg&#39;</span>):</span>
+<span id="cb13-2"><a href="basics.html#cb13-2"></a>    <span class="bu">print</span>(x, args, food)</span>
+<span id="cb13-3"><a href="basics.html#cb13-3"></a></span>
+<span id="cb13-4"><a href="basics.html#cb13-4"></a>function(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>) <span class="co">#reports the default value of food</span></span></code></pre></div>
+<pre><code>## 1 (2, 3) egg</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="basics.html#cb15-1"></a>function(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>, food<span class="op">=</span><span class="st">&#39;salmon&#39;</span>)</span></code></pre></div>
+<pre><code>## 1 (2, 3, 4, 5) salmon</code></pre>
+<div id="lambdas" class="section level5" number="2.1.5.1.1">
+<h5><span class="header-section-number">2.1.5.1.1</span> Lambdas</h5>
+<p>Python allows to create functions on-the-fly (<em>anonymous</em>), thanks to <code>lambda()</code> syntax. However they are not as powerful as takes a single line of code</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="basics.html#cb17-1"></a><span class="co">#Named Functions</span></span>
+<span id="cb17-2"><a href="basics.html#cb17-2"></a><span class="kw">def</span> polynomial(x):</span>
+<span id="cb17-3"><a href="basics.html#cb17-3"></a>    <span class="cf">return</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">5</span><span class="op">*</span>x <span class="op">+</span> <span class="dv">4</span></span>
+<span id="cb17-4"><a href="basics.html#cb17-4"></a><span class="bu">print</span>(polynomial(<span class="dv">1</span>))</span></code></pre></div>
+<pre><code>## 10</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="basics.html#cb19-1"></a><span class="co">#Lambda</span></span>
+<span id="cb19-2"><a href="basics.html#cb19-2"></a><span class="bu">print</span>((<span class="kw">lambda</span> x: x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">5</span><span class="op">*</span>x <span class="op">+</span> <span class="dv">4</span>) (<span class="dv">1</span>)) <span class="co">#argument:(1) </span></span></code></pre></div>
+<pre><code>## 10</code></pre>
+</div>
+<div id="map-and-filter" class="section level5" number="2.1.5.1.2">
+<h5><span class="header-section-number">2.1.5.1.2</span> <code>map</code> and <code>filter</code></h5>
+<p>These two are high-order functions that operate on lists or <em>iterables</em>. - The function <code>map()</code> takes a function and an iterable as arguments and returns a new iterable with the function applied to each argument</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="basics.html#cb21-1"></a><span class="kw">def</span> add_five(x):</span>
+<span id="cb21-2"><a href="basics.html#cb21-2"></a>    <span class="cf">return</span> x<span class="op">+</span><span class="dv">5</span></span>
+<span id="cb21-3"><a href="basics.html#cb21-3"></a></span>
+<span id="cb21-4"><a href="basics.html#cb21-4"></a>nums <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">0</span>,<span class="dv">11</span>))</span>
+<span id="cb21-5"><a href="basics.html#cb21-5"></a>result <span class="op">=</span> <span class="bu">list</span>(<span class="bu">map</span>(add_five,nums))</span>
+<span id="cb21-6"><a href="basics.html#cb21-6"></a><span class="bu">print</span>(result)</span></code></pre></div>
+<pre><code>## [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]</code></pre>
+<ul>
+<li>The <code>filter()</code> function filters an iterable, leaving only the objects that match a condition (<em>predicate</em>)</li>
+</ul>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="basics.html#cb23-1"></a>nums <span class="op">=</span> [<span class="dv">11</span>,<span class="dv">22</span>,<span class="dv">33</span>,<span class="dv">44</span>,<span class="dv">55</span>]</span>
+<span id="cb23-2"><a href="basics.html#cb23-2"></a><span class="co">#return even number from the list</span></span>
+<span id="cb23-3"><a href="basics.html#cb23-3"></a>res <span class="op">=</span> <span class="bu">list</span>(<span class="bu">filter</span>(<span class="kw">lambda</span> x: x<span class="op">%</span><span class="dv">2</span><span class="op">==</span><span class="dv">0</span>, nums))</span>
+<span id="cb23-4"><a href="basics.html#cb23-4"></a><span class="bu">print</span>(res)</span></code></pre></div>
+<pre><code>## [22, 44]</code></pre>
+</div>
+<div id="generators" class="section level5" number="2.1.5.1.3">
+<h5><span class="header-section-number">2.1.5.1.3</span> Generators</h5>
+<p><strong>Generators</strong> are a type of iterable. They are created by the <code>yield</code> statement, which replaces the <code>return</code> of a function to provide a result without destroying local variables. Moreover as they <code>yield</code> one item at time, generators don’t have memory restrictions and so can be <strong>infinite</strong>. They can be converted into list with the function <code>list()</code>.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="basics.html#cb25-1"></a><span class="kw">def</span> countdown():</span>
+<span id="cb25-2"><a href="basics.html#cb25-2"></a>    i<span class="op">=</span><span class="dv">5</span></span>
+<span id="cb25-3"><a href="basics.html#cb25-3"></a>    <span class="cf">while</span> i <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb25-4"><a href="basics.html#cb25-4"></a>        <span class="cf">yield</span> i</span>
+<span id="cb25-5"><a href="basics.html#cb25-5"></a>        i <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb25-6"><a href="basics.html#cb25-6"></a>        </span>
+<span id="cb25-7"><a href="basics.html#cb25-7"></a><span class="bu">print</span>(<span class="bu">list</span>(countdown()))</span></code></pre></div>
+<pre><code>## [5, 4, 3, 2, 1]</code></pre>
+<p>Its usage results in improved performance, as consume low memory and there is no need to wait until all elements have been generated before starting using them</p>
+<!-- ##### Decorators -->
+<!-- Provide a way to modify functions using other functions. This is ideal when arise the need to extend the functionality of functions what we don't want to modify -->
+<!-- ```{python} -->
+<!-- def decor(func): -->
+<!--    def wrap(): -->
+<!--     print("===========") -->
+<!--     func() -->
+<!--     print("===========") -->
+<!--    return wrap -->
+<!-- @decor -->
+<!-- def print_text(): -->
+<!--    print("Hello!") -->
+<!-- decorated = decor(print_text) -->
+<!-- decorated() -->
+<!-- ``` -->
+</div>
+</div>
+</div>
+</div>
+<div id="collection-types" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Collection Types</h2>
+<div id="lists" class="section level3" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Lists</h3>
+<p>At their simplest, Lists are used to store items. We can create a list by using square brackets with commas separating items. Like this:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="basics.html#cb27-1"></a>words <span class="op">=</span> [<span class="st">&quot;Hello&quot;</span>, <span class="st">&quot;world&quot;</span>, <span class="st">&quot;!&quot;</span>]</span>
+<span id="cb27-2"><a href="basics.html#cb27-2"></a></span>
+<span id="cb27-3"><a href="basics.html#cb27-3"></a><span class="bu">print</span>(words[<span class="dv">0</span>])</span></code></pre></div>
+<pre><code>## Hello</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="basics.html#cb29-1"></a><span class="bu">print</span>(words[<span class="dv">1</span>])</span></code></pre></div>
+<pre><code>## world</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="basics.html#cb31-1"></a><span class="bu">print</span>(words[<span class="dv">2</span>]) </span>
+<span id="cb31-2"><a href="basics.html#cb31-2"></a><span class="co">#or:</span></span></code></pre></div>
+<pre><code>## !</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="basics.html#cb33-1"></a><span class="bu">print</span>(words[<span class="dv">0</span>]<span class="op">+</span> <span class="st">&quot; &quot;</span> <span class="op">+</span> words[<span class="dv">1</span>] <span class="op">+</span> words[<span class="dv">2</span>])</span></code></pre></div>
+<pre><code>## Hello world!</code></pre>
+<p>Indexing a string is like creating a list containing each character in the string.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="basics.html#cb35-1"></a>string <span class="op">=</span> <span class="st">&quot;Hello world!&quot;</span></span>
+<span id="cb35-2"><a href="basics.html#cb35-2"></a><span class="bu">print</span>(string[<span class="dv">0</span>])</span>
+<span id="cb35-3"><a href="basics.html#cb35-3"></a><span class="co">#First element is indexed w/ 0</span></span></code></pre></div>
+<pre><code>## H</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="basics.html#cb37-1"></a><span class="bu">print</span>(<span class="st">&quot;H&quot;</span> <span class="kw">in</span> string)</span></code></pre></div>
+<pre><code>## True</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="basics.html#cb39-1"></a><span class="bu">print</span>(<span class="st">&quot;Hello&quot;</span> <span class="kw">not</span> <span class="kw">in</span> string)</span></code></pre></div>
+<pre><code>## False</code></pre>
+<p>Lists can also be added and multiplied in the same way as strings.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="basics.html#cb41-1"></a>nums <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb41-2"><a href="basics.html#cb41-2"></a><span class="bu">print</span>(nums <span class="op">+</span> [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>])</span></code></pre></div>
+<pre><code>## [1, 2, 3, 4, 5, 6]</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="basics.html#cb43-1"></a><span class="bu">print</span>(nums <span class="op">*</span> <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## [1, 2, 3, 1, 2, 3, 1, 2, 3]</code></pre>
+<div id="range" class="section level4" number="2.2.1.1">
+<h4><span class="header-section-number">2.2.1.1</span> <code>range()</code></h4>
+<p>This function, if converted to a list, creates number sequences of the form: <span class="math inline">\([a,b) \ \ | \ a \le x &lt;b\)</span>, i.e. the argument won’t be included in the list</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="basics.html#cb45-1"></a><span class="co">#To produce an object from 0 to first argument</span></span>
+<span id="cb45-2"><a href="basics.html#cb45-2"></a><span class="bu">print</span>(<span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">10</span>)))</span></code></pre></div>
+<pre><code>## [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="basics.html#cb47-1"></a><span class="co">#To produce an object from 1st to 2nd argument(not included)</span></span>
+<span id="cb47-2"><a href="basics.html#cb47-2"></a><span class="bu">print</span>(<span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">4</span>)))</span></code></pre></div>
+<pre><code>## [1, 2, 3]</code></pre>
+<p>A third argument can be added if you want to include steps</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="basics.html#cb49-1"></a><span class="co">#From 0 to 10 by step of 2 (even numbers)</span></span>
+<span id="cb49-2"><a href="basics.html#cb49-2"></a><span class="bu">print</span>(<span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">2</span>))) </span></code></pre></div>
+<pre><code>## [0, 2, 4, 6, 8]</code></pre>
+</div>
+<div id="list-slices" class="section level4" number="2.2.1.2">
+<h4><span class="header-section-number">2.2.1.2</span> List Slices</h4>
+<p>Other way to retrieve values from a list: using <code>:</code></p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="basics.html#cb51-1"></a>numbers <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">0</span>,<span class="dv">11</span>))</span>
+<span id="cb51-2"><a href="basics.html#cb51-2"></a><span class="bu">print</span>(numbers[:<span class="dv">6</span>]) <span class="co">#numbers from 1st to 5th</span></span></code></pre></div>
+<pre><code>## [0, 1, 2, 3, 4, 5]</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="basics.html#cb53-1"></a><span class="bu">print</span>(numbers[<span class="dv">5</span>:]) <span class="co">#from the 5th to last</span></span></code></pre></div>
+<pre><code>## [5, 6, 7, 8, 9, 10]</code></pre>
+<div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="basics.html#cb55-1"></a><span class="co">#Retrieve elements from list by step of 2</span></span>
+<span id="cb55-2"><a href="basics.html#cb55-2"></a><span class="bu">print</span>(numbers[::<span class="dv">2</span>]) </span></code></pre></div>
+<pre><code>## [0, 2, 4, 6, 8, 10]</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb57-1"><a href="basics.html#cb57-1"></a><span class="co">#Retrieve elements from 1st argument to nth last one using -</span></span>
+<span id="cb57-2"><a href="basics.html#cb57-2"></a><span class="bu">print</span>(numbers[<span class="dv">1</span>:<span class="op">-</span><span class="dv">2</span>]) <span class="co">#from 2nd to 3rd last one</span></span></code></pre></div>
+<pre><code>## [1, 2, 3, 4, 5, 6, 7, 8]</code></pre>
+<p>There is a way to remove an item from a list given its index instead of its value: the <code>*del*</code> statement. This differs from the <code>pop()</code> method which returns a value. The del statement can also be used to remove slices from a list or clear the entire list</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb59-1"><a href="basics.html#cb59-1"></a><span class="co">#delete numbers from 2 to 9 in numbers list</span></span>
+<span id="cb59-2"><a href="basics.html#cb59-2"></a><span class="kw">del</span> numbers[<span class="dv">2</span>:<span class="dv">10</span>]</span>
+<span id="cb59-3"><a href="basics.html#cb59-3"></a>numbers</span></code></pre></div>
+<pre><code>## [0, 1, 10]</code></pre>
+</div>
+<div id="list-comprehensions" class="section level4" number="2.2.1.3">
+<h4><span class="header-section-number">2.2.1.3</span> List Comprehensions</h4>
+<p>This is a way to creating lists whose contents obey a rule</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb61-1"><a href="basics.html#cb61-1"></a>evens <span class="op">=</span> [i<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>) <span class="cf">if</span> i<span class="op">**</span><span class="dv">2</span> <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>]</span>
+<span id="cb61-2"><a href="basics.html#cb61-2"></a><span class="bu">print</span>(evens)</span></code></pre></div>
+<pre><code>## [0, 4, 16, 36, 64]</code></pre>
+</div>
+<div id="list-functions" class="section level4" number="2.2.1.4">
+<h4><span class="header-section-number">2.2.1.4</span> List Functions</h4>
+<ul>
+<li><code>len()</code>: Gets you the number of items in a list (or a string)</li>
+<li><code>.append()</code> Adds an element at the end of the list</li>
+<li><code>.clear()</code> Removes all the elements from the list</li>
+<li><code>.copy()</code> Returns a copy of the list</li>
+<li><code>.count()</code> Returns the number of elements with the specified value</li>
+<li><code>.extend()</code> Add the elements of a list (or any iterable), to the end of the current list</li>
+<li><code>.index()</code> Returns the index of the first element with the specified value</li>
+<li><code>.insert()</code> Adds an element at the specified position</li>
+<li><code>.pop()</code> Removes the element at the specified position</li>
+<li><code>.remove()</code> Removes the first item with the specified value</li>
+<li><code>.reverse()</code> Reverses the order of the list</li>
+<li><code>.sort()</code> Sorts the list</li>
+</ul>
+</div>
+<div id="strings-function" class="section level4" number="2.2.1.5">
+<h4><span class="header-section-number">2.2.1.5</span> Strings Function</h4>
+<ul>
+<li><code>.join</code>- joins a list of strings with another string as a separator.</li>
+<li><code>replace</code>- replaces one substring in a string with another.</li>
+<li><code>.startswith</code>and <code>.endswith</code> - determine if there is a substring at the start and end of a string, respectively.</li>
+<li><code>.lower</code>and .<code>upper</code>– changes the case of a string</li>
+<li><code>.split</code> <strong>-</strong> the opposite of .<code>join</code>, turns a string with a certain separator into a list.</li>
+<li><code>.find()</code> - Searches the string for a specified value and returns the position of where it was found</li>
+<li><code>.format()</code> - Formats specified values in a string</li>
+<li><code>.format_map()</code> - Formats specified values in a string</li>
+<li><code>.index()</code> - Searches the string for a specified value and returns the position of where it was found</li>
+<li><code>.isalpha()</code> - Returns True if all characters in the string are in the alphabet</li>
+<li><code>.swapcase()</code> - Swaps cases, lower case becomes upper case and vice versa</li>
+<li><code>.title()</code> - Converts the first character of each word to upper case</li>
+<li><code>.translate()</code> - Returns a translated string</li>
+</ul>
+</div>
+</div>
+<div id="matrixes" class="section level3" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Matrixes</h3>
+<p>We can use nested lists to represent 2D grids, such as matrices.</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb63-1"><a href="basics.html#cb63-1"></a>m <span class="op">=</span> [</span>
+<span id="cb63-2"><a href="basics.html#cb63-2"></a>    [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>],</span>
+<span id="cb63-3"><a href="basics.html#cb63-3"></a>    [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]</span>
+<span id="cb63-4"><a href="basics.html#cb63-4"></a>    ]</span>
+<span id="cb63-5"><a href="basics.html#cb63-5"></a><span class="co">#The code below outputs the 3rd item of the 2nd row.</span></span>
+<span id="cb63-6"><a href="basics.html#cb63-6"></a><span class="bu">print</span>(m[<span class="dv">1</span>][<span class="dv">2</span>])  </span></code></pre></div>
+<pre><code>## 6</code></pre>
+<p>However it’s mainly used the <strong>NumPy</strong> (Chapter <a href="numpy.html#numpy">4</a> is a package for scientific computing which has support for a powerful N-dimensional array object. Before you can use NumPy, you need to install it. For more info,</p>
+</div>
+<div id="dictionaries" class="section level3" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> Dictionaries</h3>
+<p>Another useful data type built into Python is the dictionary. Dictionaries are sometimes found in other languages as “associative memories” or “associative arrays”. Unlike sequences, which are indexed by a range of numbers, dictionaries are indexed by keys, which can be any immutable type; strings and numbers can always be keys.</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb65-1"><a href="basics.html#cb65-1"></a>prefix <span class="op">=</span> {<span class="st">&#39;italy&#39;</span>: <span class="dv">39</span>, <span class="st">&#39;spain&#39;</span>: <span class="dv">34</span>, <span class="st">&#39;france&#39;</span>: <span class="dv">33</span>}</span>
+<span id="cb65-2"><a href="basics.html#cb65-2"></a>prefix[<span class="st">&#39;italy&#39;</span>]</span></code></pre></div>
+<pre><code>## 39</code></pre>
+<p>The <code>dict()</code> constructor builds dictionaries directly from sequences of key-value pairs</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb67-1"><a href="basics.html#cb67-1"></a><span class="bu">dict</span>([(<span class="st">&#39;sape&#39;</span>, <span class="dv">4139</span>), (<span class="st">&#39;guido&#39;</span>, <span class="dv">4127</span>), (<span class="st">&#39;jack&#39;</span>, <span class="dv">4098</span>)])</span></code></pre></div>
+<pre><code>## {&#39;sape&#39;: 4139, &#39;guido&#39;: 4127, &#39;jack&#39;: 4098}</code></pre>
+</div>
+<div id="tuples" class="section level3" number="2.2.4">
+<h3><span class="header-section-number">2.2.4</span> Tuples</h3>
+<p>Tuples are immutable sequences, typically used to store collections of heterogeneous data. Tuples may be constructed in a number of ways:</p>
+<ul>
+<li>Using a pair of parentheses to denote the empty tuple: <code>()</code></li>
+<li>Using a trailing comma for a singleton tuple: <code>a,</code> or <code>(a,)</code></li>
+<li>Separating items with commas: <code>a, b, c</code> or <code>(a, b, c)</code></li>
+<li>Using the <code>tuple()</code> built-in: <code>tuple()</code> or <code>tuple(iterable)</code></li>
+</ul>
+</div>
+<div id="sets" class="section level3" number="2.2.5">
+<h3><span class="header-section-number">2.2.5</span> Sets</h3>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="algorithms.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="text-mining.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

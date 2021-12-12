@@ -1,0 +1,8 @@
+"0","numbers = list(range(0,11))
+print(numbers[:6]) #numbers from 1st to 5th
+print(numbers[5:]) #from the 5th to last"
+"1","INTEL MKL ERROR: dlopen(/Users/Pito/opt/miniconda3/lib/libmkl_intel_thread.1.dylib, 9): Library not loaded: @rpath/libiomp5.dylib
+  Referenced from: /Users/Pito/opt/miniconda3/lib/libmkl_intel_thread.1.dylib
+  Reason: image not found.
+Intel MKL FATAL ERROR: Cannot load libmkl_intel_thread.1.dylib.
+"

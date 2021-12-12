@@ -1,0 +1,377 @@
+# Basics {#basics}
+
+## Control Flow
+
+### Data Types
+
+-   `int()` converts to **integers**
+-   `str()` converts to **strings**
+-   `float()` converts to **float** (integers with decimals)
+
+There exist also booleans: **True**, **False**
+
+So what are the other comparison operators? Well, we've got: equal to **==**, not equal to **!=**, greater than **\>**, smaller than **\<**, greater or equal to **\>=**, smaller or equal to **\<=**
+
+Other booleans operators are **and**, **or**, **not**.
+
+Be careful not to confuse *assignment* (one equals sign) with *comparison* (two equals signs)
+
+### Variables
+
+A variable lets you store a value by assigning it to a name. The name can be used to refer to the value later in the program. You can use letters, numbers, and underscores in variable names. But you can't use special symbols, or start the name with a number.
+
+```{python}
+x = 5
+name = "Alessio"
+print(x,name)
+```
+
+The input function prompts the user for input, and returns what they enter as a string. Like this:
+
+```{python eval=FALSE}
+x = int(input("Insert a value for x:"))
+```
+
+Remember to specify the type of the value in this case *int* was used in order to work with an integer value for x \#\#\#\# In-Place Operators In-place operators let you write code like \`x = x + 3´ more concisely, as 'x += 3', for all the operations \<+,-,\*,/,%,\*\*,//\>
+
+### Logics
+
+#### `if`, `else`, `elif`
+
+-   `if`statements to run code based on a certain condition
+
+-   The `else` statement can be used to run some statements when the condition of the **if** statement is not met.
+
+-   `elif` is the short for `else if` statement, used when chaining several `if` statements
+
+```{python, eval=F}
+if condition:
+	statement
+elif condition:
+	statement:
+else condition:
+  statement
+```
+
+Python uses **indentation** (that empty space at the beginning of a line) to delimit blocks of code. Depending on the program's logic, indentation can be mandatory. As you can see, the statements in the **if** should be indented.
+
+#### `while`
+
+We can use the `while` loop to repeat a block of code multiple times.
+
+For example, let's say we need to process multiple user inputs, so that each time the user inputs something, the same block of code needs to execute.
+
+To end a `while` loop prematurely, we can use a `break` statement.
+
+Instead `continue` jumps back to the top of the loop, rather than stopping it. Basically, the continue statement stops the current iteration and continues with the next one.
+
+### Iteration
+
+The `for` loop is used to iterate over a given sequence, such as lists or strings.
+
+```{python}
+string = "testing for loops"
+count = 0 #initialize counter
+
+for i in string:
+  if(i == 't'):
+    count += 1
+
+print(count)
+#How many letters "t"?
+```
+
+`while` or `for`?
+
+:   Usually we'd use the for loop when the number of iterations is fixed. For example, iterating over a fixed list of items in a shopping list.
+
+    The while loop is useful in cases when the number of iterations isn't known and depends on some calculations and conditions in the code block of the loop.
+
+Inserting `%%time` in the code chunk reports the computational time to complete the operation
+
+### Functions
+
+Functions are defined with the *`def`* statement. The statement ends with a colon, and the code that is part of the function is indented below the *`def`* statement.
+
+```{python}
+def function(x):
+	return(x)
+
+function(5)
+```
+
+#### Functional Programming
+
+In this section I will define **higher-order functions**. These are functions that have no side effects, and return a value that depend only on the argument and therefore it doesn't change the structure of functions or elements within.
+
+```{python}
+def pure_function(x,y):
+	temp = x + 2*y
+	return temp / (2*x + y)
+
+pure_function(2,1)
+```
+
+-   easier to test and reasoning
+-   more efficient. It reduces the number of times the function is called (*memoization*)
+-   easier to run in parallel
+
+Python allows to have function with varying number of arguments. Using `*args` (the name *args* is just a convention; you can choose to use another) as a function parameter enables you to pass an arbitrary number of arguments to that function. The arguments are then accessible as the tuple `args` in the body of the function.
+
+The parameter `*args` must come after the named parameters to a function. Also, named parameters to a function can be made optional by giving them a default value. These must come after named parameters without a default value.
+
+```{python}
+def function(x, *args, food='egg'):
+	print(x, args, food)
+
+function(1,2,3) #reports the default value of food
+function(1,2,3,4,5, food='salmon')
+```
+
+##### Lambdas
+
+Python allows to create functions on-the-fly (*anonymous*), thanks to `lambda()` syntax. However they are not as powerful as takes a single line of code
+
+```{python}
+#Named Functions
+def polynomial(x):
+	return x**2 + 5*x + 4
+print(polynomial(1))
+```
+
+```{python}
+#Lambda
+print((lambda x: x**2 + 5*x + 4) (1)) #argument:(1) 
+```
+
+##### `map` and `filter`
+
+These two are high-order functions that operate on lists or *iterables*. - The function `map()` takes a function and an iterable as arguments and returns a new iterable with the function applied to each argument
+
+```{python}
+def add_five(x):
+	return x+5
+
+nums = list(range(0,11))
+result = list(map(add_five,nums))
+print(result)
+```
+
+-   The `filter()` function filters an iterable, leaving only the objects that match a condition (*predicate*)
+
+```{python}
+nums = [11,22,33,44,55]
+#return even number from the list
+res = list(filter(lambda x: x%2==0, nums))
+print(res)
+```
+
+##### Generators
+
+**Generators** are a type of iterable. They are created by the `yield` statement, which replaces the `return` of a function to provide a result without destroying local variables. Moreover as they `yield` one item at time, generators don't have memory restrictions and so can be **infinite**. They can be converted into list with the function `list()`.
+
+```{python}
+def countdown():
+	i=5
+	while i > 0:
+		yield i
+		i -= 1
+		
+print(list(countdown()))
+```
+
+Its usage results in improved performance, as consume low memory and there is no need to wait until all elements have been generated before starting using them
+
+<!-- ##### Decorators -->
+
+<!-- Provide a way to modify functions using other functions. This is ideal when arise the need to extend the functionality of functions what we don't want to modify -->
+
+<!-- ```{python} -->
+
+<!-- def decor(func): -->
+
+<!--    def wrap(): -->
+
+<!--     print("===========") -->
+
+<!--     func() -->
+
+<!--     print("===========") -->
+
+<!--    return wrap -->
+
+<!-- @decor -->
+
+<!-- def print_text(): -->
+
+<!--    print("Hello!") -->
+
+<!-- decorated = decor(print_text) -->
+
+<!-- decorated() -->
+
+<!-- ``` -->
+
+## Collection Types
+
+### Lists
+
+At their simplest, Lists are used to store items. We can create a list by using square brackets with commas separating items. Like this:
+
+```{python}
+words = ["Hello", "world", "!"]
+
+print(words[0])
+print(words[1])
+print(words[2]) 
+#or:
+print(words[0]+ " " + words[1] + words[2])
+```
+
+Indexing a string is like creating a list containing each character in the string.
+
+```{python}
+string = "Hello world!"
+print(string[0])
+#First element is indexed w/ 0
+print("H" in string)
+print("Hello" not in string)
+```
+
+Lists can also be added and multiplied in the same way as strings.
+
+```{python}
+nums = [1, 2, 3]
+print(nums + [4, 5, 6])
+print(nums * 3)
+```
+
+#### `range()`
+
+This function, if converted to a list, creates number sequences of the form: $[a,b) \ \ | \ a \le x <b$, i.e. the argument won't be included in the list
+
+```{python}
+#To produce an object from 0 to first argument
+print(list(range(10)))
+```
+
+```{python}
+#To produce an object from 1st to 2nd argument(not included)
+print(list(range(1,4)))
+```
+
+A third argument can be added if you want to include steps
+
+```{python}
+#From 0 to 10 by step of 2 (even numbers)
+print(list(range(0,10,2))) 
+```
+
+#### List Slices
+
+Other way to retrieve values from a list: using `:`
+
+```{python}
+numbers = list(range(0,11))
+print(numbers[:6]) #numbers from 1st to 5th
+print(numbers[5:]) #from the 5th to last
+```
+
+```{python}
+#Retrieve elements from list by step of 2
+print(numbers[::2]) 
+```
+
+```{python}
+#Retrieve elements from 1st argument to nth last one using -
+print(numbers[1:-2]) #from 2nd to 3rd last one
+```
+
+There is a way to remove an item from a list given its index instead of its value: the `*del*` statement. This differs from the `pop()` method which returns a value. The del statement can also be used to remove slices from a list or clear the entire list
+
+```{python}
+#delete numbers from 2 to 9 in numbers list
+del numbers[2:10]
+numbers
+```
+
+#### List Comprehensions
+
+This is a way to creating lists whose contents obey a rule
+
+```{python}
+evens = [i**2 for i in range(10) if i**2 % 2 == 0]
+print(evens)
+```
+
+#### List Functions
+
+-   `len()`: Gets you the number of items in a list (or a string)
+-   `.append()` Adds an element at the end of the list
+-   `.clear()` Removes all the elements from the list
+-   `.copy()` Returns a copy of the list
+-   `.count()` Returns the number of elements with the specified value
+-   `.extend()` Add the elements of a list (or any iterable), to the end of the current list
+-   `.index()` Returns the index of the first element with the specified value
+-   `.insert()` Adds an element at the specified position
+-   `.pop()` Removes the element at the specified position
+-   `.remove()` Removes the first item with the specified value
+-   `.reverse()` Reverses the order of the list
+-   `.sort()` Sorts the list
+
+#### Strings Function
+
+-   `.join`- joins a list of strings with another string as a separator.
+-   `replace`- replaces one substring in a string with another.
+-   `.startswith`and `.endswith` - determine if there is a substring at the start and end of a string, respectively.
+-   `.lower`and .`upper`-- changes the case of a string
+-   `.split` **-** the opposite of .`join`, turns a string with a certain separator into a list.
+-   `.find()` - Searches the string for a specified value and returns the position of where it was found
+-   `.format()` - Formats specified values in a string
+-   `.format_map()` - Formats specified values in a string
+-   `.index()` - Searches the string for a specified value and returns the position of where it was found
+-   `.isalpha()` - Returns True if all characters in the string are in the alphabet
+-   `.swapcase()` - Swaps cases, lower case becomes upper case and vice versa
+-   `.title()` - Converts the first character of each word to upper case
+-   `.translate()` - Returns a translated string
+
+### Matrixes
+
+We can use nested lists to represent 2D grids, such as matrices.
+
+```{python}
+m = [
+    [1, 2, 3],
+    [4, 5, 6]
+    ]
+#The code below outputs the 3rd item of the 2nd row.
+print(m[1][2])  
+```
+
+However it's mainly used the **NumPy** (Chapter \@ref(numpy) is a package for scientific computing which has support for a powerful N-dimensional array object. Before you can use NumPy, you need to install it. For more info,
+
+### Dictionaries
+
+Another useful data type built into Python is the dictionary. Dictionaries are sometimes found in other languages as "associative memories" or "associative arrays". Unlike sequences, which are indexed by a range of numbers, dictionaries are indexed by keys, which can be any immutable type; strings and numbers can always be keys.
+
+```{python}
+prefix = {'italy': 39, 'spain': 34, 'france': 33}
+prefix['italy']
+```
+
+The `dict()` constructor builds dictionaries directly from sequences of key-value pairs
+
+```{python}
+dict([('sape', 4139), ('guido', 4127), ('jack', 4098)])
+```
+
+### Tuples
+
+Tuples are immutable sequences, typically used to store collections of heterogeneous data. Tuples may be constructed in a number of ways:
+
+-   Using a pair of parentheses to denote the empty tuple: `()`
+-   Using a trailing comma for a singleton tuple: `a,` or `(a,)`
+-   Separating items with commas: `a, b, c` or `(a, b, c)`
+-   Using the `tuple()` built-in: `tuple()` or `tuple(iterable)`
+
+### Sets

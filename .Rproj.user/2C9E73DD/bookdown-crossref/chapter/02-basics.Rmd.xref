@@ -1,0 +1,25 @@
+h1:basics Basics
+h2:control-flow Control Flow
+h3:data-types Data Types
+h3:variables Variables
+h3:logics Logics
+h4:if-else-elif , , 
+h4:while 
+h3:iteration Iteration
+h3:functions Functions
+h4:functional-programming Functional Programming
+h5:lambdas Lambdas
+h5:map-and-filter  and 
+h5:generators Generators
+h2:collection-types Collection Types
+h3:lists Lists
+h4:range 
+h4:list-slices List Slices
+h4:list-comprehensions List Comprehensions
+h4:list-functions List Functions
+h4:strings-function Strings Function
+h3:matrixes Matrixes
+h3:dictionaries Dictionaries
+h3:tuples Tuples
+h3:sets Sets
+

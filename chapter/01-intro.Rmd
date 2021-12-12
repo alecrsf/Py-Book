@@ -1,0 +1,47 @@
+------------------------------------------------------------------------
+
+# Algorithms
+## Definitions
+**Algorithm**
+
+:   is a non-ambiguous and repeatable sequence of instructions which allows to solve a problem in a general way. The instructions are as et of elementary operations which are assumed to be executable by a predefined executor. Where:
+
+------------------------------------------------------------------------
+
+**Executor model**
+
+:   a schematic description of internal architecture of the executor and its components
+
+Some components are *numerical variables and expressions, assignment, conditionals, for loops, while loops, function definition and invocation.*
+
+**Expressions** are constructed with parentheses, constants, scalar variables, arithmetic or logical operators, and follow the formation rules of arithmetic and logical expressions. We assume a countable set of symbols, called **variables**. A variable may be:
+
+-   *undefined*, that is, have no value, or
+-   *scalar*, that is,have a numerical or logical value, or
+-   *vector*, that is, have a finite sequence of values
+
+Every scalar variable in the expression is replaced by its value and all operations in the resulting expression are computed in the order set by the rules of arithmetic and logic, until the value of the expression is obtained.
+
+An **assignment** is a pair consisting of a scalar variable and an expression, separated by an assignment symbol.
+
+A **conditional** statement is an expression, which evaluates to either true or false,and two sequences of instructions.
+
+A **for loop** consists of a scalar variable𝑥, a vector variable𝑣, and a sequence of instructions.
+
+A **while loop** is an expression, which evaluates to either true or false, and asequence of instructions
+
+A **function definition** is a function name, a sequence of parameters, and a sequence of instructions, called the body of the function. A **function invocation** is a function name and a sequence of expressions.
+
+**Set of operations**
+
+:   the machine can execute and how the components interact to compute them
+
+**Set of rules**
+
+:   to write algorithms that use the machine operations, i.e., a language.
+
+## Computers Architecture
+
+Independent of the writing style, the recommended format for algorithm presentation consists of an **Input** section describing a generic instance, an **Output** section describing the corresponding solution, an **Algorithm** section listing the lines of code in the chosen style. The sequences of instructions in conditional statements, for and while loops must be *indented*.
+
+The **Von Neumann architecture**: a single memory stores both program and data. A central processing unit (CPU) executes program instructions. Arithmetic operations are computed by a sub-unit of the CPU, the arithmetic-logic unit (ALU). The CPU contains a small amount of memory in a collection of registers,which store the current instruction (instruction register, IR), the address in memory of the next instruction (program counter, PC), operands, memory addresses, and the status of the last executed instruction. A bidirectional bus connects the CPU to the memory. Input and output units are connected to the memory.

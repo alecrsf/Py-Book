@@ -1,0 +1,72 @@
+h1:preface Preface
+h2:setup Setup
+h1:algorithms Algorithms
+h2:definitions Definitions
+h2:computers-architecture Computers Architecture
+h1:basics Basics
+h2:control-flow Control Flow
+h3:data-types Data Types
+h3:variables Variables
+h3:logics Logics
+h4:if-else-elif , , 
+h4:while 
+h3:iteration Iteration
+h3:functions Functions
+h4:functional-programming Functional Programming
+h5:lambdas Lambdas
+h5:map-and-filter  and 
+h5:generators Generators
+h2:collection-types Collection Types
+h3:lists Lists
+h4:range 
+h4:list-slices List Slices
+h4:list-comprehensions List Comprehensions
+h4:list-functions List Functions
+h4:strings-function Strings Function
+h3:matrixes Matrixes
+h3:dictionaries Dictionaries
+h3:tuples Tuples
+h3:sets Sets
+h1:numpy Numpy
+h2:arrays Arrays
+h3:creating-arrays Creating Arrays
+h3:indexing-and-slicing-arrays Indexing and slicing arrays
+h3:reshape Reshape
+h4:aggregate Aggregate
+h4:sort Sort
+h4:transpose Transpose
+h2:operators Operators
+h3:broadcasting-rules Broadcasting Rules
+h3:upcasting Upcasting
+h3:conditional-operators Conditional operators
+h3:statistics Statistics
+h3:linear-algebra Linear Algebra
+h1:pandas Pandas
+h2:series Series
+h2:dataframe DataFrame
+h3:indexing Indexing
+h4:loc-attribute  attribute
+h4:iloc-attribute  attribute
+h3:reading-data Reading Data
+h4:read_csv 
+h4:read_excel 
+h3:data-wrangling Data Wrangling
+h4:multi-indexing Multi-indexing
+h4:stacking-and-unstacking-levels Stacking and unstacking levels
+h4:adding-or-removing-columns Adding or removing columns
+h4:sorting-a-dataframe Sorting a DataFrame
+h4:aggregating Aggregating
+h3:evaluating-an-expression Evaluating an expression
+h3:handling-missing-data Handling Missing Data
+h4:fillna 
+h4:dropna 
+h3:overview-functions Overview Functions
+h1:data-visualization Data Visualization
+h2:matplotlib Matplotlib
+h2:seaborn Seaborn
+h2:bokeh Bokeh
+h2:plotly Plotly
+h1:clustering Clustering
+h3:clustering-1 Clustering
+h3:type-of-clustering-models Type of Clustering Models
+

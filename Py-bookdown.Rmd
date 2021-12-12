@@ -1,0 +1,1370 @@
+---
+title: "Py-Book"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+description: |
+  This is a minimal example of using the bookdown package to write a book.
+  The HTML output format for this example is bookdown::bs4_book,
+  set in the _output.yml file.
+biblio-style: apalike
+---
+```{r include=FALSE, cache=FALSE}
+# example R options set globally
+options(width = 60)
+
+# example chunk options set globally
+knitr::opts_chunk$set(
+  comment = "#>",
+  collapse = TRUE
+  )
+
+library(bookdown)
+library(reticulate)
+```
+# Preface {.unnumbered}
+
+ <a href="https://your-url" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#FD6C6C; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+This is a book aimed at summarizing my knowledge in python language
+
+## Setup {.unnumbered} 
+
+I mainly work with RStudio, therefore I won't go deeper inside the usual Pyhton Setup, instead I just suggest to install the package `reticulate` and work with it within RStudio.
+
+```{r echo=T, eval=F ,message=FALSE, warning=FALSE,}
+#install.packages('reticulate')
+library(reticulate)
+# conda_list()
+# conda_version()
+virtualenv_create(envname = "r-reticulate",
+	packages = c('pandas', 'numpy', 'scikit-learn')
+)
+virtualenv_list()
+virtualenv_exists()
+virtualenv_root()
+#-------------------------------------
+use_virtualenv(virtualenv_root()
+) 
+#repl_python()
+#quit
+```
+
+<p style="color:red;"> Now Python is ready to use</p>
+
+Here you can find everything you need to know on using _reticulate_ package in r
+
+<iframe src="https://rstudio.github.io/reticulate/" height="650px" width="95%"></iframe>
+
+<br>
+To clear all the environment 
+```{python}
+# import sys
+# sys.modules[__name__].__dict__.clear()
+
+#Or delete single object
+#del <variable_name>
+```
+
+
+<!--chapter:end:index.Rmd-->
+
+```{r include=FALSE, cache=FALSE}
+# example R options set globally
+options(width = 60)
+
+# example chunk options set globally
+knitr::opts_chunk$set(
+  comment = "#>",
+  collapse = TRUE
+  )
+
+library(bookdown)
+library(reticulate)
+```
+------------------------------------------------------------------------
+
+# Algorithms
+## Definitions
+**Algorithm**
+
+:   is a non-ambiguous and repeatable sequence of instructions which allows to solve a problem in a general way. The instructions are as et of elementary operations which are assumed to be executable by a predefined executor. Where:
+
+------------------------------------------------------------------------
+
+**Executor model**
+
+:   a schematic description of internal architecture of the executor and its components
+
+Some components are *numerical variables and expressions, assignment, conditionals, for loops, while loops, function definition and invocation.*
+
+**Expressions** are constructed with parentheses, constants, scalar variables, arithmetic or logical operators, and follow the formation rules of arithmetic and logical expressions. We assume a countable set of symbols, called **variables**. A variable may be:
+
+-   *undefined*, that is, have no value, or
+-   *scalar*, that is,have a numerical or logical value, or
+-   *vector*, that is, have a finite sequence of values
+
+Every scalar variable in the expression is replaced by its value and all operations in the resulting expression are computed in the order set by the rules of arithmetic and logic, until the value of the expression is obtained.
+
+An **assignment** is a pair consisting of a scalar variable and an expression, separated by an assignment symbol.
+
+A **conditional** statement is an expression, which evaluates to either true or false,and two sequences of instructions.
+
+A **for loop** consists of a scalar variable𝑥, a vector variable𝑣, and a sequence of instructions.
+
+A **while loop** is an expression, which evaluates to either true or false, and asequence of instructions
+
+A **function definition** is a function name, a sequence of parameters, and a sequence of instructions, called the body of the function. A **function invocation** is a function name and a sequence of expressions.
+
+**Set of operations**
+
+:   the machine can execute and how the components interact to compute them
+
+**Set of rules**
+
+:   to write algorithms that use the machine operations, i.e., a language.
+
+## Computers Architecture
+
+Independent of the writing style, the recommended format for algorithm presentation consists of an **Input** section describing a generic instance, an **Output** section describing the corresponding solution, an **Algorithm** section listing the lines of code in the chosen style. The sequences of instructions in conditional statements, for and while loops must be *indented*.
+
+The **Von Neumann architecture**: a single memory stores both program and data. A central processing unit (CPU) executes program instructions. Arithmetic operations are computed by a sub-unit of the CPU, the arithmetic-logic unit (ALU). The CPU contains a small amount of memory in a collection of registers,which store the current instruction (instruction register, IR), the address in memory of the next instruction (program counter, PC), operands, memory addresses, and the status of the last executed instruction. A bidirectional bus connects the CPU to the memory. Input and output units are connected to the memory.
+
+<!--chapter:end:chapter/01-intro.Rmd-->
+
+```{r include=FALSE, cache=FALSE}
+# example R options set globally
+options(width = 60)
+
+# example chunk options set globally
+knitr::opts_chunk$set(
+  comment = "#>",
+  collapse = TRUE
+  )
+
+library(bookdown)
+library(reticulate)
+```
+# Basics {#basics}
+
+## Control Flow
+
+### Data Types
+
+-   `int()` converts to **integers**
+-   `str()` converts to **strings**
+-   `float()` converts to **float** (integers with decimals)
+
+There exist also booleans: **True**, **False**
+
+So what are the other comparison operators? Well, we've got: equal to **==**, not equal to **!=**, greater than **\>**, smaller than **\<**, greater or equal to **\>=**, smaller or equal to **\<=**
+
+Other booleans operators are **and**, **or**, **not**.
+
+Be careful not to confuse *assignment* (one equals sign) with *comparison* (two equals signs)
+
+### Variables
+
+A variable lets you store a value by assigning it to a name. The name can be used to refer to the value later in the program. You can use letters, numbers, and underscores in variable names. But you can't use special symbols, or start the name with a number.
+
+```{python}
+x = 5
+name = "Alessio"
+print(x,name)
+```
+
+The input function prompts the user for input, and returns what they enter as a string. Like this:
+
+```{python eval=FALSE}
+x = int(input("Insert a value for x:"))
+```
+
+Remember to specify the type of the value in this case *int* was used in order to work with an integer value for x \#\#\#\# In-Place Operators In-place operators let you write code like \`x = x + 3´ more concisely, as 'x += 3', for all the operations \<+,-,\*,/,%,\*\*,//\>
+
+### Logics
+
+#### `if`, `else`, `elif`
+
+-   `if`statements to run code based on a certain condition
+
+-   The `else` statement can be used to run some statements when the condition of the **if** statement is not met.
+
+-   `elif` is the short for `else if` statement, used when chaining several `if` statements
+
+```{python, eval=F}
+if condition:
+	statement
+elif condition:
+	statement:
+else condition:
+  statement
+```
+
+Python uses **indentation** (that empty space at the beginning of a line) to delimit blocks of code. Depending on the program's logic, indentation can be mandatory. As you can see, the statements in the **if** should be indented.
+
+#### `while`
+
+We can use the `while` loop to repeat a block of code multiple times.
+
+For example, let's say we need to process multiple user inputs, so that each time the user inputs something, the same block of code needs to execute.
+
+To end a `while` loop prematurely, we can use a `break` statement.
+
+Instead `continue` jumps back to the top of the loop, rather than stopping it. Basically, the continue statement stops the current iteration and continues with the next one.
+
+### Iteration
+
+The `for` loop is used to iterate over a given sequence, such as lists or strings.
+
+```{python}
+string = "testing for loops"
+count = 0 #initialize counter
+
+for i in string:
+  if(i == 't'):
+    count += 1
+
+print(count)
+#How many letters "t"?
+```
+
+`while` or `for`?
+
+:   Usually we'd use the for loop when the number of iterations is fixed. For example, iterating over a fixed list of items in a shopping list.
+
+    The while loop is useful in cases when the number of iterations isn't known and depends on some calculations and conditions in the code block of the loop.
+
+### Functions
+
+Functions are defined with the *`def`* statement. The statement ends with a colon, and the code that is part of the function is indented below the *`def`* statement.
+
+```{python}
+def function(x):
+	return(x)
+
+function(5)
+```
+
+#### Functional Programming
+In this section I will define **higher-order functions**
+##### Pure functions
+These are functions that have no side effects, and return a value that depend only on the argument and therefore it doesn't change the structure of functions or elements within.
+```{python}
+def pure_function(x,y):
+	temp = x + 2*y
+	return temp / (2*x + y)
+
+pure_function(2,1)
+```
+
+- easier to test and reasoning
+- more efficient. It reduces the number of times the function is called (*memoization*)
+- easier to run in parallel
+
+##### Lambdas
+Python allows to create functions on-the-fly (*anonymous*), thanks to `lambda()` syntax. However they are not as powerful as takes a single line of code
+```{python}
+#Named Functions
+def polynomial(x):
+	return x**2 + 5*x + 4
+print(polynomial(1))
+```
+
+```{python}
+#Lambda
+print((lambda x: x**2 + 5*x + 4) (1)) #argument:(1) 
+```
+
+##### `map` and `filter`
+These two are high-order functions that operate on lists or *iterables*. 
+- The function `map()` takes a function and an iterable as arguments and returns a new iterable with the function applied to each argument
+
+```{python}
+def add_five(x):
+	return x+5
+
+nums = list(range(0,11))
+result = list(map(add_five,nums))
+print(result)
+```
+
+- The `filter()` function filters an iterable, leaving only the objects that match a condition (*predicate*)
+```{python}
+nums = [11,22,33,44,55]
+#return even number from the list
+res = list(filter(lambda x: x%2==0, nums))
+print(res)
+```
+
+
+##### Generators
+**Generators** are a type of iterable. They are created by the `yield` statement, which replaces the `return` of a function to provide a result without destroying local variables. Moreover as they `yield` one item at time, generators don't have memory restrictions and so can be **infinite**. They can be converted into list with the function `list()`.
+
+```{python}
+def countdown():
+	i=5
+	while i > 0:
+		yield i
+		i -= 1
+		
+print(list(countdown()))
+```
+
+Its usage results in improved performance, as consume low memory and there is no need to wait until all elements have been generated before starting using them
+
+<!-- ##### Decorators -->
+<!-- Provide a way to modify functions using other functions. This is ideal when arise the need to extend the functionality of functions what we don't want to modify -->
+
+<!-- ```{python} -->
+<!-- def decor(func): -->
+<!-- 	def wrap(): -->
+<!-- 	 print("===========") -->
+<!-- 	 func() -->
+<!-- 	 print("===========") -->
+<!--    return wrap -->
+
+<!-- @decor -->
+<!-- def print_text(): -->
+<!-- 	print("Hello!") -->
+
+<!-- decorated = decor(print_text) -->
+<!-- decorated() -->
+<!-- ``` -->
+## Collection Types
+
+### Lists
+
+At their simplest, Lists are used to store items. We can create a list by using square brackets with commas separating items. Like this:
+
+```{python}
+words = ["Hello", "world", "!"]
+
+print(words[0])
+print(words[1])
+print(words[2]) 
+#or:
+print(words[0]+ " " + words[1] + words[2])
+```
+
+Indexing a string is like creating a list containing each character in the string.
+
+```{python}
+string = "Hello world!"
+print(string[0])
+#First element is indexed w/ 0
+print("H" in string)
+print("Hello" not in string)
+```
+
+Lists can also be added and multiplied in the same way as strings.
+
+```{python}
+nums = [1, 2, 3]
+print(nums + [4, 5, 6])
+print(nums * 3)
+```
+
+#### `range()`
+
+This function, if converted to a list, creates number sequences of the form: $[a,b) \ \ | \ a \le x <b$, i.e. the argument won't be included in the list
+
+```{python}
+#To produce an object from 0 to first argument
+print(list(range(10)))
+```
+
+```{python}
+#To produce an object from 1st to 2nd argument(not included)
+print(list(range(1,4)))
+```
+
+A third argument can be added if you want to include steps
+
+```{python}
+#From 0 to 10 by step of 2 (even numbers)
+print(list(range(0,10,2))) 
+```
+
+#### List Slices
+
+Other way to retrieve values from a list: using `:`
+
+```{python}
+numbers = list(range(0,11))
+print(numbers[:6]) #numbers from 1st to 5th
+print(numbers[5:]) #from the 5th to last
+```
+
+```{python}
+#Retrieve elements from list by step of 2
+print(numbers[::2]) 
+```
+
+```{python}
+#Retrieve elements from 1st argument to nth last one using -
+print(numbers[1:-2]) #from 2nd to 3rd last one
+```
+
+There is a way to remove an item from a list given its index instead of its value: the `*del*` statement. This differs from the `pop()` method which returns a value. The del statement can also be used to remove slices from a list or clear the entire list
+
+```{python}
+#delete numbers from 2 to 9 in numbers list
+del numbers[2:10]
+numbers
+```
+
+#### List Comprehensions
+This is a way to creating lists whose contents obey a rule
+```{python}
+evens = [i**2 for i in range(10) if i**2 % 2 == 0]
+print(evens)
+```
+
+
+
+#### List Functions
+
+-   `len()`: Gets you the number of items in a list (or a string)
+-   `.append()` Adds an element at the end of the list
+-   `.clear()` Removes all the elements from the list
+-   `.copy()` Returns a copy of the list
+-   `.count()` Returns the number of elements with the specified value
+-   `.extend()` Add the elements of a list (or any iterable), to the end of the current list
+-   `.index()` Returns the index of the first element with the specified value
+-   `.insert()` Adds an element at the specified position
+-   `.pop()` Removes the element at the specified position
+-   `.remove()` Removes the first item with the specified value
+-   `.reverse()` Reverses the order of the list
+-   `.sort()` Sorts the list
+
+#### Strings Function
+
+-   `.join`- joins a list of strings with another string as a separator.
+-   `replace`- replaces one substring in a string with another.
+-   `.startswith`and `.endswith` - determine if there is a substring at the start and end of a string, respectively.
+-   `.lower`and .`upper`-- changes the case of a string
+-   `.split` **-** the opposite of .`join`, turns a string with a certain separator into a list.
+-   `.find()` - Searches the string for a specified value and returns the position of where it was found
+-   `.format()` - Formats specified values in a string
+-   `.format_map()` - Formats specified values in a string
+-   `.index()` - Searches the string for a specified value and returns the position of where it was found
+-   `.isalpha()` - Returns True if all characters in the string are in the alphabet
+-   `.swapcase()` - Swaps cases, lower case becomes upper case and vice versa
+-   `.title()` - Converts the first character of each word to upper case
+-   `.translate()` - Returns a translated string
+
+### Matrixes
+
+We can use nested lists to represent 2D grids, such as matrices.
+
+```{python}
+m = [
+    [1, 2, 3],
+    [4, 5, 6]
+    ]
+#The code below outputs the 3rd item of the 2nd row.
+print(m[1][2])  
+```
+
+However it's mainly used the **NumPy** (Chapter \@ref(numpy) is a package for scientific computing which has support for a powerful N-dimensional array object. Before you can use NumPy, you need to install it. For more info,
+
+### Dictionaries
+
+Another useful data type built into Python is the dictionary. Dictionaries are sometimes found in other languages as "associative memories" or "associative arrays". Unlike sequences, which are indexed by a range of numbers, dictionaries are indexed by keys, which can be any immutable type; strings and numbers can always be keys.
+
+```{python}
+prefix = {'italy': 39, 'spain': 34, 'france': 33}
+prefix['italy']
+```
+
+The `dict()` constructor builds dictionaries directly from sequences of key-value pairs
+
+```{python}
+dict([('sape', 4139), ('guido', 4127), ('jack', 4098)])
+```
+
+### Tuples
+
+Tuples are immutable sequences, typically used to store collections of heterogeneous data. Tuples may be constructed in a number of ways:
+
+-   Using a pair of parentheses to denote the empty tuple: `()`
+-   Using a trailing comma for a singleton tuple: `a,` or `(a,)`
+-   Separating items with commas: `a, b, c` or `(a, b, c)`
+-   Using the `tuple()` built-in: `tuple()` or `tuple(iterable)`
+
+### Sets
+
+<!--chapter:end:chapter/02-basics.Rmd-->
+
+```{r include=FALSE, cache=FALSE}
+# example R options set globally
+options(width = 60)
+
+# example chunk options set globally
+knitr::opts_chunk$set(
+  comment = "#>",
+  collapse = TRUE
+  )
+
+library(bookdown)
+library(reticulate)
+```
+# Numpy {#numpy}
+Numpy is the core library for scientific computing in Python. It provides a high-performance multidimensional array object, and tools for working with these arrays
+
+<iframe src="https://numpy.org/doc/stable/user/absolute_beginners.html" height="500px" width="95%"></iframe>
+
+## Arrays 
+A numpy array is a grid of values, all of the same type, and is indexed by a tuple of nonnegative integers. 
+The number of dimensions is the rank of the array.
+The shape of an array is a tuple of integers giving the size (the total number of elements) of the array along each dimension.
+```{python}
+import numpy as np
+```
+
+
+```{python}
+# 1-dimensonal array, also referred to as a vector
+a1 = np.array([1, 2, 3])
+a1.shape, a1.ndim, a1.dtype, a1.size, type(a1)
+```
+
+```{python}
+# 2-dimensional array, also referred to as matrix
+a2 = np.array([[1, 2.0, 3.3],
+               [4, 5, 6.5]])
+a2.shape, a2.ndim, a2.dtype, a2.size, type(a2)
+```
+
+
+```{python}
+# 3-dimensional array, also referred to as a matrix
+a3 = np.array([[[1, 2, 3],
+                [4, 5, 6],
+                [7, 8, 9]],
+                [[10, 11, 12],
+                 [13, 14, 15],
+                 [16, 17, 18]]])
+a3.shape, a3.ndim, a3.dtype, a3.size, type(a3)
+```
+
+### Creating Arrays
+* `np.array()`
+* `np.ones()`
+* `np.full()`
+* `np.zeros()`
+* `np.random.rand(5, 3)`
+* `np.random.randint(10, size=5)`
+* `np.random.seed()` - pseudo random numbers
+
+You can change the data type with `.astype()` or calling the argument `dtype=` when creating. 
+```{python}
+# Create an array of ones, 10 rows of 2 cols type integer
+ones = np.ones((10, 2))
+# Create an array of zeros
+zeros = np.zeros((5, 3, 3))
+# One-dim array from 1 to 10
+a = np.arange(1,11)
+# One-dim array of 100 numbers from 1 to 10
+a = np.linspace(1,11,50) 
+# Random array of integers
+a = np.random.randint(10, size=(5, 3))
+# Random array of floats (between 0 & 1)
+a = np.random.random((5, 3))
+```
+For consistency, you might want to keep the random numbers you generate similar throughout experiments. To do this, you can use [`np.random.seed()`](https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.random.seed.html).
+
+### Indexing and slicing arrays
+Array shapes are always listed in the format `(row, column, n...)` where `n` is optional extra dimension(s).
+```{python}
+a = np.arange(100)
+a = a.reshape(50,2)
+a[0,1]  # same form of an access to a nested list or a[0][1] 
+a[1:3]  # row slice
+a[:,0]  # project on first column
+a[0]    # first row or a[0, :]
+a[:3,0] # Get the first value of the first 3 row
+```
+
+```{python}
+b = np.arange(48).reshape(4, 12)
+b, b[(0,2), 2:5],  b[:, (-1, 2, -1)]
+
+# returns a 1D array with b[-1, 5], b[2, 9], b[-1, 1] and b[2, 9]
+b[(-1, 2, -1, 2), (5, 9, 1, 9)]
+```
+
+
+### Reshape
+```{python}
+a = np.arange(0,11) 
+## Reshape into n rows of n col
+# Row vector
+a = a.reshape((1,11)) #a[np.newaxis, :]
+a
+```
+```{python}
+# Column vector
+a = a.reshape((11,1)) #a[:, np.newaxis]
+a
+```
+```{python}
+# Transpose the array
+a.T
+```
+
+#### Aggregate
+```{python}
+#Concatenate (The arrays must have equal numbers of dimensions)
+a=np.array([1,2,3])
+b=np.array([4,5,6])
+c=np.array([7,8,9])
+np.concatenate([a, b, c])
+```
+For arrays with different numbers of dimensions, use vstack and hstack to perform concatenation. The inverse operation, splitting, is implemented by split,vsplit,hsplit
+```{python}
+a = np.array([2,3,5])
+b = np.array([[7,11,13], [17,19,23]])
+np.vstack([a, b]) #np.concatenate((a, b), axis=0)
+```
+```{python}
+b = np.array([[29], [31]])
+b2 = np.array([[7,11,13], [17,19,23]])
+np.hstack([b, b2]) ##np.concatenate((a, b), axis=1)
+```
+```{python}
+a = np.array([2,3,5,7,11,13,17,19,23])
+a1, a2, a3 = np.split(a, [3,6])
+a1, a2, a3
+```
+There is also a split function which splits an array along any given axis. Calling vsplit is equivalent to calling split with axis=0. There is also an hsplit function, equivalent to calling split with axis=1.
+
+#### Sort
+* `np.sort()`
+* `np.argsort()`
+* `np.argmax()`
+* `np.argmin()`
+
+#### Transpose
+The transpose method creates a new view on an ndarray’s data, with axes permuted in the given order. By default, transpose reverses the order of the dimensions:
+
+```{python}
+a = np.arange(24).reshape(4,2,3)
+a
+a2= a.transpose() # equivalent to t.transpose((2, 1, 0))
+```
+
+Now let’s create an ndarray such that the axes 0, 1, 2 (depth, height, width) are re-ordered to 1, 2, 0 (depth→width, height→depth, width→height):
+
+```{python}
+a1 = a.transpose((1,2,0))
+a1, a1.shape
+```
+
+NumPy provides a convenience function `swapaxes()` to swap two axes. For example, let’s create a new view of t with depth and height swapped:
+```{python}
+a3 = a.swapaxes(0,1) # equivalent to a.transpose((1, 0, 2)) 
+a3
+```
+
+The `T` attribute is equivalent to calling `transpose()` when the rank is 2. The T attribute has no effect on rank 0 (empty) or rank 1 arrays.
+
+```{python}
+a.T
+```
+
+## Operators
+All the usual arithmetic operators can be used with ndarrays. They apply element wise:
+* Arithmetic
+    * `+`, `-`, `*`, `/`, `//`, `**`, `%`
+    * `np.exp()`
+    * `np.log()`
+    * `np.dot()` - [Dot product](https://en.wikipedia.org/wiki/Matrix_multiplication)
+    
+The arrays must have the same shape. If they do not, NumPy will apply the *broadcasting rules*.
+
+### Broadcasting Rules
+
+* If the arrays do not have the same rank, then a 1 will be prepended to the smaller ranking arrays until their ranks match.
+
+```{python}
+h = np.arange(5).reshape(1, 1, 5)
+h
+```
+
+Now let’s try to add a 1D array of shape (5,) to this 3D array of shape (1,1,5). Applying the first rule of broadcasting!
+
+```{python}
+h + [10, 20, 30, 40, 50] #same as: h + [[[10, 20, 30, 40, 50]]]
+```
+
+* Arrays with a 1, along a particular dimension, act as if they had the size of the array with the largest shape along that dimension. The value of the array element is repeated along that dimension.
+
+```{python}
+k = np.arange(6).reshape(2,3)
+k
+```
+Let’s try to add a 2D array of shape (2,1) to this 2D ndarray of shape (2, 3). NumPy will apply the second rule of broadcasting:
+
+```{python}
+k + [[100], [200]] # same as: k + [[100, 100, 100], [200, 200, 200]]
+```
+
+Combining rules 1 & 2, we can do this:
+
+```{python}
+k + [100, 200, 300] # after rule 1: [[100, 200, 300]], and after rule 2:␣ 􏰰→[[100, 200, 300], [100, 200, 300]]
+```
+
+After rules 1 & 2, the sizes of all arrays must match.
+
+```{python}
+try:
+ k + [33, 44]
+except ValueError as e:
+ print(e)
+```
+
+### Upcasting
+When trying to combine arrays with different dtypes, NumPy will upcast to a type capable of handling all possible values (regardless of what the actual values are).
+
+```{python}
+k1 = np.arange(0, 5, dtype=np.uint8)
+print(k1.dtype, k1)
+
+k2 = k1 + np.array([5, 6, 7, 8, 9], dtype=np.int8)
+# Note that int16 is required to represent all possible int8 and uint8 values (from -128 to 255)
+print(k2.dtype, k2)
+
+k3 = k1 + 1.5
+print(k3.dtype, k3)
+```
+
+### Conditional operators
+The conditional operators also apply elementwise.
+
+* Comparison operators
+    * `>`
+    * `<`
+    * `<=`
+    * `>=`
+    * `x != 3`
+    * `x == 3`
+    * `np.sum(x > 3)`
+    
+```{python}
+k2 < np.array([2, 8, 11, 9, 6]) 
+k2 < 8
+```
+
+### Statistics
+Many mathematical and statistical functions are available for ndarrays.
+
+* Aggregation
+    * `np.sum()` - faster than `.sum()`
+    * `np.prod()`
+    * `np.mean()`
+    * `np.std()`
+    * `np.var()`
+    * `np.min()`
+    * `np.max()`
+    * `np.argmin()` - find index of minimum value
+    * `np.argmax()` - find index of maximum value
+
+These functions accept an optional argument axis which lets you ask for the operation to be performed on elements along the given axis. For example:
+
+```{python}
+c=np.arange(24).reshape(2,3,4)
+c
+c.sum(axis=0) # sum across matrices
+c.sum(axis=1) # sum across rows
+
+c.sum(axis=(0,2)) # sum across matrices and columns (first row, second row , 8+9+10+11 + 20+21+22+23)
+```
+
+### Linear Algebra
+Linear algebra functions are available in the *numpy.linalg* module. 
+The `inv` function computes a square matrix’s inverse, whereas the `pinv()` computes the pseudoinverse.
+
+```{python}
+import numpy.linalg as linalg
+a = np.array([[1,2,3],[5,7,11],[21,29,31]])
+linalg.inv(a), linalg.pinv(a)
+```
+ 
+The qr function computes the QR decomposition of a matrix, also known as a QR factorization or QU factorization. It is a decomposition of a matrix A into a product A = QR of an orthogonal matrix Q and an upper triangular matrix R.
+
+```{python}
+q, r = linalg.qr(a)  #q.dot(r) -> q**r equals a
+```
+
+* The `det()` function computes the matrix determinant.
+```{python}
+linalg.det(a)
+```
+
+* The `eig()` function from `linalg` computes the eigenvalues and eigenvectors of a square matrix:
+```{python}
+eigenvalues, eigenvectors = linalg.eig(a)
+eigenvalues, eigenvectors
+```
+
+* The `diag()` function returns the elements on the diagonal, whereas `trace()` returns their sum:
+```{python}
+np.diag(a),np.trace(a)
+```
+The solve function solves a system of linear scalar equations, such as:
+$$2x+6y=6$$
+$$5x+3y=-9$$
+```{python}
+coeffs  = np.array([[2, 6], [5, 3]])
+depvars = np.array([6, -9])
+solution = linalg.solve(coeffs, depvars)
+solution
+```
+
+
+<!--chapter:end:chapter/03-numpy.Rmd-->
+
+```{r include=FALSE, cache=FALSE}
+# example R options set globally
+options(width = 60)
+
+# example chunk options set globally
+knitr::opts_chunk$set(
+  comment = "#>",
+  collapse = TRUE
+  )
+
+library(bookdown)
+library(reticulate)
+```
+# Pandas
+
+A powerful library for data manipulation and analysis, borrowing the idea of data frames from the **R language**. An essential import setup for Pandas is
+
+```{python}
+import pandas as pd
+from datetime import datetime, date
+```
+
+## Series
+
+Similar to one-dimensional NumPy array, with the addition of an index which can comprisearbitrary values
+
+```{python}
+pd.Series([2,5,6,7])
+```
+
+In the example above, the index has not been specified, and it defaults to the standard 0-based integer index.
+
+```{python}
+s = pd.Series([2,5,6,7],index=("prime1","prime2","prime3","prime4"))
+print(s)
+```
+
+And then indexes can be used for slicing
+
+```{python}
+s[["prime2","prime4"]]
+```
+
+When instantiated from a dictionary input, the keys are used to create the index
+
+```{python}
+s = pd.Series({'Friday':0.2,'Saturday':1.0,'Sunday':4.2,'Monday':0.0,'Tuesday':1.2})
+print(s[1:3])
+```
+
+The overall behaviour of Series is similar to that of ndarray, as far as slicing and indexing are concerned:
+
+```{python}
+def fahrenheit(t):
+	return 9*t/5+32
+	
+s[s<1.2],
+fahrenheit(s)
+```
+
+Series has some features of `dict`, like assignment by index and testing of index value membership
+
+```{python}
+s['Monday'] = np.nan
+pd.isna(s['Monday'])
+```
+
+```{python}
+dt=pd.date_range('2019-10-29','2019-11-02')
+print(dt)
+```
+
+```{python}
+precip_sp = pd.Series([0.2,1.0,4.2,0.0,1.2],index=dt)
+print(precip_sp)
+```
+
+```{python}
+precip_bu = pd.Series([0.0,0.0,0.0,1.2,4.2,0.0], index=pd.date_range('2019-10-27','2019-11-01'))
+#NaN as precip_bu and precip_sp have different indexes range
+print(precip_sp-precip_bu)
+```
+
+## DataFrame
+
+A2-dimensional, table-like, data structure with columns of possibly different types and an index for its rows.
+
+You can create a DataFrame by passing a dictionary of Series objects:
+
+```{python}
+people_dict = {
+    "weight": pd.Series([68, 83, 112], index=["alice", "martino", "franco"]),
+    "birthyear": pd.Series([1984, 1985, 1992], index=["alice", "martino","franco"], name="year"),
+"children": pd.Series([0, 3], index=["martino", "franco"]),
+"hobby": pd.Series(["Biking", "Dancing"], index=["alice", "martino"]),
+}
+
+people = pd.DataFrame(people_dict)
+people
+```
+
+Another convenient way to create a DataFrame is to pass all the values to the constructor as an ndarray, or a list of lists, and specify the column names and row index labels separately:
+
+```{python}
+values = [
+[1985, np.nan, "Biking",   68],
+[1984, 3,      "Dancing",  83],
+[1992, 0,      np.nan,    112]
+         ]
+
+d = pd.DataFrame(
+        values,
+        columns=["birthyear", "children", "hobby", "weight"],
+        index=["alice", "martino", "franco"])
+d
+```
+
+```{python}
+precips = pd.DataFrame({'San Pietro Capofiume': precip_sp,'Bologna Urbana': precip_bu})
+print(precips)
+```
+
+Panda's `DataFrame()` function is flexible as to the types of its inputs. As a list of dictionaries, each dictionary element of the input list is one row ofthe data frame
+
+```{python}
+city_loc = pd.DataFrame([{'Lat':44.49381,'Long':11.33875},
+{'Lat':41.89193,'Long':12.51133}],
+index=['Bologna','Rome'])
+print(city_loc)
+```
+
+`DataFrame` behaves like a dictionary, in which keys are column names and the values are index-aligned `Series`
+
+```{python}
+city_loc['Lat']
+```
+
+```{python}
+# add an elevation column for example as a list
+city_loc['Elev'] = [54,21]
+city_loc
+```
+
+### Indexing
+
+#### `.loc[]` attribute
+
+Label-based indexing is supported via the attribute `.loc[]`, the result is a `Series` object.
+
+```{python}
+precips.loc['2019-10-30'], 
+type(precips.loc['2019-10-30'])
+```
+
+`.loc[]` supports slicing. However, unlike ndarray integer-based slicing,it includes the upper label:
+
+```{python}
+precips.loc['2019-10-29':'2019-11-01']
+```
+
+and it also allows for list of labels:
+
+```{python}
+# Note: in this example the list has to be transformed into a DatetimeIndex because the Series objects which were the input of the data frame had been constructed with a DatetimeIndex
+precips.loc[pd.DatetimeIndex(['2019-10-31','2019-11-01','2019-11-02'])]
+```
+
+Is it possible to index through *booleans*
+
+```{python}
+#create index with missing values
+na=(pd.isna(precips['Bologna Urbana'])|pd.isna(precips['San Pietro Capofiume']))
+#index full dataset without(-) values which are na
+precips.loc[~na]
+```
+
+#### `.iloc[]` attribute
+
+The.iloc attribute provides integer-based indexing, following the usual Pythonconventions. The allowed types of input are the same as.loc, but integers mustbe specified instead of labels. The following examples return the same resultsas the ones above:
+
+```{python}
+precips.iloc[3]
+precips.iloc[2:6]
+precips.iloc[[4,5,6]]
+```
+
+Is it possible to index with booleans, however first we need to convert it to a numpy array wiht `.to_numpy()`
+
+```{python}
+precips.iloc[~na.to_numpy()]
+```
+
+The `.query()` method lets you filter a DataFrame based on a query expression:
+
+### Reading Data
+
+#### `read_csv`
+
+```{python}
+# iris1 = pd.read_csv("https://raw.githubusercontent.com/SakshamAyush/Iris_Flower_Classification/master/data/bezdekIris.csv")
+```
+
+-   The compression argument enables to specify the decompression algorithm if dataset is a compressed CSV file, setting the value `'infer'` chooses it by file extension.
+
+-   By default, time series are not recognized, the `dtypeof` the series is object, it should be `datetime64[ns]`. the `parse_dates` argument enables us to specify a list of columns that must be parse as dates (i.e. `parse_dates = ['year']` or `parse_dates = [0]`)
+
+-   The `index_col` argument enables us to set a sequence of columns as row labels (ex. `index_col='Time'`)
+
+#### `read_excel`
+
+The read\_excel function enables the reading of *.xls* and *.xlsx* files. Installation of either xlrd or openpyxl (for Excel 2007,.xlsx) is a prerequisite.
+
+### Data Wrangling
+
+Function `pd.concat` on a list of objects can concatenate Series or DataFrame objects
+
+```{python}
+#Row labels are not modified
+s1=pd.Series([1,2,3])
+s2=pd.Series([4,5,6])
+s=pd.concat([s1, s2])
+s
+```
+
+Be careful when concatenating DataFrame objects. Let c1 and c2 be the column labels of the 1st and 2nd frame
+
+Columns𝐶2 and 𝐶1 are added to first data frame, columns𝐶1 and 𝐶2 to the second, all filled with NaN.
+
+The rows of the second frame are appended to the first
+
+```{python}
+df1=pd.DataFrame({'a': [1,2,3],'b': [4,5,6]})
+df2=pd.DataFrame({'b': [7,8,9],'c': [10,11,12]})
+df=pd.concat([df1, df2])
+```
+
+#### Multi-indexing
+
+If all columns are tuples of the same size, then they are understood as a multi-index. The same goes for row index labels. For example:
+
+```{python}
+d = pd.DataFrame(
+  {
+    ("public", "birthyear"):
+        {("Paris","alice"):1985, ("Paris","martino"): 1984, ("London","franco"):1992},
+("public", "hobby"):
+        {("Paris","alice"):"Biking", ("Paris","martino"): "Dancing"},
+    ("private", "weight"):
+        {("Paris","alice"):68, ("Paris","martino"): 83, ("London","franco"): 112},
+    ("private", "children"):
+        {("Paris", "alice"):np.nan, ("Paris","martino"): 3, ("London","franco"): 0}
+  }
+) 
+d
+```
+
+You can transpose columns and indices using the `.T` attribute:
+
+```{python}
+dT = d.T
+```
+
+There are two levels of columns, and two levels of indices. We can drop a column level by calling `droplevel()` (the same goes for indices):
+
+```{python}
+dT.columns = dT.columns.droplevel(level = 0)
+dT
+```
+
+#### Stacking and unstacking levels
+
+Calling the `stack()` method will push the lowest column level after the lowest index:
+
+```{python}
+d.stack()
+dT.stack()
+```
+
+Note that many NaN values appeared. This makes sense because many new combinations did not exist before (eg. there was no bob in London).
+
+Calling `unstack()` will do the reverse, once again creating many NaN values.
+
+```{python}
+dT.unstack()
+```
+
+The `stack()` and `unstack()` methods let you select the level to stack/unstack. You can even stack/unstack multiple levels at once, specifying the `level` parameter.
+
+#### Adding or removing columns
+
+```{python}
+people
+```
+
+```{python}
+people["age"] = 2018 - people["birthyear"] # adds a new column "age" 
+people["over 30"] = people["age"] > 30 # adds another column "over 30" 
+birthyears = people.pop("birthyear")
+del people["children"]
+
+people
+```
+
+When you add a new column, it must have the same number of rows. Missing rows are filled with NaN, and extra rows are ignored.
+
+When adding a new column, it is added at the end (on the right) by default. You can also insert a column anywhere else using the `.insert()` method.
+
+```{python}
+people.insert(1, "height", [172, 181, 185])
+
+(people
+.assign(body_mass_index = lambda df: df["weight"] / (df["height"] / 100)** 2)
+.assign(overweight = lambda df: df["body_mass_index"] > 25)
+)
+```
+
+#### Sorting a DataFrame
+
+You can sort a DataFrame by calling its sort\_index method. By default it sorts the rows by their index label, in ascending order, but let's reverse the order:
+
+```{python}
+people.sort_index(ascending=False)
+```
+
+Note that sort\_index returned a sorted copy of the DataFrame. To modify people directly, we can set the `inplace=` argument to `True`. Also, we can sort the columns instead of the rows by setting `axis=1` or by the values instead of the labels, we can use `sort_values()` and specify the column to sort by:
+
+```{python}
+people.sort_values(by="age", inplace=True)
+people
+```
+
+#### Aggregating
+
+Similar to the SQL language, pandas allows grouping your data into groups to run calculations over each group.
+* `.groupby(" ")`
+
+Pandas supports spreadsheet-like <a title= "A pivot table is a table of grouped values that aggregates the individual items of a more extensive table (such as from a database, spreadsheet, or business intelligence program) within one or more discrete categories. This summary might include sums, averages, or other statistics, which the pivot table groups together using a chosen aggregation function applied to the grouped values."> pivot tables </a> that allow quick data summarization. To illustrate this, let's create a simple DataFrame:
+
+### Evaluating an expression
+
+A great feature supported by pandas is expression evaluation. This relies on the `numexpr` library which must be installed.
+
+```{python}
+people.eval("weight / (height/100) ** 2 > 25")
+```
+
+Assignment expressions are also supported. Let's set `inplace=True` to directly modify the DataFrame rather than getting a modified copy:
+
+```{python}
+people.eval("body_mass_index = weight / (height/100) ** 2", inplace=True)
+people
+```
+
+### Handling Missing Data
+
+Dealing with missing data is a frequent task when working with real life data. Pandas offers a few tools to handle missing data.
+
+```{python}
+grades_array = np.array([[8,8,9],[10,9,9],[4, 8, 2], [9, 10, 10]])
+grades = pd.DataFrame(grades_array, columns=["sep", "oct", "nov"], index=["alice","bob","charles","darwin"])
+grades
+
+bonus_array = np.array([[0,np.nan,2],[np.nan,1,0],[0, 1, 0], [3, 3, 0]])
+bonus_points = pd.DataFrame(bonus_array, columns=["oct", "nov", "dec"], index=["bob","colin", "darwin", "charles"]) 
+bonus_points
+```
+
+```{python}
+grades + bonus_points
+```
+
+Looks like the addition worked in some cases but way too many elements are now empty. That's because when aligning the DataFrames, some columns and rows were only present on one side, and thus they were considered missing on the other side (NaN). Then adding NaN to a number results in NaN, hence the result.
+
+#### `.fillna()`
+
+Let's try to fix the problem above. For example, we can decide that missing data should result in a zero, instead of NaN. We can replace all *NaN* values by a any value using the `fillna()` method:
+
+```{python}
+(grades + bonus_points).fillna(0) #fill with 0s
+```
+
+It's a bit unfair that we're setting grades to zero in September, though. Perhaps we should decide that missing grades are missing grades, but missing bonus points should be replaced by zeros:
+
+```{python}
+better_bonus_points = bonus_points.copy()
+better_bonus_points.insert(0, "sep", 0)
+better_bonus_points.loc["alice"] = 0
+better_bonus_points = better_bonus_points.interpolate(axis=1)
+
+final_grades = grades + better_bonus_points
+final_grades
+```
+
+#### `.dropna()`
+
+So let's call the `.dropna()` method to get rid of rows that are full of NaNs:
+
+```{python}
+final_grades_clean = final_grades.dropna(how="all")
+final_grades_clean
+```
+
+To remove columns that are full of NaNs, we set the axis argument to 1:
+
+```{python}
+final_grades_clean = final_grades_clean.dropna(axis=1, how="all")
+final_grades_clean
+```
+
+### Overview Functions
+
+* The `.info()` method prints out a summary of each columns contents:
+
+* the `.describe()` method gives a nice overview of the main aggregated values over each column: * count: number of non-null (not NaN) values * mean: mean of non-null values * std: standard deviation of non-null values * min: minimum of non-null values * 25%, 50%, 75%: 25th, 50th and 75th percentile of non-null values * max: maximum of non-null values
+
+<!--chapter:end:chapter/04-pandas.Rmd-->
+
+```{r include=FALSE, cache=FALSE}
+# example R options set globally
+options(width = 60)
+
+# example chunk options set globally
+knitr::opts_chunk$set(
+  comment = "#>",
+  collapse = TRUE
+  )
+
+library(bookdown)
+library(reticulate)
+```
+# Data Visualization
+
+## Matplotlib
+```{python}
+import matplotlib.pyplot as plt 
+```
+
+<iframe src="https://matplotlib.org/stable/tutorials/index.html" height="600px" width="100%"></iframe>
+
+## Seaborn
+
+<iframe src="https://seaborn.pydata.org/tutorial.html" height="600px" width="100%"></iframe>
+
+## Bokeh
+
+<iframe src="https://docs.bokeh.org/en/latest/docs/first_steps.html" height="600px" width="100%"></iframe>
+
+## Plotly
+
+<iframe src="https://dash.plotly.com/" height="600px" width="100%"></iframe>
+
+<!--chapter:end:chapter/05-visualization.Rmd-->
+
+```{r include=FALSE, cache=FALSE}
+# example R options set globally
+options(width = 60)
+
+# example chunk options set globally
+knitr::opts_chunk$set(
+  comment = "#>",
+  collapse = TRUE
+  )
+
+library(bookdown)
+library(reticulate)
+```
+# Clustering
+
+Grouping objects into classes, or classification, is a basic cognitive ability and a fundamental scientific methodology and procedure. The definitions had different historical perspectives:
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.width=4, fig.height=12}
+library(timevis)
+data <- data.frame(
+  id = 1:4,
+  content = c("Cormack", 
+  						"Gordon",
+  						"Hastie", 
+  						"Han & Kamber"),
+  start = c("1971-01-10", 
+  					"1987-01-11", 
+  					"2001-01-20", 
+  					"2006-02-14"),
+  end = c(NA,NA,NA,NA))
+timevis(data, height = 350, width = 650)
+```
+
+-   *Hastie et al.* (2001): objects in a cluster "are more closely related to oneanother than objects assigned to different clusters."
+-   *Han & Kamber* (2006): "A cluster is a collection of data objects that aresimilar to one another within the same cluster and are dissimilar to theobjects in other clusters."
+
+### Clustering
+The **clustering problem**: given a data set, divide it into groups such that the homogeneity of each group is maximized or the separation between groups is maximized, or both are maximized.
+
+**Homogeneity and separation can be formalized in different ways**:
+
+Similarity or dissimilarity measure
+:   A domain-dependent real function of object pairs measuring their similarity or dissimilarity is assumed
+:   Similar objects are homogeneous, dissimilar ones are separated
+
+Density estimation
+:   A statistical estimate of the probability density function that generated the data is computed
+:   Homogeneity is high in regions where the estimated <a title="probability density function" style="text-decoration: none;">*p.d.f.* </a>is large
+
+Frequency and expectation
+:   The number of objects in space volumes
+:   Homogeneity is high in the collection of space volumes where the number exceeds its expectation
+
+### Type of Clustering Models
+Clustering models can be categorized according to nesting and coverageproperties:
+
+Hierarchical or flat
+:   *Hierarchical*: Clusters may be subdivided into smaller, contained sub-clusters, forming a hierarchy.
+
+Exclusive, overlapping or fuzzy
+:   *Exclusive*: Any object is an element of exactly one cluster.
+:   *Overlapping*: Any object may be an element of more than one cluster.
+:   *Fuzzy*: For each cluster, a membership function on objects onto [0,1] is defined.
+
+Complete or partial
+:   *Complete*: Any object is an element of some cluster
+:   *Partial*: An object may belong to no cluster; objects not belonging to any cluster can be deemed as noise or outliers.
+
+<!--chapter:end:chapter/06-clustering.Rmd-->
+
+```{r include=FALSE, cache=FALSE}
+# example R options set globally
+options(width = 60)
+
+# example chunk options set globally
+knitr::opts_chunk$set(
+  comment = "#>",
+  collapse = TRUE
+  )
+
+library(bookdown)
+library(reticulate)
+```
+`r if (knitr::is_html_output()) '
+# References {-}
+'`
+
+<!--chapter:end:chapter/07-references.Rmd-->
+

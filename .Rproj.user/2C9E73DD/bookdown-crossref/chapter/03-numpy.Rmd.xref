@@ -1,0 +1,15 @@
+h1:numpy Numpy
+h2:arrays Arrays
+h3:creating-arrays Creating Arrays
+h3:indexing-and-slicing-arrays Indexing and slicing arrays
+h3:reshape Reshape
+h4:aggregate Aggregate
+h4:sort Sort
+h4:transpose Transpose
+h2:operators Operators
+h3:broadcasting-rules Broadcasting Rules
+h3:upcasting Upcasting
+h3:conditional-operators Conditional operators
+h3:statistics Statistics
+h3:linear-algebra Linear Algebra
+

@@ -1,0 +1,54 @@
+# Clustering
+
+Grouping objects into classes, or classification, is a basic cognitive ability and a fundamental scientific methodology and procedure. The definitions had different historical perspectives:
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.width=4, fig.height=12}
+library(timevis)
+data <- data.frame(
+  id = 1:4,
+  content = c("Cormack", 
+  						"Gordon",
+  						"Hastie", 
+  						"Han & Kamber"),
+  start = c("1971-01-10", 
+  					"1987-01-11", 
+  					"2001-01-20", 
+  					"2006-02-14"),
+  end = c(NA,NA,NA,NA))
+timevis(data, height = 350, width = 650)
+```
+
+-   *Hastie et al.* (2001): objects in a cluster "are more closely related to oneanother than objects assigned to different clusters."
+-   *Han & Kamber* (2006): "A cluster is a collection of data objects that aresimilar to one another within the same cluster and are dissimilar to theobjects in other clusters."
+
+### Clustering
+The **clustering problem**: given a data set, divide it into groups such that the homogeneity of each group is maximized or the separation between groups is maximized, or both are maximized.
+
+**Homogeneity and separation can be formalized in different ways**:
+
+Similarity or dissimilarity measure
+:   A domain-dependent real function of object pairs measuring their similarity or dissimilarity is assumed
+:   Similar objects are homogeneous, dissimilar ones are separated
+
+Density estimation
+:   A statistical estimate of the probability density function that generated the data is computed
+:   Homogeneity is high in regions where the estimated <a title="probability density function" style="text-decoration: none;">*p.d.f.* </a>is large
+
+Frequency and expectation
+:   The number of objects in space volumes
+:   Homogeneity is high in the collection of space volumes where the number exceeds its expectation
+
+### Type of Clustering Models
+Clustering models can be categorized according to nesting and coverageproperties:
+
+Hierarchical or flat
+:   *Hierarchical*: Clusters may be subdivided into smaller, contained sub-clusters, forming a hierarchy.
+
+Exclusive, overlapping or fuzzy
+:   *Exclusive*: Any object is an element of exactly one cluster.
+:   *Overlapping*: Any object may be an element of more than one cluster.
+:   *Fuzzy*: For each cluster, a membership function on objects onto [0,1] is defined.
+
+Complete or partial
+:   *Complete*: Any object is an element of some cluster
+:   *Partial*: An object may belong to no cluster; objects not belonging to any cluster can be deemed as noise or outliers.

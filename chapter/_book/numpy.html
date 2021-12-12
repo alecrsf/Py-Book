@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 Numpy | Py-Book</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::bs4_book,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 Numpy | Py-Book" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::bs4_book,
+set in the _output.yml file.</p>" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 Numpy | Py-Book" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::bs4_book,
+set in the _output.yml file.</p>" />
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="text-mining.html"/>
+<link rel="next" href="pandas.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/vis-4.16.1/vis.min.css" rel="stylesheet" />
+<script src="libs/vis-4.16.1/vis.min.js"></script>
+<link href="libs/timeline-0.4/timevis.css" rel="stylesheet" />
+<script src="libs/timevis-binding-1.0.0/timevis.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#setup"><i class="fa fa-check"></i>Setup</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="algorithms.html"><a href="algorithms.html"><i class="fa fa-check"></i><b>1</b> Algorithms</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="algorithms.html"><a href="algorithms.html#definitions"><i class="fa fa-check"></i><b>1.1</b> Definitions</a></li>
+<li class="chapter" data-level="1.2" data-path="algorithms.html"><a href="algorithms.html#computers-architecture"><i class="fa fa-check"></i><b>1.2</b> Computers Architecture</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Basics</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="basics.html"><a href="basics.html#control-flow"><i class="fa fa-check"></i><b>2.1</b> Control Flow</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="basics.html"><a href="basics.html#data-types"><i class="fa fa-check"></i><b>2.1.1</b> Data Types</a></li>
+<li class="chapter" data-level="2.1.2" data-path="basics.html"><a href="basics.html#variables"><i class="fa fa-check"></i><b>2.1.2</b> Variables</a></li>
+<li class="chapter" data-level="2.1.3" data-path="basics.html"><a href="basics.html#logics"><i class="fa fa-check"></i><b>2.1.3</b> Logics</a></li>
+<li class="chapter" data-level="2.1.4" data-path="basics.html"><a href="basics.html#iteration"><i class="fa fa-check"></i><b>2.1.4</b> Iteration</a></li>
+<li class="chapter" data-level="2.1.5" data-path="basics.html"><a href="basics.html#functions"><i class="fa fa-check"></i><b>2.1.5</b> Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="basics.html"><a href="basics.html#collection-types"><i class="fa fa-check"></i><b>2.2</b> Collection Types</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="basics.html"><a href="basics.html#lists"><i class="fa fa-check"></i><b>2.2.1</b> Lists</a></li>
+<li class="chapter" data-level="2.2.2" data-path="basics.html"><a href="basics.html#matrixes"><i class="fa fa-check"></i><b>2.2.2</b> Matrixes</a></li>
+<li class="chapter" data-level="2.2.3" data-path="basics.html"><a href="basics.html#dictionaries"><i class="fa fa-check"></i><b>2.2.3</b> Dictionaries</a></li>
+<li class="chapter" data-level="2.2.4" data-path="basics.html"><a href="basics.html#tuples"><i class="fa fa-check"></i><b>2.2.4</b> Tuples</a></li>
+<li class="chapter" data-level="2.2.5" data-path="basics.html"><a href="basics.html#sets"><i class="fa fa-check"></i><b>2.2.5</b> Sets</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="text-mining.html"><a href="text-mining.html"><i class="fa fa-check"></i><b>3</b> Text Mining</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="text-mining.html"><a href="text-mining.html#working-with-strings"><i class="fa fa-check"></i><b>3.1</b> Working with strings</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="text-mining.html"><a href="text-mining.html#string-types"><i class="fa fa-check"></i><b>3.1.1</b> String Types</a></li>
+<li class="chapter" data-level="3.1.2" data-path="text-mining.html"><a href="text-mining.html#strings-operations"><i class="fa fa-check"></i><b>3.1.2</b> Strings Operations</a></li>
+<li class="chapter" data-level="3.1.3" data-path="text-mining.html"><a href="text-mining.html#strings-conversion"><i class="fa fa-check"></i><b>3.1.3</b> Strings Conversion</a></li>
+<li class="chapter" data-level="3.1.4" data-path="text-mining.html"><a href="text-mining.html#string-indexing-and-slicing"><i class="fa fa-check"></i><b>3.1.4</b> String Indexing and Slicing</a></li>
+<li class="chapter" data-level="3.1.5" data-path="text-mining.html"><a href="text-mining.html#string-splitting-and-joining"><i class="fa fa-check"></i><b>3.1.5</b> String splitting and joining</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="text-mining.html"><a href="text-mining.html#regular-expressions"><i class="fa fa-check"></i><b>3.2</b> Regular Expressions</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="text-mining.html"><a href="text-mining.html#match-find"><i class="fa fa-check"></i><b>3.2.1</b> Match &amp; Find</a></li>
+<li class="chapter" data-level="3.2.2" data-path="text-mining.html"><a href="text-mining.html#search-replace"><i class="fa fa-check"></i><b>3.2.2</b> Search &amp; Replace</a></li>
+<li class="chapter" data-level="3.2.3" data-path="text-mining.html"><a href="text-mining.html#metacharacters"><i class="fa fa-check"></i><b>3.2.3</b> Metacharacters</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="numpy.html"><a href="numpy.html"><i class="fa fa-check"></i><b>4</b> Numpy</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="numpy.html"><a href="numpy.html#arrays"><i class="fa fa-check"></i><b>4.1</b> Arrays</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="numpy.html"><a href="numpy.html#creating-arrays"><i class="fa fa-check"></i><b>4.1.1</b> Creating Arrays</a></li>
+<li class="chapter" data-level="4.1.2" data-path="numpy.html"><a href="numpy.html#indexing-and-slicing-arrays"><i class="fa fa-check"></i><b>4.1.2</b> Indexing and slicing arrays</a></li>
+<li class="chapter" data-level="4.1.3" data-path="numpy.html"><a href="numpy.html#reshape"><i class="fa fa-check"></i><b>4.1.3</b> Reshape</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="numpy.html"><a href="numpy.html#operators"><i class="fa fa-check"></i><b>4.2</b> Operators</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="numpy.html"><a href="numpy.html#broadcasting-rules"><i class="fa fa-check"></i><b>4.2.1</b> Broadcasting Rules</a></li>
+<li class="chapter" data-level="4.2.2" data-path="numpy.html"><a href="numpy.html#upcasting"><i class="fa fa-check"></i><b>4.2.2</b> Upcasting</a></li>
+<li class="chapter" data-level="4.2.3" data-path="numpy.html"><a href="numpy.html#conditional-operators"><i class="fa fa-check"></i><b>4.2.3</b> Conditional operators</a></li>
+<li class="chapter" data-level="4.2.4" data-path="numpy.html"><a href="numpy.html#statistics"><i class="fa fa-check"></i><b>4.2.4</b> Statistics</a></li>
+<li class="chapter" data-level="4.2.5" data-path="numpy.html"><a href="numpy.html#linear-algebra"><i class="fa fa-check"></i><b>4.2.5</b> Linear Algebra</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="pandas.html"><a href="pandas.html"><i class="fa fa-check"></i><b>5</b> Pandas</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="pandas.html"><a href="pandas.html#series"><i class="fa fa-check"></i><b>5.1</b> Series</a></li>
+<li class="chapter" data-level="5.2" data-path="pandas.html"><a href="pandas.html#dataframe"><i class="fa fa-check"></i><b>5.2</b> DataFrame</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="pandas.html"><a href="pandas.html#indexing"><i class="fa fa-check"></i><b>5.2.1</b> Indexing</a></li>
+<li class="chapter" data-level="5.2.2" data-path="pandas.html"><a href="pandas.html#reading-data"><i class="fa fa-check"></i><b>5.2.2</b> Reading Data</a></li>
+<li class="chapter" data-level="5.2.3" data-path="pandas.html"><a href="pandas.html#data-wrangling"><i class="fa fa-check"></i><b>5.2.3</b> Data Wrangling</a></li>
+<li class="chapter" data-level="5.2.4" data-path="pandas.html"><a href="pandas.html#evaluating-an-expression"><i class="fa fa-check"></i><b>5.2.4</b> Evaluating an expression</a></li>
+<li class="chapter" data-level="5.2.5" data-path="pandas.html"><a href="pandas.html#handling-missing-data"><i class="fa fa-check"></i><b>5.2.5</b> Handling Missing Data</a></li>
+<li class="chapter" data-level="5.2.6" data-path="pandas.html"><a href="pandas.html#data-manipulation"><i class="fa fa-check"></i><b>5.2.6</b> Data Manipulation</a></li>
+<li class="chapter" data-level="5.2.7" data-path="pandas.html"><a href="pandas.html#overview-functions"><i class="fa fa-check"></i><b>5.2.7</b> Overview Functions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="data-visualization.html"><a href="data-visualization.html"><i class="fa fa-check"></i><b>6</b> Data Visualization</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="data-visualization.html"><a href="data-visualization.html#matplotlib"><i class="fa fa-check"></i><b>6.1</b> Matplotlib</a></li>
+<li class="chapter" data-level="6.2" data-path="data-visualization.html"><a href="data-visualization.html#exploratory-visualization"><i class="fa fa-check"></i><b>6.2</b> Exploratory Visualization</a></li>
+<li class="chapter" data-level="6.3" data-path="data-visualization.html"><a href="data-visualization.html#other-packages"><i class="fa fa-check"></i><b>6.3</b> Other Packages</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="data-visualization.html"><a href="data-visualization.html#seaborn"><i class="fa fa-check"></i><b>6.3.1</b> Seaborn</a></li>
+<li class="chapter" data-level="6.3.2" data-path="data-visualization.html"><a href="data-visualization.html#bokeh"><i class="fa fa-check"></i><b>6.3.2</b> Bokeh</a></li>
+<li class="chapter" data-level="6.3.3" data-path="data-visualization.html"><a href="data-visualization.html#plotly"><i class="fa fa-check"></i><b>6.3.3</b> Plotly</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html"><i class="fa fa-check"></i><b>7</b> Machine Learning with <strong>Scikit-Learn</strong></a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#data-preprocessing"><i class="fa fa-check"></i><b>7.1</b> Data PreProcessing</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#create-a-training-and-test-sets"><i class="fa fa-check"></i><b>7.1.1</b> Create a Training and Test Sets</a></li>
+<li class="chapter" data-level="7.1.2" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#impute-missing-values"><i class="fa fa-check"></i><b>7.1.2</b> Impute Missing Values</a></li>
+<li class="chapter" data-level="7.1.3" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#handling-texts-and-categorical-attributes"><i class="fa fa-check"></i><b>7.1.3</b> Handling Texts and Categorical Attributes</a></li>
+<li class="chapter" data-level="7.1.4" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#feature-scaling"><i class="fa fa-check"></i><b>7.1.4</b> Feature Scaling</a></li>
+<li class="chapter" data-level="7.1.5" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#pipelines"><i class="fa fa-check"></i><b>7.1.5</b> Pipelines</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#select-and-train-a-model"><i class="fa fa-check"></i><b>7.2</b> Select and Train a Model</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#training-and-evaluating-on-the-training-set"><i class="fa fa-check"></i><b>7.2.1</b> Training and Evaluating on the Training Set</a></li>
+<li class="chapter" data-level="7.2.2" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#model-evaluation"><i class="fa fa-check"></i><b>7.2.2</b> Model Evaluation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>8</b> Clustering</a>
+<ul>
+<li class="chapter" data-level="8.0.1" data-path="clustering.html"><a href="clustering.html#clustering-1"><i class="fa fa-check"></i><b>8.0.1</b> Clustering</a></li>
+<li class="chapter" data-level="8.0.2" data-path="clustering.html"><a href="clustering.html#type-of-clustering-models"><i class="fa fa-check"></i><b>8.0.2</b> Type of Clustering Models</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Py-Book</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="numpy" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Numpy</h1>
+<p>Numpy is the core library for scientific computing in Python. It provides a high-performance multidimensional array object, and tools for working with these arrays</p>
+<iframe src="https://numpy.org/doc/stable/user/absolute_beginners.html" height="500px" width="95%">
+</iframe>
+<div id="arrays" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Arrays</h2>
+<p>A numpy array is a grid of values, all of the same type, and is indexed by a tuple of nonnegative integers.
+The number of dimensions is the rank of the array.
+The shape of an array is a tuple of integers giving the size (the total number of elements) of the array along each dimension.</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb139-1"><a href="numpy.html#cb139-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb140-1"><a href="numpy.html#cb140-1"></a><span class="co"># 1-dimensonal array, also referred to as a vector</span></span>
+<span id="cb140-2"><a href="numpy.html#cb140-2"></a>a1 <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
+<span id="cb140-3"><a href="numpy.html#cb140-3"></a>a1.shape, a1.ndim, a1.dtype, a1.size, <span class="bu">type</span>(a1)</span></code></pre></div>
+<pre><code>## ((3,), 1, dtype(&#39;int64&#39;), 3, &lt;class &#39;numpy.ndarray&#39;&gt;)</code></pre>
+<div class="sourceCode" id="cb142"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb142-1"><a href="numpy.html#cb142-1"></a><span class="co"># 2-dimensional array, also referred to as matrix</span></span>
+<span id="cb142-2"><a href="numpy.html#cb142-2"></a>a2 <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="fl">2.0</span>, <span class="fl">3.3</span>],</span>
+<span id="cb142-3"><a href="numpy.html#cb142-3"></a>               [<span class="dv">4</span>, <span class="dv">5</span>, <span class="fl">6.5</span>]])</span>
+<span id="cb142-4"><a href="numpy.html#cb142-4"></a>a2.shape, a2.ndim, a2.dtype, a2.size, <span class="bu">type</span>(a2)</span></code></pre></div>
+<pre><code>## ((2, 3), 2, dtype(&#39;float64&#39;), 6, &lt;class &#39;numpy.ndarray&#39;&gt;)</code></pre>
+<div class="sourceCode" id="cb144"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb144-1"><a href="numpy.html#cb144-1"></a><span class="co"># 3-dimensional array, also referred to as a matrix</span></span>
+<span id="cb144-2"><a href="numpy.html#cb144-2"></a>a3 <span class="op">=</span> np.array([[[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>],</span>
+<span id="cb144-3"><a href="numpy.html#cb144-3"></a>                [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>],</span>
+<span id="cb144-4"><a href="numpy.html#cb144-4"></a>                [<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>]],</span>
+<span id="cb144-5"><a href="numpy.html#cb144-5"></a>                [[<span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>],</span>
+<span id="cb144-6"><a href="numpy.html#cb144-6"></a>                 [<span class="dv">13</span>, <span class="dv">14</span>, <span class="dv">15</span>],</span>
+<span id="cb144-7"><a href="numpy.html#cb144-7"></a>                 [<span class="dv">16</span>, <span class="dv">17</span>, <span class="dv">18</span>]]])</span>
+<span id="cb144-8"><a href="numpy.html#cb144-8"></a>a3.shape, a3.ndim, a3.dtype, a3.size, <span class="bu">type</span>(a3)</span></code></pre></div>
+<pre><code>## ((2, 3, 3), 3, dtype(&#39;int64&#39;), 18, &lt;class &#39;numpy.ndarray&#39;&gt;)</code></pre>
+<div id="creating-arrays" class="section level3" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Creating Arrays</h3>
+<ul>
+<li><code>np.array()</code></li>
+<li><code>np.ones()</code></li>
+<li><code>np.full()</code></li>
+<li><code>np.zeros()</code></li>
+<li><code>np.random.rand(5, 3)</code></li>
+<li><code>np.random.randint(10, size=5)</code></li>
+<li><code>np.random.seed()</code> - pseudo random numbers</li>
+</ul>
+<p>You can change the data type with <code>.astype()</code> or calling the argument <code>dtype=</code> when creating.</p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb146-1"><a href="numpy.html#cb146-1"></a><span class="co"># Create an array of ones, 10 rows of 2 cols type integer</span></span>
+<span id="cb146-2"><a href="numpy.html#cb146-2"></a>ones <span class="op">=</span> np.ones((<span class="dv">10</span>, <span class="dv">2</span>))</span>
+<span id="cb146-3"><a href="numpy.html#cb146-3"></a><span class="co"># Create an array of zeros</span></span>
+<span id="cb146-4"><a href="numpy.html#cb146-4"></a>zeros <span class="op">=</span> np.zeros((<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">3</span>))</span>
+<span id="cb146-5"><a href="numpy.html#cb146-5"></a><span class="co"># One-dim array from 1 to 10</span></span>
+<span id="cb146-6"><a href="numpy.html#cb146-6"></a>a <span class="op">=</span> np.arange(<span class="dv">1</span>,<span class="dv">11</span>)</span>
+<span id="cb146-7"><a href="numpy.html#cb146-7"></a><span class="co"># One-dim array of 100 numbers from 1 to 10</span></span>
+<span id="cb146-8"><a href="numpy.html#cb146-8"></a>a <span class="op">=</span> np.linspace(<span class="dv">1</span>,<span class="dv">11</span>,<span class="dv">50</span>) </span>
+<span id="cb146-9"><a href="numpy.html#cb146-9"></a><span class="co"># Random array of integers</span></span>
+<span id="cb146-10"><a href="numpy.html#cb146-10"></a>a <span class="op">=</span> np.random.randint(<span class="dv">10</span>, size<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
+<span id="cb146-11"><a href="numpy.html#cb146-11"></a><span class="co"># Random array of floats (between 0 &amp; 1)</span></span>
+<span id="cb146-12"><a href="numpy.html#cb146-12"></a>a <span class="op">=</span> np.random.random((<span class="dv">5</span>, <span class="dv">3</span>))</span></code></pre></div>
+<p>For consistency, you might want to keep the random numbers you generate similar throughout experiments. To do this, you can use <a href="https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.random.seed.html"><code>np.random.seed()</code></a>.</p>
+</div>
+<div id="indexing-and-slicing-arrays" class="section level3" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> Indexing and slicing arrays</h3>
+<p>Array shapes are always listed in the format <code>(row, column, n...)</code> where <code>n</code> is optional extra dimension(s).</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb147-1"><a href="numpy.html#cb147-1"></a>a <span class="op">=</span> np.arange(<span class="dv">100</span>)</span>
+<span id="cb147-2"><a href="numpy.html#cb147-2"></a>a <span class="op">=</span> a.reshape(<span class="dv">50</span>,<span class="dv">2</span>)</span>
+<span id="cb147-3"><a href="numpy.html#cb147-3"></a>a[<span class="dv">0</span>,<span class="dv">1</span>]  <span class="co"># same form of an access to a nested list or a[0][1] </span></span></code></pre></div>
+<pre><code>## 1</code></pre>
+<div class="sourceCode" id="cb149"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb149-1"><a href="numpy.html#cb149-1"></a>a[<span class="dv">1</span>:<span class="dv">3</span>]  <span class="co"># row slice</span></span></code></pre></div>
+<pre><code>## array([[2, 3],
+##        [4, 5]])</code></pre>
+<div class="sourceCode" id="cb151"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb151-1"><a href="numpy.html#cb151-1"></a>a[:,<span class="dv">0</span>]  <span class="co"># project on first column</span></span></code></pre></div>
+<pre><code>## array([ 0,  2,  4,  6,  8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32,
+##        34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 62, 64, 66,
+##        68, 70, 72, 74, 76, 78, 80, 82, 84, 86, 88, 90, 92, 94, 96, 98])</code></pre>
+<div class="sourceCode" id="cb153"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb153-1"><a href="numpy.html#cb153-1"></a>a[<span class="dv">0</span>]    <span class="co"># first row or a[0, :]</span></span></code></pre></div>
+<pre><code>## array([0, 1])</code></pre>
+<div class="sourceCode" id="cb155"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb155-1"><a href="numpy.html#cb155-1"></a>a[:<span class="dv">3</span>,<span class="dv">0</span>] <span class="co"># Get the first value of the first 3 row</span></span></code></pre></div>
+<pre><code>## array([0, 2, 4])</code></pre>
+<div class="sourceCode" id="cb157"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb157-1"><a href="numpy.html#cb157-1"></a>b <span class="op">=</span> np.arange(<span class="dv">48</span>).reshape(<span class="dv">4</span>, <span class="dv">12</span>)</span>
+<span id="cb157-2"><a href="numpy.html#cb157-2"></a>b, b[(<span class="dv">0</span>,<span class="dv">2</span>), <span class="dv">2</span>:<span class="dv">5</span>],  b[:, (<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span>)]</span>
+<span id="cb157-3"><a href="numpy.html#cb157-3"></a></span>
+<span id="cb157-4"><a href="numpy.html#cb157-4"></a><span class="co"># returns a 1D array with b[-1, 5], b[2, 9], b[-1, 1] and b[2, 9]</span></span></code></pre></div>
+<pre><code>## (array([[ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11],
+##        [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+##        [24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35],
+##        [36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47]]), array([[ 2,  3,  4],
+##        [26, 27, 28]]), array([[11,  2, 11],
+##        [23, 14, 23],
+##        [35, 26, 35],
+##        [47, 38, 47]]))</code></pre>
+<div class="sourceCode" id="cb159"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb159-1"><a href="numpy.html#cb159-1"></a>b[(<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>), (<span class="dv">5</span>, <span class="dv">9</span>, <span class="dv">1</span>, <span class="dv">9</span>)]</span></code></pre></div>
+<pre><code>## array([41, 33, 37, 33])</code></pre>
+</div>
+<div id="reshape" class="section level3" number="4.1.3">
+<h3><span class="header-section-number">4.1.3</span> Reshape</h3>
+<div class="sourceCode" id="cb161"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb161-1"><a href="numpy.html#cb161-1"></a>a <span class="op">=</span> np.arange(<span class="dv">0</span>,<span class="dv">11</span>) </span>
+<span id="cb161-2"><a href="numpy.html#cb161-2"></a><span class="co">## Reshape into n rows of n col</span></span>
+<span id="cb161-3"><a href="numpy.html#cb161-3"></a><span class="co"># Row vector</span></span>
+<span id="cb161-4"><a href="numpy.html#cb161-4"></a>a <span class="op">=</span> a.reshape((<span class="dv">1</span>,<span class="dv">11</span>)) <span class="co">#a[np.newaxis, :]</span></span>
+<span id="cb161-5"><a href="numpy.html#cb161-5"></a>a</span></code></pre></div>
+<pre><code>## array([[ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10]])</code></pre>
+<div class="sourceCode" id="cb163"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb163-1"><a href="numpy.html#cb163-1"></a><span class="co"># Column vector</span></span>
+<span id="cb163-2"><a href="numpy.html#cb163-2"></a>a <span class="op">=</span> a.reshape((<span class="dv">11</span>,<span class="dv">1</span>)) <span class="co">#a[:, np.newaxis]</span></span>
+<span id="cb163-3"><a href="numpy.html#cb163-3"></a>a</span></code></pre></div>
+<pre><code>## array([[ 0],
+##        [ 1],
+##        [ 2],
+##        [ 3],
+##        [ 4],
+##        [ 5],
+##        [ 6],
+##        [ 7],
+##        [ 8],
+##        [ 9],
+##        [10]])</code></pre>
+<div class="sourceCode" id="cb165"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb165-1"><a href="numpy.html#cb165-1"></a><span class="co"># Transpose the array</span></span>
+<span id="cb165-2"><a href="numpy.html#cb165-2"></a>a.T</span></code></pre></div>
+<pre><code>## array([[ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10]])</code></pre>
+<div id="aggregate" class="section level4" number="4.1.3.1">
+<h4><span class="header-section-number">4.1.3.1</span> Aggregate</h4>
+<div class="sourceCode" id="cb167"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb167-1"><a href="numpy.html#cb167-1"></a><span class="co">#Concatenate (The arrays must have equal numbers of dimensions)</span></span>
+<span id="cb167-2"><a href="numpy.html#cb167-2"></a>a<span class="op">=</span>np.array([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>])</span>
+<span id="cb167-3"><a href="numpy.html#cb167-3"></a>b<span class="op">=</span>np.array([<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>])</span>
+<span id="cb167-4"><a href="numpy.html#cb167-4"></a>c<span class="op">=</span>np.array([<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>])</span>
+<span id="cb167-5"><a href="numpy.html#cb167-5"></a>np.concatenate([a, b, c])</span></code></pre></div>
+<pre><code>## array([1, 2, 3, 4, 5, 6, 7, 8, 9])</code></pre>
+<p>For arrays with different numbers of dimensions, use vstack and hstack to perform concatenation. The inverse operation, splitting, is implemented by split,vsplit,hsplit</p>
+<div class="sourceCode" id="cb169"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb169-1"><a href="numpy.html#cb169-1"></a>a <span class="op">=</span> np.array([<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">5</span>])</span>
+<span id="cb169-2"><a href="numpy.html#cb169-2"></a>b <span class="op">=</span> np.array([[<span class="dv">7</span>,<span class="dv">11</span>,<span class="dv">13</span>], [<span class="dv">17</span>,<span class="dv">19</span>,<span class="dv">23</span>]])</span>
+<span id="cb169-3"><a href="numpy.html#cb169-3"></a>np.vstack([a, b]) <span class="co">#np.concatenate((a, b), axis=0)</span></span></code></pre></div>
+<pre><code>## array([[ 2,  3,  5],
+##        [ 7, 11, 13],
+##        [17, 19, 23]])</code></pre>
+<div class="sourceCode" id="cb171"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb171-1"><a href="numpy.html#cb171-1"></a>b <span class="op">=</span> np.array([[<span class="dv">29</span>], [<span class="dv">31</span>]])</span>
+<span id="cb171-2"><a href="numpy.html#cb171-2"></a>b2 <span class="op">=</span> np.array([[<span class="dv">7</span>,<span class="dv">11</span>,<span class="dv">13</span>], [<span class="dv">17</span>,<span class="dv">19</span>,<span class="dv">23</span>]])</span>
+<span id="cb171-3"><a href="numpy.html#cb171-3"></a>np.hstack([b, b2]) <span class="co">##np.concatenate((a, b), axis=1)</span></span></code></pre></div>
+<pre><code>## array([[29,  7, 11, 13],
+##        [31, 17, 19, 23]])</code></pre>
+<div class="sourceCode" id="cb173"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb173-1"><a href="numpy.html#cb173-1"></a>a <span class="op">=</span> np.array([<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">11</span>,<span class="dv">13</span>,<span class="dv">17</span>,<span class="dv">19</span>,<span class="dv">23</span>])</span>
+<span id="cb173-2"><a href="numpy.html#cb173-2"></a>a1, a2, a3 <span class="op">=</span> np.split(a, [<span class="dv">3</span>,<span class="dv">6</span>])</span>
+<span id="cb173-3"><a href="numpy.html#cb173-3"></a>a1, a2, a3</span></code></pre></div>
+<pre><code>## (array([2, 3, 5]), array([ 7, 11, 13]), array([17, 19, 23]))</code></pre>
+<p>There is also a split function which splits an array along any given axis. Calling vsplit is equivalent to calling split with axis=0. There is also an hsplit function, equivalent to calling split with axis=1.</p>
+</div>
+<div id="sort" class="section level4" number="4.1.3.2">
+<h4><span class="header-section-number">4.1.3.2</span> Sort</h4>
+<ul>
+<li><code>np.sort()</code></li>
+<li><code>np.argsort()</code></li>
+<li><code>np.argmax()</code></li>
+<li><code>np.argmin()</code></li>
+</ul>
+</div>
+<div id="transpose" class="section level4" number="4.1.3.3">
+<h4><span class="header-section-number">4.1.3.3</span> Transpose</h4>
+<p>The transpose method creates a new view on an ndarray’s data, with axes permuted in the given order. By default, transpose reverses the order of the dimensions:</p>
+<div class="sourceCode" id="cb175"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb175-1"><a href="numpy.html#cb175-1"></a>a <span class="op">=</span> np.arange(<span class="dv">24</span>).reshape(<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
+<span id="cb175-2"><a href="numpy.html#cb175-2"></a>a</span></code></pre></div>
+<pre><code>## array([[[ 0,  1,  2],
+##         [ 3,  4,  5]],
+## 
+##        [[ 6,  7,  8],
+##         [ 9, 10, 11]],
+## 
+##        [[12, 13, 14],
+##         [15, 16, 17]],
+## 
+##        [[18, 19, 20],
+##         [21, 22, 23]]])</code></pre>
+<div class="sourceCode" id="cb177"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb177-1"><a href="numpy.html#cb177-1"></a>a2<span class="op">=</span> a.transpose() <span class="co"># equivalent to t.transpose((2, 1, 0))</span></span></code></pre></div>
+<p>Now let’s create an ndarray such that the axes 0, 1, 2 (depth, height, width) are re-ordered to 1, 2, 0 (depth→width, height→depth, width→height):</p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb178-1"><a href="numpy.html#cb178-1"></a>a1 <span class="op">=</span> a.transpose((<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">0</span>))</span>
+<span id="cb178-2"><a href="numpy.html#cb178-2"></a>a1, a1.shape</span></code></pre></div>
+<pre><code>## (array([[[ 0,  6, 12, 18],
+##         [ 1,  7, 13, 19],
+##         [ 2,  8, 14, 20]],
+## 
+##        [[ 3,  9, 15, 21],
+##         [ 4, 10, 16, 22],
+##         [ 5, 11, 17, 23]]]), (2, 3, 4))</code></pre>
+<p>NumPy provides a convenience function <code>swapaxes()</code> to swap two axes. For example, let’s create a new view of t with depth and height swapped:</p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb180-1"><a href="numpy.html#cb180-1"></a>a3 <span class="op">=</span> a.swapaxes(<span class="dv">0</span>,<span class="dv">1</span>) <span class="co"># equivalent to a.transpose((1, 0, 2)) </span></span>
+<span id="cb180-2"><a href="numpy.html#cb180-2"></a>a3</span></code></pre></div>
+<pre><code>## array([[[ 0,  1,  2],
+##         [ 6,  7,  8],
+##         [12, 13, 14],
+##         [18, 19, 20]],
+## 
+##        [[ 3,  4,  5],
+##         [ 9, 10, 11],
+##         [15, 16, 17],
+##         [21, 22, 23]]])</code></pre>
+<p>The <code>T</code> attribute is equivalent to calling <code>transpose()</code> when the rank is 2. The T attribute has no effect on rank 0 (empty) or rank 1 arrays.</p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb182-1"><a href="numpy.html#cb182-1"></a>a.T</span></code></pre></div>
+<pre><code>## array([[[ 0,  6, 12, 18],
+##         [ 3,  9, 15, 21]],
+## 
+##        [[ 1,  7, 13, 19],
+##         [ 4, 10, 16, 22]],
+## 
+##        [[ 2,  8, 14, 20],
+##         [ 5, 11, 17, 23]]])</code></pre>
+</div>
+</div>
+</div>
+<div id="operators" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Operators</h2>
+<p>All the usual arithmetic operators can be used with ndarrays. They apply element wise:
+* Arithmetic
+* <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>//</code>, <code>**</code>, <code>%</code>
+* <code>np.exp()</code>
+* <code>np.log()</code>
+* <code>np.dot()</code> - <a href="https://en.wikipedia.org/wiki/Matrix_multiplication">Dot product</a></p>
+<p>The arrays must have the same shape. If they do not, NumPy will apply the <em>broadcasting rules</em>.</p>
+<div id="broadcasting-rules" class="section level3" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Broadcasting Rules</h3>
+<ul>
+<li>If the arrays do not have the same rank, then a 1 will be prepended to the smaller ranking arrays until their ranks match.</li>
+</ul>
+<div class="sourceCode" id="cb184"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb184-1"><a href="numpy.html#cb184-1"></a>h <span class="op">=</span> np.arange(<span class="dv">5</span>).reshape(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">5</span>)</span>
+<span id="cb184-2"><a href="numpy.html#cb184-2"></a>h</span></code></pre></div>
+<pre><code>## array([[[0, 1, 2, 3, 4]]])</code></pre>
+<p>Now let’s try to add a 1D array of shape (5,) to this 3D array of shape (1,1,5). Applying the first rule of broadcasting!</p>
+<div class="sourceCode" id="cb186"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb186-1"><a href="numpy.html#cb186-1"></a>h <span class="op">+</span> [<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>] <span class="co">#same as: h + [[[10, 20, 30, 40, 50]]]</span></span></code></pre></div>
+<pre><code>## array([[[10, 21, 32, 43, 54]]])</code></pre>
+<ul>
+<li>Arrays with a 1, along a particular dimension, act as if they had the size of the array with the largest shape along that dimension. The value of the array element is repeated along that dimension.</li>
+</ul>
+<div class="sourceCode" id="cb188"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb188-1"><a href="numpy.html#cb188-1"></a>k <span class="op">=</span> np.arange(<span class="dv">6</span>).reshape(<span class="dv">2</span>,<span class="dv">3</span>)</span>
+<span id="cb188-2"><a href="numpy.html#cb188-2"></a>k</span></code></pre></div>
+<pre><code>## array([[0, 1, 2],
+##        [3, 4, 5]])</code></pre>
+<p>Let’s try to add a 2D array of shape (2,1) to this 2D ndarray of shape (2, 3). NumPy will apply the second rule of broadcasting:</p>
+<div class="sourceCode" id="cb190"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb190-1"><a href="numpy.html#cb190-1"></a>k <span class="op">+</span> [[<span class="dv">100</span>], [<span class="dv">200</span>]] <span class="co"># same as: k + [[100, 100, 100], [200, 200, 200]]</span></span></code></pre></div>
+<pre><code>## array([[100, 101, 102],
+##        [203, 204, 205]])</code></pre>
+<p>Combining rules 1 &amp; 2, we can do this:</p>
+<div class="sourceCode" id="cb192"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb192-1"><a href="numpy.html#cb192-1"></a>k <span class="op">+</span> [<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>] <span class="co"># after rule 1: [[100, 200, 300]], and after rule 2:␣ 􏰰→[[100, 200, 300], [100, 200, 300]]</span></span></code></pre></div>
+<pre><code>## array([[100, 201, 302],
+##        [103, 204, 305]])</code></pre>
+<p>After rules 1 &amp; 2, the sizes of all arrays must match.</p>
+<div class="sourceCode" id="cb194"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb194-1"><a href="numpy.html#cb194-1"></a><span class="cf">try</span>:</span>
+<span id="cb194-2"><a href="numpy.html#cb194-2"></a> k <span class="op">+</span> [<span class="dv">33</span>, <span class="dv">44</span>]</span>
+<span id="cb194-3"><a href="numpy.html#cb194-3"></a><span class="cf">except</span> <span class="pp">ValueError</span> <span class="im">as</span> e:</span>
+<span id="cb194-4"><a href="numpy.html#cb194-4"></a> <span class="bu">print</span>(e)</span></code></pre></div>
+<pre><code>## operands could not be broadcast together with shapes (2,3) (2,)</code></pre>
+</div>
+<div id="upcasting" class="section level3" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> Upcasting</h3>
+<p>When trying to combine arrays with different dtypes, NumPy will upcast to a type capable of handling all possible values (regardless of what the actual values are).</p>
+<div class="sourceCode" id="cb196"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb196-1"><a href="numpy.html#cb196-1"></a>k1 <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">5</span>, dtype<span class="op">=</span>np.uint8)</span>
+<span id="cb196-2"><a href="numpy.html#cb196-2"></a><span class="bu">print</span>(k1.dtype, k1)</span></code></pre></div>
+<pre><code>## uint8 [0 1 2 3 4]</code></pre>
+<div class="sourceCode" id="cb198"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb198-1"><a href="numpy.html#cb198-1"></a>k2 <span class="op">=</span> k1 <span class="op">+</span> np.array([<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>], dtype<span class="op">=</span>np.int8)</span>
+<span id="cb198-2"><a href="numpy.html#cb198-2"></a><span class="co"># Note that int16 is required to represent all possible int8 and uint8 values (from -128 to 255)</span></span>
+<span id="cb198-3"><a href="numpy.html#cb198-3"></a><span class="bu">print</span>(k2.dtype, k2)</span></code></pre></div>
+<pre><code>## int16 [ 5  7  9 11 13]</code></pre>
+<div class="sourceCode" id="cb200"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb200-1"><a href="numpy.html#cb200-1"></a>k3 <span class="op">=</span> k1 <span class="op">+</span> <span class="fl">1.5</span></span>
+<span id="cb200-2"><a href="numpy.html#cb200-2"></a><span class="bu">print</span>(k3.dtype, k3)</span></code></pre></div>
+<pre><code>## float64 [1.5 2.5 3.5 4.5 5.5]</code></pre>
+</div>
+<div id="conditional-operators" class="section level3" number="4.2.3">
+<h3><span class="header-section-number">4.2.3</span> Conditional operators</h3>
+<p>The conditional operators also apply elementwise.</p>
+<ul>
+<li>Comparison operators
+<ul>
+<li><code>&gt;</code></li>
+<li><code>&lt;</code></li>
+<li><code>&lt;=</code></li>
+<li><code>&gt;=</code></li>
+<li><code>x != 3</code></li>
+<li><code>x == 3</code></li>
+<li><code>np.sum(x &gt; 3)</code></li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb202"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb202-1"><a href="numpy.html#cb202-1"></a>k2 <span class="op">&lt;</span> np.array([<span class="dv">2</span>, <span class="dv">8</span>, <span class="dv">11</span>, <span class="dv">9</span>, <span class="dv">6</span>]) </span></code></pre></div>
+<pre><code>## array([False,  True,  True, False, False])</code></pre>
+<div class="sourceCode" id="cb204"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb204-1"><a href="numpy.html#cb204-1"></a>k2 <span class="op">&lt;</span> <span class="dv">8</span></span></code></pre></div>
+<pre><code>## array([ True,  True, False, False, False])</code></pre>
+</div>
+<div id="statistics" class="section level3" number="4.2.4">
+<h3><span class="header-section-number">4.2.4</span> Statistics</h3>
+<p>Many mathematical and statistical functions are available for ndarrays.</p>
+<ul>
+<li>Aggregation
+<ul>
+<li><code>np.sum()</code> - faster than <code>.sum()</code></li>
+<li><code>np.prod()</code></li>
+<li><code>np.mean()</code></li>
+<li><code>np.std()</code></li>
+<li><code>np.var()</code></li>
+<li><code>np.min()</code></li>
+<li><code>np.max()</code></li>
+<li><code>np.argmin()</code> - find index of minimum value</li>
+<li><code>np.argmax()</code> - find index of maximum value</li>
+</ul></li>
+</ul>
+<p>These functions accept an optional argument axis which lets you ask for the operation to be performed on elements along the given axis. For example:</p>
+<div class="sourceCode" id="cb206"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb206-1"><a href="numpy.html#cb206-1"></a>c<span class="op">=</span>np.arange(<span class="dv">24</span>).reshape(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)</span>
+<span id="cb206-2"><a href="numpy.html#cb206-2"></a>c</span></code></pre></div>
+<pre><code>## array([[[ 0,  1,  2,  3],
+##         [ 4,  5,  6,  7],
+##         [ 8,  9, 10, 11]],
+## 
+##        [[12, 13, 14, 15],
+##         [16, 17, 18, 19],
+##         [20, 21, 22, 23]]])</code></pre>
+<div class="sourceCode" id="cb208"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb208-1"><a href="numpy.html#cb208-1"></a>c.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">0</span>) <span class="co"># sum across matrices</span></span></code></pre></div>
+<pre><code>## array([[12, 14, 16, 18],
+##        [20, 22, 24, 26],
+##        [28, 30, 32, 34]])</code></pre>
+<div class="sourceCode" id="cb210"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb210-1"><a href="numpy.html#cb210-1"></a>c.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>) <span class="co"># sum across rows</span></span></code></pre></div>
+<pre><code>## array([[12, 15, 18, 21],
+##        [48, 51, 54, 57]])</code></pre>
+<div class="sourceCode" id="cb212"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb212-1"><a href="numpy.html#cb212-1"></a>c.<span class="bu">sum</span>(axis<span class="op">=</span>(<span class="dv">0</span>,<span class="dv">2</span>)) <span class="co"># sum across matrices and columns (first row, second row , 8+9+10+11 + 20+21+22+23)</span></span></code></pre></div>
+<pre><code>## array([ 60,  92, 124])</code></pre>
+</div>
+<div id="linear-algebra" class="section level3" number="4.2.5">
+<h3><span class="header-section-number">4.2.5</span> Linear Algebra</h3>
+<p>Linear algebra functions are available in the <em>numpy.linalg</em> module.
+The <code>inv</code> function computes a square matrix’s inverse, whereas the <code>pinv()</code> computes the pseudoinverse.</p>
+<div class="sourceCode" id="cb214"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb214-1"><a href="numpy.html#cb214-1"></a><span class="im">import</span> numpy.linalg <span class="im">as</span> linalg</span>
+<span id="cb214-2"><a href="numpy.html#cb214-2"></a>a <span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>],[<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">11</span>],[<span class="dv">21</span>,<span class="dv">29</span>,<span class="dv">31</span>]])</span>
+<span id="cb214-3"><a href="numpy.html#cb214-3"></a>linalg.inv(a), linalg.pinv(a)</span></code></pre></div>
+<pre><code>## (array([[-2.31818182,  0.56818182,  0.02272727],
+##        [ 1.72727273, -0.72727273,  0.09090909],
+##        [-0.04545455,  0.29545455, -0.06818182]]), array([[-2.31818182,  0.56818182,  0.02272727],
+##        [ 1.72727273, -0.72727273,  0.09090909],
+##        [-0.04545455,  0.29545455, -0.06818182]]))</code></pre>
+<p>The qr function computes the QR decomposition of a matrix, also known as a QR factorization or QU factorization. It is a decomposition of a matrix A into a product A = QR of an orthogonal matrix Q and an upper triangular matrix R.</p>
+<div class="sourceCode" id="cb216"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb216-1"><a href="numpy.html#cb216-1"></a>q, r <span class="op">=</span> linalg.qr(a)  <span class="co">#q.dot(r) -&gt; q**r equals a</span></span></code></pre></div>
+<ul>
+<li>The <code>det()</code> function computes the matrix determinant.</li>
+</ul>
+<div class="sourceCode" id="cb217"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb217-1"><a href="numpy.html#cb217-1"></a>linalg.det(a)</span></code></pre></div>
+<pre><code>## 43.99999999999997</code></pre>
+<ul>
+<li>The <code>eig()</code> function from <code>linalg</code> computes the eigenvalues and eigenvectors of a square matrix:</li>
+</ul>
+<div class="sourceCode" id="cb219"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb219-1"><a href="numpy.html#cb219-1"></a>eigenvalues, eigenvectors <span class="op">=</span> linalg.eig(a)</span>
+<span id="cb219-2"><a href="numpy.html#cb219-2"></a>eigenvalues, eigenvectors</span></code></pre></div>
+<pre><code>## (array([42.26600592, -0.35798416, -2.90802176]), array([[-0.08381182, -0.76283526, -0.18913107],
+##        [-0.3075286 ,  0.64133975, -0.6853186 ],
+##        [-0.94784057, -0.08225377,  0.70325518]]))</code></pre>
+<ul>
+<li>The <code>diag()</code> function returns the elements on the diagonal, whereas <code>trace()</code> returns their sum:</li>
+</ul>
+<div class="sourceCode" id="cb221"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb221-1"><a href="numpy.html#cb221-1"></a>np.diag(a),np.trace(a)</span></code></pre></div>
+<pre><code>## (array([ 1,  7, 31]), 39)</code></pre>
+<p>The solve function solves a system of linear scalar equations, such as:
+<span class="math display">\[2x+6y=6\]</span>
+<span class="math display">\[5x+3y=-9\]</span></p>
+<div class="sourceCode" id="cb223"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb223-1"><a href="numpy.html#cb223-1"></a>coeffs  <span class="op">=</span> np.array([[<span class="dv">2</span>, <span class="dv">6</span>], [<span class="dv">5</span>, <span class="dv">3</span>]])</span>
+<span id="cb223-2"><a href="numpy.html#cb223-2"></a>depvars <span class="op">=</span> np.array([<span class="dv">6</span>, <span class="op">-</span><span class="dv">9</span>])</span>
+<span id="cb223-3"><a href="numpy.html#cb223-3"></a>solution <span class="op">=</span> linalg.solve(coeffs, depvars)</span>
+<span id="cb223-4"><a href="numpy.html#cb223-4"></a>solution</span></code></pre></div>
+<pre><code>## array([-3.,  2.])</code></pre>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="text-mining.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pandas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
