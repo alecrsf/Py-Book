@@ -23,14 +23,14 @@ Suppose we want to have a look at the distribution of our dataset
 ```
 
 
-```{python, eval=T}
+```{python, eval=F}
 df = pd.read_csv('data/housing.csv')
 df.hist(bins=50, figsize=(20,15))
 plt.show()
 ```
 
 Detect how each attribute correlates with the `scatter_matrix()` function, applied to a subset of attributes. It draws a matrix of scatter plot.
-```{python}
+```{python, eval=F}
 from pandas.plotting import scatter_matrix
 
 attributes = ["median_house_value", "median_income", "total_rooms", "housing_median_age"]

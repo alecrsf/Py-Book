@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Text Mining | Py-Book</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::bs4_book,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Text Mining | Py-Book" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::bs4_book,
+set in the _output.yml file.</p>" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Text Mining | Py-Book" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::bs4_book,
+set in the _output.yml file.</p>" />
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="basics.html"/>
+<link rel="next" href="numpy.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/vis-4.16.1/vis.min.css" rel="stylesheet" />
+<script src="libs/vis-4.16.1/vis.min.js"></script>
+<link href="libs/timeline-0.4/timevis.css" rel="stylesheet" />
+<script src="libs/timevis-binding-1.0.0/timevis.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><h1>Py Notes</h1></li>
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#setup"><i class="fa fa-check"></i>Setup</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="algorithms.html"><a href="algorithms.html"><i class="fa fa-check"></i><b>1</b> Algorithms</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="algorithms.html"><a href="algorithms.html#definitions"><i class="fa fa-check"></i><b>1.1</b> Definitions</a></li>
+<li class="chapter" data-level="1.2" data-path="algorithms.html"><a href="algorithms.html#computers-architecture"><i class="fa fa-check"></i><b>1.2</b> Computers Architecture</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Basics</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="basics.html"><a href="basics.html#control-flow"><i class="fa fa-check"></i><b>2.1</b> Control Flow</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="basics.html"><a href="basics.html#data-types"><i class="fa fa-check"></i><b>2.1.1</b> Data Types</a></li>
+<li class="chapter" data-level="2.1.2" data-path="basics.html"><a href="basics.html#variables"><i class="fa fa-check"></i><b>2.1.2</b> Variables</a></li>
+<li class="chapter" data-level="2.1.3" data-path="basics.html"><a href="basics.html#logics"><i class="fa fa-check"></i><b>2.1.3</b> Logics</a></li>
+<li class="chapter" data-level="2.1.4" data-path="basics.html"><a href="basics.html#iteration"><i class="fa fa-check"></i><b>2.1.4</b> Iteration</a></li>
+<li class="chapter" data-level="2.1.5" data-path="basics.html"><a href="basics.html#functions"><i class="fa fa-check"></i><b>2.1.5</b> Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="basics.html"><a href="basics.html#collection-types"><i class="fa fa-check"></i><b>2.2</b> Collection Types</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="basics.html"><a href="basics.html#lists"><i class="fa fa-check"></i><b>2.2.1</b> Lists</a></li>
+<li class="chapter" data-level="2.2.2" data-path="basics.html"><a href="basics.html#matrixes"><i class="fa fa-check"></i><b>2.2.2</b> Matrixes</a></li>
+<li class="chapter" data-level="2.2.3" data-path="basics.html"><a href="basics.html#dictionaries"><i class="fa fa-check"></i><b>2.2.3</b> Dictionaries</a></li>
+<li class="chapter" data-level="2.2.4" data-path="basics.html"><a href="basics.html#tuples"><i class="fa fa-check"></i><b>2.2.4</b> Tuples</a></li>
+<li class="chapter" data-level="2.2.5" data-path="basics.html"><a href="basics.html#sets"><i class="fa fa-check"></i><b>2.2.5</b> Sets</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="text-mining.html"><a href="text-mining.html"><i class="fa fa-check"></i><b>3</b> Text Mining</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="text-mining.html"><a href="text-mining.html#working-with-strings"><i class="fa fa-check"></i><b>3.1</b> Working with strings</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="text-mining.html"><a href="text-mining.html#string-types"><i class="fa fa-check"></i><b>3.1.1</b> String Types</a></li>
+<li class="chapter" data-level="3.1.2" data-path="text-mining.html"><a href="text-mining.html#strings-operations"><i class="fa fa-check"></i><b>3.1.2</b> Strings Operations</a></li>
+<li class="chapter" data-level="3.1.3" data-path="text-mining.html"><a href="text-mining.html#strings-conversion"><i class="fa fa-check"></i><b>3.1.3</b> Strings Conversion</a></li>
+<li class="chapter" data-level="3.1.4" data-path="text-mining.html"><a href="text-mining.html#string-indexing-and-slicing"><i class="fa fa-check"></i><b>3.1.4</b> String Indexing and Slicing</a></li>
+<li class="chapter" data-level="3.1.5" data-path="text-mining.html"><a href="text-mining.html#string-splitting-and-joining"><i class="fa fa-check"></i><b>3.1.5</b> String splitting and joining</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="text-mining.html"><a href="text-mining.html#regular-expressions"><i class="fa fa-check"></i><b>3.2</b> Regular Expressions</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="text-mining.html"><a href="text-mining.html#match-find"><i class="fa fa-check"></i><b>3.2.1</b> Match &amp; Find</a></li>
+<li class="chapter" data-level="3.2.2" data-path="text-mining.html"><a href="text-mining.html#search-replace"><i class="fa fa-check"></i><b>3.2.2</b> Search &amp; Replace</a></li>
+<li class="chapter" data-level="3.2.3" data-path="text-mining.html"><a href="text-mining.html#metacharacters"><i class="fa fa-check"></i><b>3.2.3</b> Metacharacters</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="numpy.html"><a href="numpy.html"><i class="fa fa-check"></i><b>4</b> Numpy</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="numpy.html"><a href="numpy.html#arrays"><i class="fa fa-check"></i><b>4.1</b> Arrays</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="numpy.html"><a href="numpy.html#creating-arrays"><i class="fa fa-check"></i><b>4.1.1</b> Creating Arrays</a></li>
+<li class="chapter" data-level="4.1.2" data-path="numpy.html"><a href="numpy.html#indexing-and-slicing-arrays"><i class="fa fa-check"></i><b>4.1.2</b> Indexing and slicing arrays</a></li>
+<li class="chapter" data-level="4.1.3" data-path="numpy.html"><a href="numpy.html#reshape"><i class="fa fa-check"></i><b>4.1.3</b> Reshape</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="numpy.html"><a href="numpy.html#operators"><i class="fa fa-check"></i><b>4.2</b> Operators</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="numpy.html"><a href="numpy.html#broadcasting-rules"><i class="fa fa-check"></i><b>4.2.1</b> Broadcasting Rules</a></li>
+<li class="chapter" data-level="4.2.2" data-path="numpy.html"><a href="numpy.html#upcasting"><i class="fa fa-check"></i><b>4.2.2</b> Upcasting</a></li>
+<li class="chapter" data-level="4.2.3" data-path="numpy.html"><a href="numpy.html#conditional-operators"><i class="fa fa-check"></i><b>4.2.3</b> Conditional operators</a></li>
+<li class="chapter" data-level="4.2.4" data-path="numpy.html"><a href="numpy.html#statistics"><i class="fa fa-check"></i><b>4.2.4</b> Statistics</a></li>
+<li class="chapter" data-level="4.2.5" data-path="numpy.html"><a href="numpy.html#linear-algebra"><i class="fa fa-check"></i><b>4.2.5</b> Linear Algebra</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="pandas.html"><a href="pandas.html"><i class="fa fa-check"></i><b>5</b> Pandas</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="pandas.html"><a href="pandas.html#series"><i class="fa fa-check"></i><b>5.1</b> Series</a></li>
+<li class="chapter" data-level="5.2" data-path="pandas.html"><a href="pandas.html#dataframe"><i class="fa fa-check"></i><b>5.2</b> DataFrame</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="pandas.html"><a href="pandas.html#indexing"><i class="fa fa-check"></i><b>5.2.1</b> Indexing</a></li>
+<li class="chapter" data-level="5.2.2" data-path="pandas.html"><a href="pandas.html#reading-data"><i class="fa fa-check"></i><b>5.2.2</b> Reading Data</a></li>
+<li class="chapter" data-level="5.2.3" data-path="pandas.html"><a href="pandas.html#data-wrangling"><i class="fa fa-check"></i><b>5.2.3</b> Data Wrangling</a></li>
+<li class="chapter" data-level="5.2.4" data-path="pandas.html"><a href="pandas.html#evaluating-an-expression"><i class="fa fa-check"></i><b>5.2.4</b> Evaluating an expression</a></li>
+<li class="chapter" data-level="5.2.5" data-path="pandas.html"><a href="pandas.html#handling-missing-data"><i class="fa fa-check"></i><b>5.2.5</b> Handling Missing Data</a></li>
+<li class="chapter" data-level="5.2.6" data-path="pandas.html"><a href="pandas.html#data-manipulation"><i class="fa fa-check"></i><b>5.2.6</b> Data Manipulation</a></li>
+<li class="chapter" data-level="5.2.7" data-path="pandas.html"><a href="pandas.html#overview-functions"><i class="fa fa-check"></i><b>5.2.7</b> Overview Functions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="data-visualization.html"><a href="data-visualization.html"><i class="fa fa-check"></i><b>6</b> Data Visualization</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="data-visualization.html"><a href="data-visualization.html#matplotlib"><i class="fa fa-check"></i><b>6.1</b> Matplotlib</a></li>
+<li class="chapter" data-level="6.2" data-path="data-visualization.html"><a href="data-visualization.html#exploratory-visualization"><i class="fa fa-check"></i><b>6.2</b> Exploratory Visualization</a></li>
+<li class="chapter" data-level="6.3" data-path="data-visualization.html"><a href="data-visualization.html#other-packages"><i class="fa fa-check"></i><b>6.3</b> Other Packages</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="data-visualization.html"><a href="data-visualization.html#seaborn"><i class="fa fa-check"></i><b>6.3.1</b> Seaborn</a></li>
+<li class="chapter" data-level="6.3.2" data-path="data-visualization.html"><a href="data-visualization.html#bokeh"><i class="fa fa-check"></i><b>6.3.2</b> Bokeh</a></li>
+<li class="chapter" data-level="6.3.3" data-path="data-visualization.html"><a href="data-visualization.html#plotly"><i class="fa fa-check"></i><b>6.3.3</b> Plotly</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html"><i class="fa fa-check"></i><b>7</b> Machine Learning with <strong>Scikit-Learn</strong></a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#data-preprocessing"><i class="fa fa-check"></i><b>7.1</b> Data PreProcessing</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#create-a-training-and-test-sets"><i class="fa fa-check"></i><b>7.1.1</b> Create a Training and Test Sets</a></li>
+<li class="chapter" data-level="7.1.2" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#impute-missing-values"><i class="fa fa-check"></i><b>7.1.2</b> Impute Missing Values</a></li>
+<li class="chapter" data-level="7.1.3" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#handling-texts-and-categorical-attributes"><i class="fa fa-check"></i><b>7.1.3</b> Handling Texts and Categorical Attributes</a></li>
+<li class="chapter" data-level="7.1.4" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#feature-scaling"><i class="fa fa-check"></i><b>7.1.4</b> Feature Scaling</a></li>
+<li class="chapter" data-level="7.1.5" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#pipelines"><i class="fa fa-check"></i><b>7.1.5</b> Pipelines</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#select-and-train-a-model"><i class="fa fa-check"></i><b>7.2</b> Select and Train a Model</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#training-and-evaluating-on-the-training-set"><i class="fa fa-check"></i><b>7.2.1</b> Training and Evaluating on the Training Set</a></li>
+<li class="chapter" data-level="7.2.2" data-path="machine-learning-with-scikit-learn.html"><a href="machine-learning-with-scikit-learn.html#model-evaluation"><i class="fa fa-check"></i><b>7.2.2</b> Model Evaluation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="clustering.html"><a href="clustering.html"><i class="fa fa-check"></i><b>8</b> Clustering</a>
+<ul>
+<li class="chapter" data-level="8.0.1" data-path="clustering.html"><a href="clustering.html#clustering-1"><i class="fa fa-check"></i><b>8.0.1</b> Clustering</a></li>
+<li class="chapter" data-level="8.0.2" data-path="clustering.html"><a href="clustering.html#type-of-clustering-models"><i class="fa fa-check"></i><b>8.0.2</b> Type of Clustering Models</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://rstudio.com"> <img src="rstudio.png" width=20%></a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Py-Book</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="text-mining" class="section level1" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Text Mining</h1>
+<div id="working-with-strings" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Working with strings</h2>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="text-mining.html#cb29-1"></a><span class="im">import</span> this</span></code></pre></div>
+<div id="string-types" class="section level3" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> String Types</h3>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="text-mining.html#cb30-1"></a>new_string <span class="op">=</span> <span class="st">&quot;This is a String&quot;</span>  <span class="co"># storing a string</span></span>
+<span id="cb30-2"><a href="text-mining.html#cb30-2"></a></span>
+<span id="cb30-3"><a href="text-mining.html#cb30-3"></a><span class="bu">print</span>(<span class="ss">f&#39;ID: </span><span class="sc">{</span><span class="bu">id</span>(new_string)<span class="sc">}</span><span class="ss">&#39;</span>)  <span class="co"># shows the object identifier (address)</span></span>
+<span id="cb30-4"><a href="text-mining.html#cb30-4"></a><span class="co">#&gt; ID: 4775069456</span></span>
+<span id="cb30-5"><a href="text-mining.html#cb30-5"></a><span class="bu">print</span>(<span class="ss">f&#39;Type: </span><span class="sc">{</span><span class="bu">type</span>(new_string)<span class="sc">}</span><span class="ss">&#39;</span>)  <span class="co"># shows the object type (type(new_string)</span></span>
+<span id="cb30-6"><a href="text-mining.html#cb30-6"></a><span class="co">#&gt; Type: &lt;class &#39;str&#39;&gt;</span></span>
+<span id="cb30-7"><a href="text-mining.html#cb30-7"></a><span class="bu">print</span>(<span class="ss">f&#39;Value: </span><span class="sc">{</span>new_string<span class="sc">}</span><span class="ss">&#39;</span>)  <span class="co"># shows the object value</span></span>
+<span id="cb30-8"><a href="text-mining.html#cb30-8"></a><span class="co">#&gt; Value: This is a String</span></span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="text-mining.html#cb31-1"></a>simple_string <span class="op">=</span> <span class="st">&#39;Hello!&#39;</span> <span class="op">+</span> <span class="st">&quot; I&#39;m a simple string&quot;</span></span>
+<span id="cb31-2"><a href="text-mining.html#cb31-2"></a><span class="bu">print</span>(simple_string)</span>
+<span id="cb31-3"><a href="text-mining.html#cb31-3"></a></span>
+<span id="cb31-4"><a href="text-mining.html#cb31-4"></a><span class="co"># multi-line string, note the \n (newline) escape character automatically created</span></span>
+<span id="cb31-5"><a href="text-mining.html#cb31-5"></a><span class="co">#&gt; Hello! I&#39;m a simple string</span></span>
+<span id="cb31-6"><a href="text-mining.html#cb31-6"></a>multi_line_string <span class="op">=</span> <span class="st">&quot;&quot;&quot;Hello I&#39;m</span></span>
+<span id="cb31-7"><a href="text-mining.html#cb31-7"></a><span class="st">a multi-line</span></span>
+<span id="cb31-8"><a href="text-mining.html#cb31-8"></a><span class="st">string!&quot;&quot;&quot;</span></span>
+<span id="cb31-9"><a href="text-mining.html#cb31-9"></a></span>
+<span id="cb31-10"><a href="text-mining.html#cb31-10"></a>multi_line_string</span>
+<span id="cb31-11"><a href="text-mining.html#cb31-11"></a><span class="co">#&gt; &quot;Hello I&#39;m\na multi-line\nstring!&quot;</span></span>
+<span id="cb31-12"><a href="text-mining.html#cb31-12"></a><span class="bu">print</span>(multi_line_string)</span>
+<span id="cb31-13"><a href="text-mining.html#cb31-13"></a><span class="co">#&gt; Hello I&#39;m</span></span>
+<span id="cb31-14"><a href="text-mining.html#cb31-14"></a><span class="co">#&gt; a multi-line</span></span>
+<span id="cb31-15"><a href="text-mining.html#cb31-15"></a><span class="co">#&gt; string!</span></span></code></pre></div>
+<p>Be careful when writing raw strings, regex will escape them.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="text-mining.html#cb32-1"></a><span class="co"># Normal string with escape sequences leading to a wrong file path!</span></span>
+<span id="cb32-2"><a href="text-mining.html#cb32-2"></a>escaped_string <span class="op">=</span> <span class="st">&quot;C:</span><span class="ch">\t</span><span class="st">he_folder</span><span class="ch">\n</span><span class="st">ew_dir</span><span class="ch">\f</span><span class="st">ile.txt&quot;</span></span>
+<span id="cb32-3"><a href="text-mining.html#cb32-3"></a><span class="bu">print</span>(escaped_string)</span>
+<span id="cb32-4"><a href="text-mining.html#cb32-4"></a><span class="co">#&gt; C:   he_folder</span></span>
+<span id="cb32-5"><a href="text-mining.html#cb32-5"></a><span class="co">#&gt; ew_dirile.txt</span></span></code></pre></div>
+<p>In order to keep the backslashes, use <code>r''</code> to define a raw string:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="text-mining.html#cb33-1"></a><span class="co"># raw string keeping the backslashes in its normal form</span></span>
+<span id="cb33-2"><a href="text-mining.html#cb33-2"></a>raw_string <span class="op">=</span> <span class="vs">r&#39;C:\the_folder\new_dir\file.txt&#39;</span></span>
+<span id="cb33-3"><a href="text-mining.html#cb33-3"></a><span class="bu">print</span>(raw_string)</span>
+<span id="cb33-4"><a href="text-mining.html#cb33-4"></a><span class="co">#&gt; C:\the_folder\new_dir\file.txt</span></span></code></pre></div>
+</div>
+<div id="strings-operations" class="section level3" number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> Strings Operations</h3>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="text-mining.html#cb34-1"></a><span class="co"># concatenation of variables and literals</span></span>
+<span id="cb34-2"><a href="text-mining.html#cb34-2"></a>s1 <span class="op">=</span> <span class="st">&#39;Python 💻!&#39;</span></span>
+<span id="cb34-3"><a href="text-mining.html#cb34-3"></a><span class="co">&#39;Hello 😊 &#39;</span> <span class="op">+</span> s1</span>
+<span id="cb34-4"><a href="text-mining.html#cb34-4"></a><span class="co">#&gt; &#39;Hello 😊 Python 💻!&#39;</span></span>
+<span id="cb34-5"><a href="text-mining.html#cb34-5"></a>s1<span class="op">*</span><span class="dv">5</span></span>
+<span id="cb34-6"><a href="text-mining.html#cb34-6"></a><span class="co">#&gt; &#39;Python 💻!Python 💻!Python 💻!Python 💻!Python 💻!&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="text-mining.html#cb35-1"></a><span class="co"># concatenating several strings together in parentheses</span></span>
+<span id="cb35-2"><a href="text-mining.html#cb35-2"></a>s3 <span class="op">=</span> (<span class="st">&#39;This &#39;</span></span>
+<span id="cb35-3"><a href="text-mining.html#cb35-3"></a>      <span class="st">&#39;is another way &#39;</span></span>
+<span id="cb35-4"><a href="text-mining.html#cb35-4"></a>      <span class="st">&#39;to concatenate &#39;</span></span>
+<span id="cb35-5"><a href="text-mining.html#cb35-5"></a>      <span class="st">&#39;several strings!&#39;</span>)</span>
+<span id="cb35-6"><a href="text-mining.html#cb35-6"></a>s3</span>
+<span id="cb35-7"><a href="text-mining.html#cb35-7"></a><span class="co">#&gt; &#39;This is another way to concatenate several strings!&#39;</span></span></code></pre></div>
+<p>Checking for substrings in a string:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="text-mining.html#cb36-1"></a><span class="co">&#39;way&#39;</span> <span class="kw">in</span> s3, <span class="st">&#39;python&#39;</span> <span class="kw">in</span> s3</span>
+<span id="cb36-2"><a href="text-mining.html#cb36-2"></a><span class="co">#&gt; (True, False)</span></span></code></pre></div>
+<p>Computing total length of the string:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="text-mining.html#cb37-1"></a><span class="bu">len</span>(s3)</span>
+<span id="cb37-2"><a href="text-mining.html#cb37-2"></a><span class="co">#&gt; 51</span></span></code></pre></div>
+</div>
+<div id="strings-conversion" class="section level3" number="3.1.3">
+<h3><span class="header-section-number">3.1.3</span> Strings Conversion</h3>
+<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="text-mining.html#cb38-1"></a>s <span class="op">=</span> <span class="st">&#39;python is great&#39;</span></span>
+<span id="cb38-2"><a href="text-mining.html#cb38-2"></a>s.capitalize(), s.upper(), s.title(), s.replace(<span class="st">&#39;python&#39;</span>, <span class="st">&#39;R&#39;</span>)</span>
+<span id="cb38-3"><a href="text-mining.html#cb38-3"></a><span class="co">#&gt; (&#39;Python is great&#39;, &#39;PYTHON IS GREAT&#39;, &#39;Python Is Great&#39;, &#39;R is great&#39;)</span></span></code></pre></div>
+<p>Checking for numbers and alphabet</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="text-mining.html#cb39-1"></a><span class="co">#.isdecimal() checks only for numeric strings</span></span>
+<span id="cb39-2"><a href="text-mining.html#cb39-2"></a><span class="co">&#39;12345&#39;</span>.isdecimal(), <span class="st">&#39;apollo11&#39;</span>.isdecimal()</span>
+<span id="cb39-3"><a href="text-mining.html#cb39-3"></a></span>
+<span id="cb39-4"><a href="text-mining.html#cb39-4"></a><span class="co">#.isalpha() checks only for numeric strings</span></span>
+<span id="cb39-5"><a href="text-mining.html#cb39-5"></a><span class="co">#&gt; (True, False)</span></span>
+<span id="cb39-6"><a href="text-mining.html#cb39-6"></a><span class="co">&#39;python&#39;</span>.isalpha(), <span class="st">&#39;number1&#39;</span>.isalpha()</span>
+<span id="cb39-7"><a href="text-mining.html#cb39-7"></a></span>
+<span id="cb39-8"><a href="text-mining.html#cb39-8"></a><span class="co">#.isalpha() checks for alphanumeric strings, not just numeric strings</span></span>
+<span id="cb39-9"><a href="text-mining.html#cb39-9"></a><span class="co">#&gt; (True, False)</span></span>
+<span id="cb39-10"><a href="text-mining.html#cb39-10"></a><span class="co">&#39;total&#39;</span>.isalnum(),<span class="st">&#39;abc123&#39;</span>.isalnum(), <span class="st">&#39;1+1&#39;</span>.isalnum()</span>
+<span id="cb39-11"><a href="text-mining.html#cb39-11"></a><span class="co">#&gt; (True, True, False)</span></span></code></pre></div>
+</div>
+<div id="string-indexing-and-slicing" class="section level3" number="3.1.4">
+<h3><span class="header-section-number">3.1.4</span> String Indexing and Slicing</h3>
+<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="text-mining.html#cb40-1"></a>s <span class="op">=</span> <span class="st">&#39;PYTHON&#39;</span></span>
+<span id="cb40-2"><a href="text-mining.html#cb40-2"></a><span class="cf">for</span> index, character <span class="kw">in</span> <span class="bu">enumerate</span>(s):</span>
+<span id="cb40-3"><a href="text-mining.html#cb40-3"></a>    <span class="bu">print</span>(<span class="ss">f&#39;Character -&gt; </span><span class="sc">{</span>character<span class="sc">}</span><span class="ss"> has index-&gt; </span><span class="sc">{</span>index<span class="sc">}</span><span class="ss">&#39;</span>)</span>
+<span id="cb40-4"><a href="text-mining.html#cb40-4"></a><span class="co">#&gt; Character -&gt; P has index-&gt; 0</span></span>
+<span id="cb40-5"><a href="text-mining.html#cb40-5"></a><span class="co">#&gt; Character -&gt; Y has index-&gt; 1</span></span>
+<span id="cb40-6"><a href="text-mining.html#cb40-6"></a><span class="co">#&gt; Character -&gt; T has index-&gt; 2</span></span>
+<span id="cb40-7"><a href="text-mining.html#cb40-7"></a><span class="co">#&gt; Character -&gt; H has index-&gt; 3</span></span>
+<span id="cb40-8"><a href="text-mining.html#cb40-8"></a><span class="co">#&gt; Character -&gt; O has index-&gt; 4</span></span>
+<span id="cb40-9"><a href="text-mining.html#cb40-9"></a><span class="co">#&gt; Character -&gt; N has index-&gt; 5</span></span>
+<span id="cb40-10"><a href="text-mining.html#cb40-10"></a>s[<span class="dv">0</span>], s[<span class="dv">1</span>], s[<span class="dv">2</span>], s[<span class="dv">3</span>], s[<span class="dv">4</span>], s[<span class="dv">5</span>]</span>
+<span id="cb40-11"><a href="text-mining.html#cb40-11"></a><span class="co">#&gt; (&#39;P&#39;, &#39;Y&#39;, &#39;T&#39;, &#39;H&#39;, &#39;O&#39;, &#39;N&#39;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="text-mining.html#cb41-1"></a>s[:], s[<span class="dv">1</span>:<span class="dv">4</span>], s[:<span class="dv">3</span>], s[<span class="dv">3</span>:], s[<span class="op">-</span><span class="dv">3</span>:], s[:<span class="dv">3</span>] <span class="op">+</span> s[<span class="op">-</span><span class="dv">3</span>:]</span>
+<span id="cb41-2"><a href="text-mining.html#cb41-2"></a><span class="co">#&gt; (&#39;PYTHON&#39;, &#39;YTH&#39;, &#39;PYT&#39;, &#39;HON&#39;, &#39;HON&#39;, &#39;PYTHON&#39;)</span></span></code></pre></div>
+</div>
+<div id="string-splitting-and-joining" class="section level3" number="3.1.5">
+<h3><span class="header-section-number">3.1.5</span> String splitting and joining</h3>
+<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="text-mining.html#cb42-1"></a>s <span class="op">=</span> <span class="st">&#39;I,am,a,comma,separated,string&#39;</span></span>
+<span id="cb42-2"><a href="text-mining.html#cb42-2"></a>s.split(<span class="st">&#39;,&#39;</span>) </span>
+<span id="cb42-3"><a href="text-mining.html#cb42-3"></a><span class="co">#&gt; [&#39;I&#39;, &#39;am&#39;, &#39;a&#39;, &#39;comma&#39;, &#39;separated&#39;, &#39;string&#39;]</span></span>
+<span id="cb42-4"><a href="text-mining.html#cb42-4"></a><span class="co">&#39; &#39;</span>.join(s.split(<span class="st">&#39;,&#39;</span>))</span>
+<span id="cb42-5"><a href="text-mining.html#cb42-5"></a><span class="co">#&gt; &#39;I am a comma separated string&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="text-mining.html#cb43-1"></a><span class="co"># stripping whitespace characters</span></span>
+<span id="cb43-2"><a href="text-mining.html#cb43-2"></a>s <span class="op">=</span> <span class="st">&#39;   I am surrounded by spaces    &#39;</span></span>
+<span id="cb43-3"><a href="text-mining.html#cb43-3"></a>s, s.strip()</span>
+<span id="cb43-4"><a href="text-mining.html#cb43-4"></a><span class="co">#&gt; (&#39;   I am surrounded by spaces    &#39;, &#39;I am surrounded by spaces&#39;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="text-mining.html#cb44-1"></a>s <span class="op">=</span> <span class="st">&#39;Python is great. NLP is also good.&#39;</span></span>
+<span id="cb44-2"><a href="text-mining.html#cb44-2"></a>s.split(<span class="st">&#39;.&#39;</span>)</span>
+<span id="cb44-3"><a href="text-mining.html#cb44-3"></a><span class="co">#&gt; [&#39;Python is great&#39;, &#39; NLP is also good&#39;, &#39;&#39;]</span></span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="text-mining.html#cb45-1"></a><span class="bu">print</span>(<span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>.join(s.split(<span class="st">&#39;.&#39;</span>)))</span>
+<span id="cb45-2"><a href="text-mining.html#cb45-2"></a><span class="co">#&gt; Python is great</span></span>
+<span id="cb45-3"><a href="text-mining.html#cb45-3"></a><span class="co">#&gt;  NLP is also good</span></span>
+<span id="cb45-4"><a href="text-mining.html#cb45-4"></a><span class="bu">print</span>(<span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>.join([s.strip() <span class="cf">for</span> s <span class="kw">in</span> s.split(<span class="st">&#39;.&#39;</span>) <span class="cf">if</span> s]))</span>
+<span id="cb45-5"><a href="text-mining.html#cb45-5"></a><span class="co">#&gt; Python is great</span></span>
+<span id="cb45-6"><a href="text-mining.html#cb45-6"></a><span class="co">#&gt; NLP is also good</span></span></code></pre></div>
+</div>
+</div>
+<div id="regular-expressions" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Regular Expressions</h2>
+<p>Regular expressions are a powerful tool for various kinds of string manipulation. They are a domain specific language (DSL) that is present as a library in most modern programming languages, not just Python.</p>
+<p>Regular expressions in Python can be accessed using the <code>re</code> module, which is part of the standard library.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="text-mining.html#cb46-1"></a><span class="im">import</span> re</span>
+<span id="cb46-2"><a href="text-mining.html#cb46-2"></a></span>
+<span id="cb46-3"><a href="text-mining.html#cb46-3"></a>s1 <span class="op">=</span> <span class="st">&#39;Python is an excellent language&#39;</span></span>
+<span id="cb46-4"><a href="text-mining.html#cb46-4"></a>s2 <span class="op">=</span> <span class="st">&#39;I love the Python language. I also use Python to build applications at work!&#39;</span></span></code></pre></div>
+<div id="match-find" class="section level3" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Match &amp; Find</h3>
+<p>The <code>match()</code> function only returns a match if a match is found at the beginning of the string <code>s1</code>.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="text-mining.html#cb47-1"></a>pattern <span class="op">=</span> <span class="st">&#39;python&#39;</span></span>
+<span id="cb47-2"><a href="text-mining.html#cb47-2"></a></span>
+<span id="cb47-3"><a href="text-mining.html#cb47-3"></a>re.match(pattern, s1), re.match(pattern, s1, flags<span class="op">=</span>re.IGNORECASE)</span>
+<span id="cb47-4"><a href="text-mining.html#cb47-4"></a><span class="co">#&gt; (None, &lt;re.Match object; span=(0, 6), match=&#39;Python&#39;&gt;)</span></span></code></pre></div>
+<p><code>pattern</code> is in lower case, hence <code>ignore case</code> flag helps in matching same pattern with different cases.</p>
+<p>Other functions to match patterns are <code>re.search()</code> and <code>re.findall()</code>. The function <code>re.search()</code> finds a match of a pattern anywhere in the string. The function <code>re.findall()</code> returns a list of all substrings that match a pattern.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="text-mining.html#cb48-1"></a>re.search(pattern, s2, re.IGNORECASE)</span>
+<span id="cb48-2"><a href="text-mining.html#cb48-2"></a><span class="co">#&gt; &lt;re.Match object; span=(11, 17), match=&#39;Python&#39;&gt;</span></span>
+<span id="cb48-3"><a href="text-mining.html#cb48-3"></a>re.findall(pattern, s2, re.IGNORECASE)</span>
+<span id="cb48-4"><a href="text-mining.html#cb48-4"></a><span class="co">#&gt; [&#39;Python&#39;, &#39;Python&#39;]</span></span></code></pre></div>
+<p>There is also <code>re.finditer()</code> which does the same, except it returns an iterator rather than a list</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="text-mining.html#cb49-1"></a><span class="bu">print</span>(<span class="ss">f&#39;String: </span><span class="sc">{s2}</span><span class="ss">&#39;</span>)</span>
+<span id="cb49-2"><a href="text-mining.html#cb49-2"></a><span class="co">#&gt; String: I love the Python language. I also use Python to build applications at work!</span></span>
+<span id="cb49-3"><a href="text-mining.html#cb49-3"></a><span class="cf">for</span> m <span class="kw">in</span> re.finditer(pattern, s2, re.IGNORECASE):</span>
+<span id="cb49-4"><a href="text-mining.html#cb49-4"></a>    <span class="bu">print</span>(<span class="ss">f&quot;Found match &#39;</span><span class="sc">{m.</span>group(<span class="dv">0</span>)<span class="sc">}</span><span class="ss">&#39; ranging from index </span><span class="sc">{m.</span>start()<span class="sc">}</span><span class="ss"> - </span><span class="sc">{m.</span>end()<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb49-5"><a href="text-mining.html#cb49-5"></a><span class="co">#&gt; Found match &#39;Python&#39; ranging from index 11 - 17</span></span>
+<span id="cb49-6"><a href="text-mining.html#cb49-6"></a><span class="co">#&gt; Found match &#39;Python&#39; ranging from index 39 - 45</span></span></code></pre></div>
+<p>The regex search returns an object with several methods that give details about it. These methods include group which returns the string matched, start and end which return the start and ending positions of the first match.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="text-mining.html#cb50-1"></a><span class="bu">print</span>(<span class="st">&#39;Found match </span><span class="sc">{}</span><span class="st"> ranging from index </span><span class="sc">{}</span><span class="st"> - </span><span class="sc">{}</span><span class="st"> in the string &quot;</span><span class="sc">{}</span><span class="st">&quot;&#39;</span>.<span class="bu">format</span>(</span>
+<span id="cb50-2"><a href="text-mining.html#cb50-2"></a>    re.match(pattern, s1, flags<span class="op">=</span>re.IGNORECASE).group(<span class="dv">0</span>),</span>
+<span id="cb50-3"><a href="text-mining.html#cb50-3"></a>    re.match(pattern, s1, flags<span class="op">=</span>re.IGNORECASE).start(),</span>
+<span id="cb50-4"><a href="text-mining.html#cb50-4"></a>    re.match(pattern, s1, flags<span class="op">=</span>re.IGNORECASE).end(), s1))</span>
+<span id="cb50-5"><a href="text-mining.html#cb50-5"></a><span class="co">#&gt; Found match Python ranging from index 0 - 6 in the string &quot;Python is an excellent language&quot;</span></span></code></pre></div>
+</div>
+<div id="search-replace" class="section level3" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Search &amp; Replace</h3>
+<p>One of the most important re methods that use regular expressions is <code>.sub()</code>.</p>
+<p>This method replaces all occurrences of the pattern in string with repl, substituting all occurrences, unless count provided. This method returns the modified string.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="text-mining.html#cb51-1"></a>re.sub(pattern, <span class="st">&#39;R&#39;</span>, s2, flags<span class="op">=</span>re.IGNORECASE)</span>
+<span id="cb51-2"><a href="text-mining.html#cb51-2"></a><span class="co">#&gt; &#39;I love the R language. I also use R to build applications at work!&#39;</span></span></code></pre></div>
+</div>
+<div id="metacharacters" class="section level3" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> Metacharacters</h3>
+<p>Metacharacters are what make regular expressions more powerful than normal string methods.</p>
+<p>They allow you to create regular expressions to represent concepts like “one or more repetitions of a vowel”.</p>
+<p>The existence of metacharacters poses a problem if you want to create a regular expression (or regex) that matches a literal metacharacter, such as “$”.</p>
+<div style="color: gray;">
+<p>You can do this by escaping the metacharacters by putting a backslash in front of them.</p>
+</div>
+<p>However, this can cause problems, since backslashes also have an escaping function in normal Python strings. This can mean putting three or four backslashes in a row to do all the escaping.</p>
+<p><img src="images/regex_metachar-01.png" title="A Metacharacters cheatsheet" /></p>
+<div id="example-email-extraction" class="section level4" number="3.2.3.1">
+<h4><span class="header-section-number">3.2.3.1</span> Example: Email Extraction</h4>
+<p>To demonstrate a sample usage of regular expressions, lets create a program to extract email addresses from a string. Suppose we have a text that contains an email address: <code>str = "Please contact info@sololearn.com for assistance"</code>. Our goal is to extract the substring “<em>info@sololearn.com</em>”.</p>
+<p>A basic email address consists of a word and may include dots or dashes. This is followed by the @ sign and the domain name (the name, a dot, and the domain name suffix).</p>
+<p>This is the basis for building our regular expression.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="text-mining.html#cb52-1"></a>pattern <span class="op">=</span> <span class="vs">r&quot;([\w\.-]+)@([\w\.-]+)(\.[\w\.]+)&quot;</span></span>
+<span id="cb52-2"><a href="text-mining.html#cb52-2"></a><span class="bu">str</span> <span class="op">=</span> <span class="st">&quot;Please contact info@sololearn.com for assistance&quot;</span></span>
+<span id="cb52-3"><a href="text-mining.html#cb52-3"></a></span>
+<span id="cb52-4"><a href="text-mining.html#cb52-4"></a>match <span class="op">=</span> re.search(pattern, <span class="bu">str</span>)</span>
+<span id="cb52-5"><a href="text-mining.html#cb52-5"></a><span class="cf">if</span> match:</span>
+<span id="cb52-6"><a href="text-mining.html#cb52-6"></a>    <span class="bu">print</span>(match.group())</span>
+<span id="cb52-7"><a href="text-mining.html#cb52-7"></a><span class="co">#&gt; info@sololearn.com</span></span></code></pre></div>
+<p><code>[\w\.-]+</code> matches one or more word character, dot or dash.</p>
+<p>The regex above says that the string should contain a word (with dots and dashes allowed), followed by the @ sign, then another similar word, then a dot and another word.</p>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="basics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="numpy.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": false,
+"linkedin": true,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": true,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "times",
+"size": 8
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Py-bookdown.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"toolbar": {
+"position": "fixed"
+},
+"info": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
